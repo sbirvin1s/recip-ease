@@ -14,14 +14,10 @@ const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader
 const config = {
     entry: './client/src/index.jsx',
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: "bundle.js";
+        path: path.resolve(__dirname, './client', 'dist'),
+        filename: "bundle.js"
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: 'index.html',
-        }),
-
         // Add your plugins here
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/
     ],
