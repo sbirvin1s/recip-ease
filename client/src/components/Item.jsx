@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 
 /*========== INTERNAL MODULES ==========*/
 
-const Item = () =>{
+function Item() {
 
   /*----- STATE HOOKS -----*/
 
