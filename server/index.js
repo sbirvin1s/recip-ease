@@ -1,10 +1,10 @@
 /*========== EXTERNAL MODULES ==========*/
 require('dotenv').config();
 const express = require('express');
-
+const path = require('path');
 
 /*========== SYSTEM VARIABLES ==========*/
-const app = express;
+const app = express();
 const {PORT} = process.env;
 
 
@@ -13,7 +13,7 @@ const {writeRecipe, getRecipe} = require('./routes/routes');
 
 
 /*========== MIDDLEWARE ==========*/
-app.use('/', express.static());
+app.use('/', express.static(path.join(__dirname,'../client', '/dist')));
 app.use(express.json());
 
 
