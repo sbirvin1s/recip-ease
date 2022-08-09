@@ -82,7 +82,14 @@ Additional workflow information can be found here: [Git Feature Branch Workflow]
 ### Installing Dependencies
 From within the root directory:
 
-```sh
-npm install -g webpack
-npm install
-```
+> using npm
+>```sh
+>npm install
+>```
+
+<br/>
+
+> using yarn
+>```sh
+> yarn install
+>```
