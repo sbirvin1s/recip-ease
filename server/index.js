@@ -9,7 +9,7 @@ const {PORT} = process.env;
 
 
 /*========== INTERNAL MODULES ==========*/
-const {} = require('./routes');
+const {writeRecipe, getRecipe} = require('./routes/routes');
 
 
 /*========== MIDDLEWARE ==========*/
@@ -18,8 +18,8 @@ app.use(express.json());
 
 
 /*========== ROUTES ==========*/
-app.get('/recipes', );
-app.post('/recipes', )
+app.get('/recipes', getRecipe);
+app.post('/recipes', writeRecipe);
 
 
 /*========== SERVER CONNECTIONS ==========*/
