@@ -72,8 +72,7 @@ Additional workflow information can be found here: [Git Feature Branch Workflow]
 
 ## Requirements
 
- - Node `insert version`
- - etc
+ - Node `16.14.2`
 
  ---
 
@@ -82,14 +81,14 @@ Additional workflow information can be found here: [Git Feature Branch Workflow]
 ### Installing Dependencies
 From within the root directory:
 
-> using npm
+> using ![npm](./npm.png)
 >```sh
 >npm install
 >```
 
 <br/>
 
-> using yarn
+> using ![yarn](./yarn.png)
 >```sh
 > yarn install
 >```
