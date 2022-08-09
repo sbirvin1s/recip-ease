@@ -12,7 +12,7 @@ const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader
 
 
 const config = {
-    entry: './client/src/index.jsx',
+    entry: './client/src/index.js',
     output: {
         path: path.resolve(__dirname, './client', 'dist'),
         filename: "bundle.js"
@@ -29,7 +29,7 @@ const config = {
             },
             {
                 test: /\.css$/i,
-                use: [stylesHandler,'css-loader'],
+                use: [stylesHandler, 'css-loader'],
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
@@ -40,15 +40,20 @@ const config = {
             // Learn more about loaders from https://webpack.js.org/loaders/
         ],
     },
+    devtool: "eval-cheap-module-source-map",
+    devServer: {
+        port: 5000,
+        static: {
+            directory: path.resolve(__dirname, './client', 'dist'),
+        },
+        compress: true
+    }
 };
 
 module.exports = () => {
     if (isProduction) {
         config.mode = 'production';
-
         config.plugins.push(new MiniCssExtractPlugin());
-
-
     } else {
         config.mode = 'development';
     }
