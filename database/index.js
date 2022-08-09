@@ -30,13 +30,17 @@ const recipeSchema = new mongoose.Schema({
 const Recipe = mongoose.model('Recipe', recipeSchema);
 
 /*========== DATABASE METHODS ==========*/
+const findRecipe = () => {
+  // Recipe.findOneAndUpdate
+}
+
 const addRecipe = () => {
   // Recipe.findOneAndUpdate
 }
 
 
-
 /*========== EXPORTS ==========*/
 module.exports = {
+  findRecipe,
   addRecipe,
 }
