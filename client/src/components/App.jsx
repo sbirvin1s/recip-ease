@@ -4,12 +4,14 @@ import axios from 'axios';
 
 /*========== INTERNAL MODULES ==========*/
 import ShoppingList from './ShoppingList.jsx';
+import Form from './Form.jsx';
 
 
-const App = () =>{
+function App() {
 
   /*----- STATE HOOKS -----*/
   const [recipe, setRecipe] = useState({recipeName: '', ingredients: {name:'', quantity: 0, units: ''}});
+  const [showForm, setShowForm] = useState(false);
 
   /*----- LIFESTYLE METHODS -----*/
 
@@ -41,7 +43,7 @@ const App = () =>{
   }
 
   const renderAddRecipeForm = () => {
-    // return <Form showForm={showForm} setShowForm={setShowForm} />
+    return <Form showForm={showForm} setShowForm={setShowForm} />
   }
 
   const renderSearchRecipeForm = () => {
@@ -54,8 +56,8 @@ const App = () =>{
       <h1>This is React</h1>
       <div>{renderAddRecipe()}{renderSearchRecipes()}</div>
       <ShoppingList />
-      {/* {renderAddRecipeForm} */}
-      {/* {renderSearchRecipeForm} */}
+      {renderAddRecipeForm()}
+      {/* {renderSearchRecipeForm()} */}
     </>
   )
 }

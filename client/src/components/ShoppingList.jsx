@@ -6,7 +6,7 @@ import React, {useState} from 'react';
 import Item from './Item.jsx';
 
 
-const ShoppingList = () =>{
+function ShoppingList() {
 
   /*----- STATE HOOKS -----*/
 
