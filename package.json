@@ -1,0 +1,29 @@
+{
+  "name": "recip-ease",
+  "version": "0.0.1",
+  "description": "web app intended to simplify the creation of grocery lists by parsing recipes and creating a grocery list based on ingredients and serving amounts",
+  "main": "server/index.js",
+  "repository": "https://github.com/sbirvin1s/recip-ease.git",
+  "author": "sbirvin1s <sbirvin1s@gmail.com>",
+  "license": "UNLICENSED",
+  "scripts": {
+    "server-dev": "nodemon --watch server server/index.js",
+    "react-dev": "webpack --watch",
+    "start": ""
+  },
+  "dependencies": {
+    "@mui/material": "^5.10.0",
+    "@mui/styled-engine-sc": "^5.10.0",
+    "axios": "^0.27.2",
+    "babel": "^6.23.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^5.3.5",
+    "webpack": "^5.74.0"
+  },
+  "resolutions": {
+    "styled-components": "^5"
+  }
+}
