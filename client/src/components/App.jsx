@@ -9,23 +9,33 @@ import ShoppingList from './ShoppingList.jsx';
 const App = () =>{
 
   /*----- STATE HOOKS -----*/
-
+  const [recipe, setRecipe] = useState({recipeName: '', ingredients: {name:'', quantity: 0, units: ''}});
 
   /*----- LIFESTYLE METHODS -----*/
 
 
   /*----- EVENT HANDLERS -----*/
+  const handleChange = ({target: {name, value}}) => {
+
+  }
+
+  const handleSubmit = ({target: {name, value}}) => {
+    event.preventDefault();
+
+  }
 
 
   /*----- RENDER METHODS -----*/
   const renderAddRecipe = () => {
     return (
+      // launches add recipe modal
       <button>Add Recipe</button>
-    )
-  }
+      )
+    }
 
   const renderSearchRecipes = () => {
     return (
+      // launches search recipes modal
       <button>Search Recipes</button>
     )
   }
