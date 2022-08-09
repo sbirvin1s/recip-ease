@@ -3,6 +3,8 @@ import React, {useState} from 'react';
 import axios from 'axios';
 
 /*========== INTERNAL MODULES ==========*/
+import ShoppingList from './ShoppingList.jsx';
+
 
 const App = () =>{
 
@@ -16,11 +18,35 @@ const App = () =>{
 
 
   /*----- RENDER METHODS -----*/
+  const renderAddRecipe = () => {
+    return (
+      <button>Add Recipe</button>
+    )
+  }
 
+  const renderSearchRecipes = () => {
+    return (
+      <button>Search Recipes</button>
+    )
+  }
+
+  const renderAddRecipeForm = () => {
+    // return <Form showForm={showForm} setShowForm={setShowForm} />
+  }
+
+  const renderSearchRecipeForm = () => {
+    // return <Form showForm={showForm} setShowForm={setShowForm} />
+  }
 
   /*----- RENDERER -----*/
   return (
-    <h1>This is React</h1>
+    <>
+      <h1>This is React</h1>
+      <div>{renderAddRecipe()}{renderSearchRecipes()}</div>
+      <ShoppingList />
+      {/* {renderAddRecipeForm} */}
+      {/* {renderSearchRecipeForm} */}
+    </>
   )
 }
 

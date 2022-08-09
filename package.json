@@ -7,13 +7,9 @@
   "author": "sbirvin1s <sbirvin1s@gmail.com>",
   "license": "UNLICENSED",
   "scripts": {
-    "server-dev": "nodemon --watch server server/index.js",
-    "react-dev": "webpack --watch",
-    "start": "",
-    "build": "webpack --mode=production --node-env=production",
-    "build:dev": "webpack --mode=development",
-    "build:prod": "webpack --mode=production --node-env=production",
-    "watch": "webpack --watch"
+    "server:dev": "nodemon --watch server server/index.js",
+    "build:dev": "webpack --watch --mode=development",
+    "build:prod": "webpack --mode=production --node-env=production"
   },
   "dependencies": {
     "@mui/material": "^5.10.0",

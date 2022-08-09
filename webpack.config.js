@@ -46,7 +46,7 @@ const config = {
         static: {
             directory: path.resolve(__dirname, './client', 'dist'),
         },
-        compress: true
+        compress: true,
     }
 };
 
