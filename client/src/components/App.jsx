@@ -30,7 +30,7 @@ function App() {
   const renderAddRecipe = () => {
     return (
       // launches add recipe modal
-      <button>Add Recipe</button>
+      <button onClick={() => setShowForm(true)}>Add Recipe</button>
       )
     }
 

@@ -33,7 +33,7 @@ function Item() {
   return (
     <div>
       {renderSelected()}
-      {renderNamer()}
+      {renderName()}
       {renderQuantity()}
       {renderUnits()}
     </div>

@@ -1,10 +1,11 @@
 /*========== EXTERNAL MODULES ==========*/
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
+import styled from 'styled-components';
 
 
 /*========== INTERNAL MODULES ==========*/
-import Item from './Item.jsx';
+import RecipePreview from './RecipePreview.jsx';
 
 
 function Form({showForm, setShowForm}) {
@@ -25,32 +26,18 @@ function Form({showForm, setShowForm}) {
       ...prev,
       [name]: value
     }))
-
-    // setRecipe(prev => ({
-    //   ingredients: [
-    //     ...prev,
-    //     ingredient
-    //   ]
-    // }))
   }
 
   const handleRecipe = ({target: {name, value}}) => {
     setRecipe(prev => ({
       ...prev,
-      recipeName: value
+      [name]: value
     }));
   }
 
-  const handleServings = ({target: {name, value}}) => {
-    setRecipe(prev => ({
-      ...prev,
-      servings: value
-    }));
-  }
-
-  const handleSubmit = ({target: {name, value}}) => {
+  const handleSubmit = () => {
     event.preventDefault();
-
+    localStorage.setItem(recipe.recipeName, JSON.stringify(recipe));
   }
 
   const handleAddIngredient = () => {
@@ -62,20 +49,16 @@ function Form({showForm, setShowForm}) {
         ingredient
       ]
     }))
+    setIngredient();
   }
 
 
   /*----- RENDER METHODS -----*/
-  const renderRecipe = () => {
-    // map information and push info into each item
-    // return item as an ul element
-  }
-
   const renderEnterIngredient = () => {
     return (
       <>
-        <label>Ingredient Name <input type='text' name='ingredientName' placeholder='cheese' onChange={handleIngredient}></input></label>
-        <label>Quantity <input type='number' name='quantity' placeholder='0' onChange={handleIngredient}></input></label>
+        <label>Ingredient Name <input type='text' name='name' placeholder='cheese' onChange={handleIngredient}/></label>
+        <label>Quantity <input type='number' name='quantity' placeholder='0' onChange={handleIngredient}/></label>
         <label>Units
           <input list='units' name='units' onChange={handleIngredient}/>
           <datalist id='units' >
@@ -97,27 +80,24 @@ function Form({showForm, setShowForm}) {
   }
 
   const renderSubmit = () => {
-
-  }
-
-  const renderAddIngredient = () => {
     return (
-      <button>Add Ingredient</button>
-    )
-  }
+      <button onClick={handleSubmit}>Submit</button>
+      )
+    }
 
-  /*----- RENDERER -----*/
-  return ReactDOM.createPortal (
-    <div onClick={() => setShowForm(false)}>
-      <form>
-        <h3>This is a form</h3>
-        <label>Number of Servings<input type='number' placeholder='1' onChange={handleServings}></input></label>
-        <label>Recipe Name <input type='text' name='recipeName' placeholder='Grilled Cheese' onChange={handleRecipe}></input></label>
-        {/* {renderList()} */}
+    /*----- RENDERER -----*/
+    return ReactDOM.createPortal (
+      <Background onClick={() => setShowForm(false)}>
+      <FormStyle onClick={(event) => event.stopPropagation()}>
+        <label>Number of Servings <input type='number' name='servings' placeholder='1' onChange={handleRecipe}/></label>
+        <label>Recipe Name <input type='text' name='recipeName' placeholder='Grilled Cheese' onChange={handleRecipe}/></label>
+        <label>Prep Time <input type='number' name='prepTime' placeholder='30' step='1' onChange={handleRecipe}/></label>
+        <RecipePreview ingredients={recipe.ingredients}/>
+        <h4>Add an Ingredient</h4>
         {renderEnterIngredient()}
-        {renderEnterIngredient()}
-      </form>
-    </div>,
+        {renderSubmit()}
+      </FormStyle>
+    </Background>,
     document.getElementById('portal')
   )
 }
@@ -125,3 +105,21 @@ function Form({showForm, setShowForm}) {
 
 /*========== EXPORTS ==========*/
 export default Form;
+
+
+const Background = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+`;
+
+export const FormStyle = styled.form`
+  padding: 15px 70px 0;
+  background-color: #fff;
+  width: 600px;
+  height: 800px;
+  box-sizing: border-box;
+`;
