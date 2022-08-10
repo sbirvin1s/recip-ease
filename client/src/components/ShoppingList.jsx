@@ -23,7 +23,7 @@ function ShoppingList({recipes}) {
   /*----- RENDER METHODS -----*/
   const renderShoppingList = () => {
     // TODO: map information and push info into each Item
-    return recipes.map((recipe, index) => <IngredientList key={`${index}${recipe.recipeName}`} recipe={recipe}/>)
+    return recipes.map((recipe, index) => <IngredientList key={'shoppingList' + index} recipe={recipe}/>)
   }
 
 

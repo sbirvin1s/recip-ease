@@ -5,7 +5,7 @@ import React, {useState} from 'react';
 import Item from './Item.jsx';
 
 function IngredientList({recipe}) {
-  const {ingredients} = recipe;
+  const {ingredients, servings} = recipe;
 
   /*----- STATE HOOKS -----*/
 
@@ -18,7 +18,15 @@ function IngredientList({recipe}) {
 
   /*----- RENDER METHODS -----*/
   const renderIngredientList = () => {
-    return ingredients.map(ingredient => <p>this will be an item</p>)
+    return ingredients.map((ingredient, index) => {
+      return (
+        <div key={'ingedient' + index}>
+          <p>{ingredient.name}</p>
+          <p>Quantity: {ingredient.quantity * servings}</p>
+          <p>{ingredient.units}</p>
+        </div>
+      )
+    })
   }
 
   /*----- RENDERER -----*/
