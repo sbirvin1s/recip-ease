@@ -1,6 +1,7 @@
 /*========== EXTERNAL MODULES ==========*/
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 
 /*========== INTERNAL MODULES ==========*/
 import ShoppingList from './ShoppingList.jsx';
@@ -43,7 +44,7 @@ function App() {
   }
 
   const renderAddRecipeForm = () => {
-    return <Form showForm={showForm} setShowForm={setShowForm} />
+    return <Form showForm={showForm} setShowForm={setShowForm} setRecipes={setRecipes}/>
   }
 
   const renderSearchRecipeForm = () => {
@@ -52,16 +53,26 @@ function App() {
 
   /*----- RENDERER -----*/
   return (
-    <>
+    <Page>
       <h1>Recip*Ease</h1>
       <div>{renderAddRecipe()}{renderSearchRecipes()}</div>
       <ShoppingList recipes={recipes}/>
       {renderAddRecipeForm()}
       {/* {renderSearchRecipeForm()} */}
-    </>
+    </Page>
   )
 }
 
 
 /*========== EXPORTS ==========*/
 export default App;
+
+
+/*========== STYLES ==========*/
+
+const Page = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;

@@ -31,7 +31,6 @@ function ShoppingList({recipes}) {
   return (
     // TODO: figure out a way to iterate over all list objects and add similiar ingredients together instead of making a new ingredient line
     <>
-      <h3>This is where the shopping list goes</h3>
       {renderShoppingList()}
     </>
   )
@@ -40,3 +39,5 @@ function ShoppingList({recipes}) {
 
 /*========== EXPORTS ==========*/
 export default ShoppingList;
+
+/*========== STYLES ==========*/
