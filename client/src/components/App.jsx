@@ -10,8 +10,7 @@ import Form from './Form.jsx';
 function App() {
 
   /*----- STATE HOOKS -----*/
-  const [recipe, setRecipe] = useState({recipeName: '', ingredients: {name:'', quantity: 0, units: ''}});
-  const [showForm, setShowForm] = useState(false);
+    const [showForm, setShowForm] = useState(false);
 
   /*----- LIFESTYLE METHODS -----*/
 
