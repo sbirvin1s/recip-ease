@@ -2,6 +2,7 @@
 import React, {useState, useRef, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
+import axios from 'axios';
 
 
 /*========== INTERNAL MODULES ==========*/
@@ -42,6 +43,9 @@ function Form({showForm, setShowForm}) {
   const handleSubmit = () => {
     event.preventDefault();
     localStorage.setItem(recipe.recipeName, JSON.stringify(recipe));
+    axios.post('/recipes', recipe)
+    .then(res => console.log(res))
+    .catch(err => console.error(err));
   }
 
   const handleAddIngredient = () => {
@@ -94,8 +98,8 @@ function Form({showForm, setShowForm}) {
       <Background onClick={() => setShowForm(false)}>
       <FormStyle onClick={(event) => event.stopPropagation()}>
         <h2>Enter your Recipe</h2>
-        <label>Number of Servings <input type='number' name='servings' placeholder='1' onChange={handleRecipe}/></label>
         <label>Recipe Name <input type='text' name='recipeName' placeholder='Grilled Cheese' onChange={handleRecipe}/></label>
+        <label>Number of Servings <input type='number' name='servings' placeholder='1' onChange={handleRecipe}/></label>
         <label>Prep Time <input type='number' name='prepTime' placeholder='30' step='1' onChange={handleRecipe}/><p>minutes</p></label>
         <RecipePreview ingredients={recipe.ingredients}/>
         <h4>Add an Ingredient</h4>

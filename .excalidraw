@@ -2404,8 +2404,8 @@
     },
     {
       "type": "rectangle",
-      "version": 511,
-      "versionNonce": 1756086236,
+      "version": 512,
+      "versionNonce": 1352085150,
       "isDeleted": false,
       "id": "TyuFPTEuggqIQ6NlODs-H",
       "fillStyle": "hachure",
@@ -2415,7 +2415,7 @@
       "opacity": 100,
       "angle": 0,
       "x": 783,
-      "y": 266,
+      "y": 264.2799726275374,
       "strokeColor": "#1864ab",
       "backgroundColor": "transparent",
       "width": 400,
@@ -2445,14 +2445,14 @@
           "type": "arrow"
         }
       ],
-      "updated": 1660061767010,
+      "updated": 1660165719455,
       "link": null,
       "locked": false
     },
     {
       "type": "text",
-      "version": 513,
-      "versionNonce": 416660452,
+      "version": 514,
+      "versionNonce": 179245634,
       "isDeleted": false,
       "id": "_-MsQJTRhZoqhrGecBE-U",
       "fillStyle": "hachure",
@@ -2462,7 +2462,7 @@
       "opacity": 100,
       "angle": 0,
       "x": 788,
-      "y": 271,
+      "y": 269.2799726275374,
       "strokeColor": "#1864ab",
       "backgroundColor": "transparent",
       "width": 390,
@@ -2471,7 +2471,7 @@
       "groupIds": [],
       "strokeSharpness": "sharp",
       "boundElements": [],
-      "updated": 1660061767011,
+      "updated": 1660165719455,
       "link": null,
       "locked": false,
       "fontSize": 15.436868032149336,
@@ -4515,8 +4515,8 @@
     },
     {
       "type": "arrow",
-      "version": 45,
-      "versionNonce": 988155996,
+      "version": 47,
+      "versionNonce": 358054402,
       "isDeleted": false,
       "id": "yz1_VIynHqqNdm8Ei-PWD",
       "fillStyle": "hachure",
@@ -4526,16 +4526,16 @@
       "opacity": 100,
       "angle": 0,
       "x": 1187.888888888888,
-      "y": 271.22222222222234,
+      "y": 270.33140905796995,
       "strokeColor": "#c92a2a",
       "backgroundColor": "transparent",
       "width": 288.8888888888889,
-      "height": 16.66666666666663,
+      "height": 15.860026373222752,
       "seed": 255092651,
       "groupIds": [],
       "strokeSharpness": "round",
       "boundElements": [],
-      "updated": 1660061767011,
+      "updated": 1660165719457,
       "link": null,
       "locked": false,
       "startBinding": {
@@ -4558,7 +4558,7 @@
         ],
         [
           288.8888888888889,
-          -16.66666666666663
+          -15.860026373222752
         ]
       ]
     },

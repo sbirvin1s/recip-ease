@@ -27,15 +27,22 @@ const recipeSchema = new mongoose.Schema({
   serving_size: Number,
 })
 
+const shoppingListSchema = new mongoose.Schema({
+
+})
+
 const Recipe = mongoose.model('Recipe', recipeSchema);
+const ShoppingList = mongoose.model('ShoppingList', shoppingListSchema);
 
 /*========== DATABASE METHODS ==========*/
 const findRecipe = () => {
-  // Recipe.findOneAndUpdate
+  return Recipe.find({});
 }
 
-const addRecipe = () => {
-  // Recipe.findOneAndUpdate
+const addRecipe = (recipe) => {
+  return Recipe.findOneAndUpdate(
+
+  )
 }
 
 
