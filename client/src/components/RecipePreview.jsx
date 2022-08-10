@@ -1,5 +1,5 @@
 /*========== EXTERNAL MODULES ==========*/
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 
 /*========== INTERNAL MODULES ==========*/
 
@@ -9,7 +9,6 @@ function RecipePreview({ingredients}) {
 
 
   /*----- LIFESTYLE METHODS -----*/
-// useEffect(() => renderRecipe(), [ingredients]);
 
   /*----- EVENT HANDLERS -----*/
 

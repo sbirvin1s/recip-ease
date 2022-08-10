@@ -1,5 +1,5 @@
 /*========== EXTERNAL MODULES ==========*/
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
@@ -49,9 +49,9 @@ function Form({showForm, setShowForm}) {
         ingredient
       ]
     }))
-    setIngredient();
+    setIngredient(undefined);
+    renderEnterIngredient();
   }
-
 
   /*----- RENDER METHODS -----*/
   const renderEnterIngredient = () => {
@@ -70,6 +70,7 @@ function Form({showForm, setShowForm}) {
             <option value='g'/>
             <option value='ml'/>
             <option value='pinch'/>
+            <option value='slice(s)'/>
             <option value='cloves'/>
             <option value='count'/>
           </datalist>
@@ -91,7 +92,7 @@ function Form({showForm, setShowForm}) {
       <FormStyle onClick={(event) => event.stopPropagation()}>
         <label>Number of Servings <input type='number' name='servings' placeholder='1' onChange={handleRecipe}/></label>
         <label>Recipe Name <input type='text' name='recipeName' placeholder='Grilled Cheese' onChange={handleRecipe}/></label>
-        <label>Prep Time <input type='number' name='prepTime' placeholder='30' step='1' onChange={handleRecipe}/></label>
+        <label>Prep Time <input type='number' name='prepTime' placeholder='30' step='1' onChange={handleRecipe}/><p>minutes</p></label>
         <RecipePreview ingredients={recipe.ingredients}/>
         <h4>Add an Ingredient</h4>
         {renderEnterIngredient()}

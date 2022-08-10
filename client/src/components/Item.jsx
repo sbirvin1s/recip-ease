@@ -31,6 +31,7 @@ function Item() {
 
   /*----- RENDERER -----*/
   return (
+    // TODO: return item as an ul or list element
     <div>
       {renderSelected()}
       {renderName()}
