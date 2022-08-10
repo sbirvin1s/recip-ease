@@ -16,7 +16,7 @@ function App() {
   /*----- LIFESTYLE METHODS -----*/
   useEffect(() =>  {
       const localRecipes = Object.keys(localStorage);
-      const newRecipes = localRecipes.map(recipe => localRecipes[recipe] = localStorage[recipe])
+      const newRecipes = localRecipes.map(recipe => localRecipes[recipe] = JSON.parse(localStorage[recipe]))
       setRecipes(newRecipes);
   }, [localStorage]);
 

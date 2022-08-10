@@ -7,7 +7,6 @@ import IngredientList from './IngredientList.jsx';
 
 
 function ShoppingList({recipes}) {
-
   /*----- STATE HOOKS -----*/
   const [list, setList] = useState([]);
   // const [recipeList, setRecipeList] = useState(recipes);
@@ -24,7 +23,7 @@ function ShoppingList({recipes}) {
   /*----- RENDER METHODS -----*/
   const renderShoppingList = () => {
     // TODO: map information and push info into each Item
-    // return recipes.map((recipe, index) => <IngredientList key={index + recipe.name} recipe={recipe}/>)
+    return recipes.map((recipe, index) => <IngredientList key={`${index}${recipe.recipeName}`} recipe={recipe}/>)
   }
 
 
