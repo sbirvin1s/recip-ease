@@ -23,11 +23,12 @@
     "nodemon": "^2.0.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-is": "^18.2.0",
     "styled-components": "^5.3.5",
     "webpack": "^5.74.0"
   },
   "resolutions": {
-    "styled-components": "^5"
+    "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest"
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",

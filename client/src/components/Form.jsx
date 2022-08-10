@@ -1,5 +1,5 @@
 /*========== EXTERNAL MODULES ==========*/
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
@@ -18,7 +18,11 @@ function Form({showForm, setShowForm}) {
   const [recipe, setRecipe] = useState({recipeName: '', servings: 0, ingredients: []});
 
   /*----- LIFESTYLE METHODS -----*/
-
+  // TODO: refactor to add new recipe to main recipe tracker state on submission instead of local storage
+  // useEffect(() => setRecipes(prev => ({
+  //   ...prev,
+  //   recipe
+  // })), [recipe]);
 
   /*----- EVENT HANDLERS -----*/
   const handleIngredient = ({target: {name, value}}) => {
@@ -50,7 +54,6 @@ function Form({showForm, setShowForm}) {
       ]
     }))
     setIngredient(undefined);
-    renderEnterIngredient();
   }
 
   /*----- RENDER METHODS -----*/
@@ -90,6 +93,7 @@ function Form({showForm, setShowForm}) {
     return ReactDOM.createPortal (
       <Background onClick={() => setShowForm(false)}>
       <FormStyle onClick={(event) => event.stopPropagation()}>
+        <h2>Enter your Recipe</h2>
         <label>Number of Servings <input type='number' name='servings' placeholder='1' onChange={handleRecipe}/></label>
         <label>Recipe Name <input type='text' name='recipeName' placeholder='Grilled Cheese' onChange={handleRecipe}/></label>
         <label>Prep Time <input type='number' name='prepTime' placeholder='30' step='1' onChange={handleRecipe}/><p>minutes</p></label>
@@ -108,6 +112,7 @@ function Form({showForm, setShowForm}) {
 export default Form;
 
 
+/*========== STYLES ==========*/
 const Background = styled.div`
   position: fixed;
   top: 0;
@@ -118,9 +123,17 @@ const Background = styled.div`
 `;
 
 export const FormStyle = styled.form`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border-radius: 20px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 15px 70px 0;
-  background-color: #fff;
-  width: 600px;
-  height: 800px;
+  background-color: #d8d8d8;
+  width: 60vw;
+  height: 80vh;
   box-sizing: border-box;
 `;
