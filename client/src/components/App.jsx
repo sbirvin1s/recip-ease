@@ -14,8 +14,11 @@ function App() {
     const [recipes, setRecipes] = useState([]);
 
   /*----- LIFESTYLE METHODS -----*/
-  // TODO: pull data from local storage into state so that it can be passed into Shopping List
-  useEffect(() =>  setRecipes(localStorage), [localStorage]);
+  useEffect(() =>  {
+      const localRecipes = Object.keys(localStorage);
+      const newRecipes = localRecipes.map(recipe => localRecipes[recipe] = localStorage[recipe])
+      setRecipes(newRecipes);
+  }, [localStorage]);
 
   /*----- EVENT HANDLERS -----*/
   const handleChange = ({target: {name, value}}) => {
@@ -52,7 +55,7 @@ function App() {
     <>
       <h1>Recip*Ease</h1>
       <div>{renderAddRecipe()}{renderSearchRecipes()}</div>
-      <ShoppingList />
+      <ShoppingList recipes={recipes}/>
       {renderAddRecipeForm()}
       {/* {renderSearchRecipeForm()} */}
     </>

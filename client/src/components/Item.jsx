@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 
 /*========== INTERNAL MODULES ==========*/
 
-function Item() {
+function Item({recipe}) {
 
   /*----- STATE HOOKS -----*/
 
