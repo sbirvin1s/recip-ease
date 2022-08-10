@@ -1,5 +1,5 @@
 /*========== EXTERNAL MODULES ==========*/
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 /*========== INTERNAL MODULES ==========*/
@@ -10,11 +10,12 @@ import Form from './Form.jsx';
 function App() {
 
   /*----- STATE HOOKS -----*/
-  const [recipe, setRecipe] = useState({recipeName: '', ingredients: {name:'', quantity: 0, units: ''}});
-  const [showForm, setShowForm] = useState(false);
+    const [showForm, setShowForm] = useState(false);
+    const [recipes, setRecipes] = useState([]);
 
   /*----- LIFESTYLE METHODS -----*/
-
+  // TODO: pull data from local storage into state so that it can be passed into Shopping List
+  useEffect(() =>  setRecipes(localStorage), [localStorage]);
 
   /*----- EVENT HANDLERS -----*/
   const handleChange = ({target: {name, value}}) => {
@@ -28,12 +29,8 @@ function App() {
 
 
   /*----- RENDER METHODS -----*/
-  const renderAddRecipe = () => {
-    return (
-      // launches add recipe modal
-      <button>Add Recipe</button>
-      )
-    }
+
+  const renderAddRecipe = () => <button onClick={() => setShowForm(true)}>Add Recipe</button>
 
   const renderSearchRecipes = () => {
     return (
@@ -53,7 +50,7 @@ function App() {
   /*----- RENDERER -----*/
   return (
     <>
-      <h1>This is React</h1>
+      <h1>Recip*Ease</h1>
       <div>{renderAddRecipe()}{renderSearchRecipes()}</div>
       <ShoppingList />
       {renderAddRecipeForm()}
