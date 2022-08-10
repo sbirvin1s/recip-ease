@@ -1,7 +1,8 @@
 /*========== EXTERNAL MODULES ==========*/
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import styled from 'styled-components';
+import styled, {createGlobalStyle} from 'styled-components';
+import Button from '@mui/material/Button';
 
 /*========== INTERNAL MODULES ==========*/
 import ShoppingList from './ShoppingList.jsx';
@@ -34,12 +35,12 @@ function App() {
 
   /*----- RENDER METHODS -----*/
 
-  const renderAddRecipe = () => <button onClick={() => setShowForm(true)}>Add Recipe</button>
+  const renderAddRecipe = () => <Button variant='contained' onClick={() => setShowForm(true)}>Add Recipe</Button>
 
   const renderSearchRecipes = () => {
     return (
       // launches search recipes modal
-      <button>Search Recipes</button>
+      <Button variant='contained'>Search Recipes</Button>
     )
   }
 
@@ -53,13 +54,16 @@ function App() {
 
   /*----- RENDERER -----*/
   return (
-    <Page>
-      <h1>Recip*Ease</h1>
-      <div>{renderAddRecipe()}{renderSearchRecipes()}</div>
-      <ShoppingList recipes={recipes}/>
-      {renderAddRecipeForm()}
-      {/* {renderSearchRecipeForm()} */}
-    </Page>
+    <>
+      <GlobalStyle />
+      <Page>
+        <h1>Recip<img src='../dist/recip-ease.png'/>Ease</h1>
+        <NavBar>{renderAddRecipe()}{renderSearchRecipes()}</NavBar>
+        <ShoppingList recipes={recipes}/>
+        {renderAddRecipeForm()}
+        {/* {renderSearchRecipeForm()} */}
+      </Page>
+    </>
   )
 }
 
@@ -75,4 +79,19 @@ const Page = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  `;
+
+  const GlobalStyle = createGlobalStyle`
+    body {
+      background-color: #414141;
+    }
+  `;
+
+const NavBar = styled.nav`
+  display: flex;
+  margin-bottom: 2em;
+  width: 80vw;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 `;
