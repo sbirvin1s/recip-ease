@@ -24,7 +24,7 @@ function Ingredient({ingredient: {name,quantity, units}, servings}) {
   }
 
   /*----- RENDER METHODS -----*/
-  const renderSelected = () => <label name='selected'><Checkbox type='checkbox' onClick={handleCheck}/></label>
+  const renderSelected = () => <label name='selected'><Checkbox type='checkbox' size='large' onClick={handleCheck}/></label>
   const renderName = () => <label name='ingredientName'><IngredientName>{name}</IngredientName></label>
   const renderQuantity = () => <label name='ingredientQuantity'><Quantity>Quantity: {quantity * servings} {units}</Quantity></label>
 
@@ -49,7 +49,7 @@ const ListItem = styled.div`
   /* background-color: #88BB88; */
   margin: 0.5em;
   width: 80vw;
-  padding: 0 0.5em;
+  padding: 0.5em;
   display: flex;
   /* border: solid;
   border-width: thin; */
