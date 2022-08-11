@@ -19,8 +19,8 @@ function RecipePreview({ingredients}) {
     return ingredients.map(({name, quantity, units}, index) => {
       return (
         <ListItem key={name + index}>
-          <label name='ingredientName'><IngredientName>{name}</IngredientName></label>
-          <label name='ingredientQuantity'><Quantity>Quantity: {quantity} {units}</Quantity></label>
+          <IngredientName name='ingredientName'>{name}</IngredientName>
+          <Quantity name='ingredientQuantity'>Quantity: {quantity} {units}</Quantity>
         </ListItem>
       )
     })
@@ -46,35 +46,33 @@ export default RecipePreview;
 /*========== STYLES ==========*/
 const ListItem = styled.div`
   background-color: #d8d8d8;
-  /* background-color: #88BB88; */
-  margin: 0.5em;
-  width: 80;
+  margin: 0.25em 0.25em;
+  width: 90%;
   padding: 0.5em;
   display: flex;
-  /* border: solid;
-  border-width: thin; */
-  border-radius: 5px;
+  border-radius: 10px;
   flex-direction: row;
-  /* justify-content: space-evenly; */
   align-items: center;
+  justify-content: space-around;
 `;
 
 const List = styled.div`
   display: flex;
   width: 100%;
   min-height: 25%;
-  background-color:  rgba(0, 0, 0, 0.15);
+  padding: 0.25em;
+  background-color:  rgba(0, 0, 0, 0.05);
   border-radius: 20px;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 `;
 
-const IngredientName = styled.p`
+const IngredientName = styled.label`
   margin: 0 20px;
   font-size: 18pt;
   font-weight: bold;
-`;
+  `;
 
-const Quantity = styled.p`
+const Quantity = styled.label`
   font-size: 12pt;
 `;

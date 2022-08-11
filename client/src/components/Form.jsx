@@ -15,6 +15,8 @@ function Form({showForm, setShowForm}) {
   if (!showForm) {
     return null;
   }
+  const firstRef = useRef(null);
+  const lastRef = useRef(null);
 
   /*----- STATE HOOKS -----*/
   const [ingredient, setIngredient] = useState({});
@@ -28,20 +30,32 @@ function Form({showForm, setShowForm}) {
   // })), [recipe]);
 
   /*----- EVENT HANDLERS -----*/
-  const handleIngredient = ({target: {name, value}}) => {
-    console.log(ingredient);
-    console.log('name: ', name, 'value: ', value);
-    setIngredient(prev => ({
+  const handleIngredient = ({target: {name, value, valueAsNumber}}) => {
+    if (name === 'quantity') {
+      setIngredient(prev => ({
       ...prev,
-      [name]: value
-    }))
+      [name]: valueAsNumber
+      }))
+    } else {
+      setIngredient(prev => ({
+        ...prev,
+        [name]: value
+      }))
+    }
   }
 
-  const handleRecipe = ({target: {name, value}}) => {
-    setRecipe(prev => ({
+  const handleRecipe = ({target: {name, value, valueAsNumber}}) => {
+    if (name === 'recipeName') {
+      setRecipe(prev => ({
       ...prev,
       [name]: value
-    }));
+      }))
+    } else {
+      setRecipe(prev => ({
+        ...prev,
+        [name]: valueAsNumber
+      }))
+    }
   }
 
   const handleSubmit = () => {
@@ -52,7 +66,7 @@ function Form({showForm, setShowForm}) {
     .catch(err => console.error(err));
   }
 
-  const handleAddIngredient = () => {
+  const handleAddIngredient = event => {
     event.preventDefault();
     setRecipe(prev => ({
       ...prev,
@@ -61,6 +75,8 @@ function Form({showForm, setShowForm}) {
         ingredient
       ]
     }))
+    firstRef.current.value = '';
+    lastRef.current.value = '';
     setIngredient(undefined);
   }
 
@@ -73,6 +89,7 @@ function Form({showForm, setShowForm}) {
             Ingredient Name:
             <Input
               style={{width: '8em'}}
+              ref={firstRef}
               type='text'
               name='name'
               placeholder='cheese'
@@ -80,12 +97,13 @@ function Form({showForm, setShowForm}) {
             />
             Quantity:
             <Input
+            ref={lastRef}
               type='number'
               name='quantity'
               placeholder='0'
               onChange={handleIngredient}
             />
-            <p>{ingredient.units || ''}</p>
+            <p>{(ingredient && ingredient.units) || ''}</p>
           </Row>
             <ButtonGroup>
               <Button value='tsp' name='units' onClick={handleIngredient}>tsp</Button>
@@ -158,8 +176,8 @@ function Form({showForm, setShowForm}) {
           <RecipePreview ingredients={recipe.ingredients}/>
           <h4>Add Ingredient</h4>
           {renderEnterIngredient()}
-          {renderSubmit()}
         </Column>
+        <ButtonContainer>{renderSubmit()}</ButtonContainer>
       </Container>
     </Background>,
     document.getElementById('portal')
@@ -197,6 +215,10 @@ const Container = styled.div`
     height: 80vh;
     box-sizing: border-box;
     `;
+
+const ButtonContainer = styled.div`
+  margin: 1em;
+`;
 
 const Row = styled.div`
   display:flex;
