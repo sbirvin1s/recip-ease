@@ -7,6 +7,9 @@ import Button from '@mui/material/Button';
 /*========== INTERNAL MODULES ==========*/
 import ShoppingList from './ShoppingList.jsx';
 import Form from './Form.jsx';
+import logo from '../../dist/recip-ease.png';
+import background from '../../../background.png';
+
 
 
 function App() {
@@ -35,12 +38,12 @@ function App() {
 
   /*----- RENDER METHODS -----*/
 
-  const renderAddRecipe = () => <Button variant='contained' onClick={() => setShowForm(true)}>Add Recipe</Button>
+  const renderAddRecipe = () => <Button variant='contained' size='large' onClick={() => setShowForm(true)}>Add Recipe</Button>
 
   const renderSearchRecipes = () => {
     return (
       // launches search recipes modal
-      <Button variant='contained'>Search Recipes</Button>
+      <Button variant='contained' size='large'>Search Recipes</Button>
     )
   }
 
@@ -57,7 +60,7 @@ function App() {
     <>
       <GlobalStyle />
       <Page>
-        <h1>Recip<img src='../dist/recip-ease.png'/>Ease</h1>
+        <Header>Recip<Logo src={logo}/>Ease</Header>
         <NavBar>{renderAddRecipe()}{renderSearchRecipes()}</NavBar>
         <ShoppingList recipes={recipes}/>
         {renderAddRecipeForm()}
@@ -85,7 +88,7 @@ const Page = styled.div`
     body {
       background-color: #414141;
     }
-  `;
+    `;
 
 const NavBar = styled.nav`
   display: flex;
@@ -94,4 +97,22 @@ const NavBar = styled.nav`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  `;
+
+const Logo = styled.img`
+  transform: scale(0.5);
+  `;
+
+const Header = styled.header`
+  display: flex;
+  width: 90vw;
+  margin: 1em;
+  background-color: #8ec284;
+  /* background-image: url(${background}); */
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 32pt;
+  /* color: white; */
+  font-weight: bold;
 `;
