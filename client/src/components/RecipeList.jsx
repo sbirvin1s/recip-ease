@@ -4,15 +4,15 @@ import React from 'react';
 /*========== INTERNAL MODULES ==========*/
 import Recipe from './Recipe.jsx';
 
-function RecipeList() {
-
+function RecipeList({recipes, selectedRecipes, setSelectedRecipes}) {
 
   /*----- RENDER METHODS -----*/
   const renderRecipeList = () => {
-    return <p>Placeholder List</p>
-    // return ingredients.map((ingredient, index) => {
-    //   return <Recipe key={'ingedient' + index} ingredient={ingredient} servings={servings}/>
-    // })
+    if (recipes) {
+      return recipes.map((recipe, index) => {
+        return <Recipe key={'recipe' + index} recipe={recipe} selectedRecipes={selectedRecipes} setSelectedRecipes={setSelectedRecipes}/>
+      })
+    }
   }
 
   /*----- RENDERER -----*/

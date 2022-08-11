@@ -53,7 +53,7 @@ function SearchRecipes({showSearchForm, setShowSearchForm}) {
       <Container onClick={(event) => event.stopPropagation()}>
         <h1>Select a Recipe</h1>
         <Column>
-          <RecipeList recipes={recordedRecipes} setSelectedRecipes={setSelectedRecipes}/>
+          <RecipeList recipes={recordedRecipes} selectedRecipes={selectedRecipes} setSelectedRecipes={setSelectedRecipes}/>
         </Column>
         <ButtonContainer>{renderSubmit()}</ButtonContainer>
       </Container>
@@ -101,6 +101,7 @@ const ButtonContainer = styled.div`
 
 const Row = styled.div`
   display:flex;
+  flex-wrap: wrap;
   flex-direction: row;
   align-items: center;
 `;
