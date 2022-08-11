@@ -9,9 +9,11 @@ function IngredientList({recipe}) {
 
   /*----- RENDER METHODS -----*/
   const renderIngredientList = () => {
-    return ingredients.map((ingredient, index) => {
-      return <Ingredient key={'ingedient' + index} ingredient={ingredient} servings={servings}/>
-    })
+    if (ingredients) {
+      return ingredients.map((ingredient, index) => {
+        return <Ingredient key={'ingedient' + index} ingredient={ingredient} servings={servings}/>
+      })
+    }
   }
 
   /*----- RENDERER -----*/

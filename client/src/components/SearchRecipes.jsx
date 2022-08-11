@@ -10,7 +10,7 @@ import axios from 'axios';
 import RecipeList from './RecipeList.jsx';
 
 
-function SearchRecipes({showSearchForm, setShowSearchForm}) {
+function SearchRecipes({showSearchForm, setShowSearchForm, setRecipes}) {
   if (!showSearchForm) {
     return null;
   }
@@ -37,6 +37,12 @@ function SearchRecipes({showSearchForm, setShowSearchForm}) {
   /*----- EVENT HANDLERS -----*/
   const handleSubmit = () => {
     event.preventDefault();
+    localStorage.setItem(selectedRecipes.recipe.recipeName, JSON.stringify(selectedRecipes.recipe));
+    setRecipes(prev => ([
+      ...prev,
+      selectedRecipes
+    ]))
+    setShowSearchForm(false);
   }
 
 

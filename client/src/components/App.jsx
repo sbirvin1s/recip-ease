@@ -55,7 +55,7 @@ function App() {
   }
 
   const renderSearchRecipeForm = () => {
-    return <SearchRecipes showSearchForm={showSearchForm} setShowSearchForm={setShowSearchForm} />
+    return <SearchRecipes showSearchForm={showSearchForm} setShowSearchForm={setShowSearchForm} setRecipes={setRecipes}/>
   }
 
   const renderClearShoppingList = () => {

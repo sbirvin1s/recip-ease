@@ -21,7 +21,6 @@ function Recipe({recipe, selectedRecipes, setSelectedRecipes}) {
   }
 
   const handleSelect = ({target: {name}}) => {
-    // const selectedRecipe =
     setSelectedRecipes(prev => ({
       ...prev,
       recipe
@@ -53,8 +52,8 @@ export default Recipe;
 const ListItem = styled.div`
   background-color: #d8d8d8;
   margin: 0.5em;
-  width: 20em;
-  height: 20em;
+  width: 10em;
+  height: 10em;
   padding: 0.5em;
   display: flex;
   border-radius: 5px;
