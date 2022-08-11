@@ -18,7 +18,7 @@ const getRecipes = (req, res) => {
 
 const writeRecipe = (req, res) => {
   addRecipe(req.body)
-  .then(res => res.sendStatus(201))
+  .then(response => res.sendStatus(201))
   .catch(err => {
     console.error(err);
     return res.status(500).json({Error: 'Something went wrong processing your request'});
