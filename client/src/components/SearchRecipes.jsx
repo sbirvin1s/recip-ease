@@ -37,10 +37,11 @@ function SearchRecipes({showSearchForm, setShowSearchForm, setRecipes}) {
   /*----- EVENT HANDLERS -----*/
   const handleSubmit = () => {
     event.preventDefault();
-    localStorage.setItem(selectedRecipes.recipe.recipeName, JSON.stringify(selectedRecipes.recipe));
+    const currentRecipe = selectedRecipes.recipe;
+    localStorage.setItem(currentRecipe.recipeName, JSON.stringify(currentRecipe));
     setRecipes(prev => ([
       ...prev,
-      selectedRecipes
+      currentRecipe
     ]))
     setShowSearchForm(false);
   }
