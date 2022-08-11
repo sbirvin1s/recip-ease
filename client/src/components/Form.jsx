@@ -85,8 +85,8 @@ function Form({showForm, setShowForm, setRecipes}) {
     }))
     firstRef.current.value = '';
     lastRef.current.value = '';
-    setVisible('visible');
-    setTimeout(() => setVisible('hidden'), 500);
+    // setVisible('visible');
+    // setTimeout(() => setVisible('hidden'), 500);
     setIngredient(undefined);
   }
 

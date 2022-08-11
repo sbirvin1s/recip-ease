@@ -16,15 +16,26 @@ mongoose.connect('mongodb://localhost:27017/recip-ease',
 
 /*========== SCHEMA ==========*/
 const recipeSchema = new mongoose.Schema({
-  name: String,
+  recipeName: {
+    type: String,
+    unique: true,
+    require: true
+  },
+  servings: {
+    type: Number,
+    require: true
+  },
   ingredients: [
     {
-      ingredient: String,
+      name: String,
       quantity: Number,
       units: String
     }
   ],
-  serving_size: Number,
+  prepTime: {
+    type: Number,
+    require: true
+  }
 })
 
 const shoppingListSchema = new mongoose.Schema({
@@ -35,19 +46,21 @@ const Recipe = mongoose.model('Recipe', recipeSchema);
 const ShoppingList = mongoose.model('ShoppingList', shoppingListSchema);
 
 /*========== DATABASE METHODS ==========*/
-const findRecipe = () => {
+const findRecipes = () => {
   return Recipe.find({});
 }
 
 const addRecipe = (recipe) => {
   return Recipe.findOneAndUpdate(
-
+    {recipeName: recipe.recipeName},
+    {...recipe},
+    {upsert: true}
   )
 }
 
 
 /*========== EXPORTS ==========*/
 module.exports = {
-  findRecipe,
+  findRecipes,
   addRecipe,
 }
