@@ -194,7 +194,7 @@ function Form({showForm, setShowForm, setRecipes}) {
                 </Row>
               </label>
             </Row>
-          <RecipePreview ingredients={recipe.ingredients}/>
+          <RecipePreview ingredients={recipe.ingredients} recipe={recipe} setRecipe={setRecipe}/>
           {/* {renderIngredientAlert()} */}
           <h4>Add Ingredient</h4>
           {renderEnterIngredient()}
