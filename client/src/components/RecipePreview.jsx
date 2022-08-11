@@ -6,14 +6,6 @@ import styled from 'styled-components';
 
 function RecipePreview({ingredients}) {
 
-  /*----- STATE HOOKS -----*/
-
-
-  /*----- LIFESTYLE METHODS -----*/
-
-  /*----- EVENT HANDLERS -----*/
-
-
   /*----- RENDER METHODS -----*/
   const renderRecipe = () => {
     return ingredients.map(({name, quantity, units}, index) => {
@@ -59,7 +51,7 @@ const ListItem = styled.div`
 const List = styled.div`
   display: flex;
   width: 100%;
-  min-height: 25%;
+  min-height: 10em;
   padding: 0.25em;
   background-color:  rgba(0, 0, 0, 0.05);
   border-radius: 20px;

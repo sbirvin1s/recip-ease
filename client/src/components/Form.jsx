@@ -208,11 +208,12 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 15px 70px 0;
+    justify-content: space-between;
+    padding: 3em;
     background-color: #d8d8d8;
     /* background-color: #414141; */
     width: 60vw;
-    height: 80vh;
+    min-height: 60vh;
     box-sizing: border-box;
     `;
 
@@ -249,6 +250,8 @@ const Input = styled.input`
   border-left: none;
   border-right: none;
   outline: none;
+  font-size: 12pt;
+  font-weight: light;
   background-color: transparent;
   width: 3em;
   padding: 2px;
