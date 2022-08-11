@@ -1,4 +1,4 @@
-# Recip*Ease
+# Recip<img src='./recip-ease.png' height='32' width='32'>Ease 
 
 > A web app intended to simplify the creation of grocery lists by parsing recipes and creating a grocery list based on ingredients and serving amounts
 
