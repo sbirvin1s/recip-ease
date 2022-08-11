@@ -26,8 +26,9 @@ function App() {
   }, [localStorage]);
 
   /*----- EVENT HANDLERS -----*/
-  const handleChange = ({target: {name, value}}) => {
-
+  const handleClear = () => {
+    localStorage.clear();
+    setRecipes([]);
   }
 
   const handleSubmit = ({target: {name, value}}) => {
@@ -56,9 +57,11 @@ function App() {
   }
 
   const renderClearShoppingList = () => {
-    return (
-    <Button onClick={() => localStorage.clear()}></Button>
-    )
+    if (recipes && recipes.length > 0) {
+      return (
+      <Button onClick={handleClear}>Clear List</Button>
+      )
+    }
   }
 
   /*----- RENDERER -----*/
