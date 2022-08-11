@@ -1,7 +1,7 @@
 /*========== EXTERNAL MODULES ==========*/
 import React, {useState, useRef, useEffect} from 'react';
 import ReactDOM from 'react-dom';
-// import ButtonGroup from '@mui/material/ButtonGroup';
+// import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -11,7 +11,7 @@ import axios from 'axios';
 import RecipePreview from './RecipePreview.jsx';
 
 
-function Form({showForm, setShowForm}) {
+function Form({showForm, setShowForm, setRecipes}) {
   if (!showForm) {
     return null;
   }
@@ -21,6 +21,7 @@ function Form({showForm, setShowForm}) {
   /*----- STATE HOOKS -----*/
   const [ingredient, setIngredient] = useState({});
   const [recipe, setRecipe] = useState({recipeName: '', servings: 0, ingredients: []});
+  const [visible, setVisible] = useState('hidden');
 
   /*----- LIFESTYLE METHODS -----*/
   // TODO: refactor to add new recipe to main recipe tracker state on submission instead of local storage
@@ -61,8 +62,15 @@ function Form({showForm, setShowForm}) {
   const handleSubmit = () => {
     event.preventDefault();
     localStorage.setItem(recipe.recipeName, JSON.stringify(recipe));
+    setRecipes(prev => ([
+      ...prev,
+      recipe
+    ]))
     axios.post('/recipes', recipe)
-    .then(res => console.log(res.data))
+    .then(res => {
+      console.log(res.data)
+      setShowForm(false);
+    })
     .catch(err => console.error(err));
   }
 
@@ -77,6 +85,8 @@ function Form({showForm, setShowForm}) {
     }))
     firstRef.current.value = '';
     lastRef.current.value = '';
+    setVisible('visible');
+    setTimeout(() => setVisible('hidden'), 500);
     setIngredient(undefined);
   }
 
@@ -122,6 +132,17 @@ function Form({showForm, setShowForm}) {
         </label>
         <Button onClick={handleAddIngredient} variant='contained' >Add Ingredient</Button>
       </form>
+    )
+  }
+
+  const renderIngredientAlert = visible => {
+    return (
+      <Alert
+        sx={{visibility: {visible}, width: '80%'}}
+        variant="filled"
+        severity="success">
+          Ingredient Added
+      </Alert>
     )
   }
 
@@ -174,6 +195,7 @@ function Form({showForm, setShowForm}) {
               </label>
             </Row>
           <RecipePreview ingredients={recipe.ingredients}/>
+          {/* {renderIngredientAlert()} */}
           <h4>Add Ingredient</h4>
           {renderEnterIngredient()}
         </Column>
