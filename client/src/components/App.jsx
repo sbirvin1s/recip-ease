@@ -55,6 +55,12 @@ function App() {
     // return <Form showForm={showForm} setShowForm={setShowForm} />
   }
 
+  const renderClearShoppingList = () => {
+    return (
+    <Button onClick={() => localStorage.clear()}></Button>
+    )
+  }
+
   /*----- RENDERER -----*/
   return (
     <>
@@ -65,6 +71,7 @@ function App() {
         <ShoppingList recipes={recipes}/>
         {renderAddRecipeForm()}
         {/* {renderSearchRecipeForm()} */}
+        {renderClearShoppingList()}
       </Page>
     </>
   )
@@ -85,7 +92,9 @@ const Page = styled.div`
   `;
 
   const GlobalStyle = createGlobalStyle`
+
     body {
+      font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
       background-color: #414141;
     }
     `;
@@ -101,7 +110,8 @@ const NavBar = styled.nav`
 
 const Logo = styled.img`
   transform: scale(0.5);
-  `;
+  margin: -17px;
+`;
 
 const Header = styled.header`
   display: flex;
