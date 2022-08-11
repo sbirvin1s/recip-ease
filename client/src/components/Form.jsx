@@ -1,6 +1,8 @@
 /*========== EXTERNAL MODULES ==========*/
 import React, {useState, useRef, useEffect} from 'react';
 import ReactDOM from 'react-dom';
+// import ButtonGroup from '@mui/material/ButtonGroup';
+import Button from '@mui/material/Button';
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -13,9 +15,11 @@ function Form({showForm, setShowForm}) {
   if (!showForm) {
     return null;
   }
+  const firstRef = useRef(null);
+  const lastRef = useRef(null);
 
   /*----- STATE HOOKS -----*/
-  const [ingredient, setIngredient] = useState();
+  const [ingredient, setIngredient] = useState({});
   const [recipe, setRecipe] = useState({recipeName: '', servings: 0, ingredients: []});
 
   /*----- LIFESTYLE METHODS -----*/
@@ -26,29 +30,43 @@ function Form({showForm, setShowForm}) {
   // })), [recipe]);
 
   /*----- EVENT HANDLERS -----*/
-  const handleIngredient = ({target: {name, value}}) => {
-    setIngredient(prev => ({
+  const handleIngredient = ({target: {name, value, valueAsNumber}}) => {
+    if (name === 'quantity') {
+      setIngredient(prev => ({
       ...prev,
-      [name]: value
-    }))
+      [name]: valueAsNumber
+      }))
+    } else {
+      setIngredient(prev => ({
+        ...prev,
+        [name]: value
+      }))
+    }
   }
 
-  const handleRecipe = ({target: {name, value}}) => {
-    setRecipe(prev => ({
+  const handleRecipe = ({target: {name, value, valueAsNumber}}) => {
+    if (name === 'recipeName') {
+      setRecipe(prev => ({
       ...prev,
       [name]: value
-    }));
+      }))
+    } else {
+      setRecipe(prev => ({
+        ...prev,
+        [name]: valueAsNumber
+      }))
+    }
   }
 
   const handleSubmit = () => {
     event.preventDefault();
     localStorage.setItem(recipe.recipeName, JSON.stringify(recipe));
     axios.post('/recipes', recipe)
-    .then(res => console.log(res))
+    .then(res => console.log(res.data))
     .catch(err => console.error(err));
   }
 
-  const handleAddIngredient = () => {
+  const handleAddIngredient = event => {
     event.preventDefault();
     setRecipe(prev => ({
       ...prev,
@@ -57,66 +75,121 @@ function Form({showForm, setShowForm}) {
         ingredient
       ]
     }))
+    firstRef.current.value = '';
+    lastRef.current.value = '';
     setIngredient(undefined);
   }
 
   /*----- RENDER METHODS -----*/
   const renderEnterIngredient = () => {
     return (
-      <>
-        <label>Ingredient Name <input type='text' name='name' placeholder='cheese' onChange={handleIngredient}/></label>
-        <label>Quantity <input type='number' name='quantity' placeholder='0' onChange={handleIngredient}/></label>
-        <label>Units
-          <input list='units' name='units' onChange={handleIngredient}/>
-          <datalist id='units' >
-            <option value='tsp'/>
-            <option value='Tbsp'/>
-            <option value='oz'/>
-            <option value='lb'/>
-            <option value='c'/>
-            <option value='g'/>
-            <option value='ml'/>
-            <option value='pinch'/>
-            <option value='slice(s)'/>
-            <option value='cloves'/>
-            <option value='count'/>
-          </datalist>
+      <form>
+        <label>
+          <Row>
+            Ingredient Name:
+            <Input
+              style={{width: '8em'}}
+              ref={firstRef}
+              type='text'
+              name='name'
+              placeholder='cheese'
+              onChange={handleIngredient}
+            />
+            Quantity:
+            <Input
+            ref={lastRef}
+              type='number'
+              name='quantity'
+              placeholder='0'
+              onChange={handleIngredient}
+            />
+            <p>{(ingredient && ingredient.units) || ''}</p>
+          </Row>
+            <ButtonGroup>
+              <Button value='tsp' name='units' onClick={handleIngredient}>tsp</Button>
+              <Button value='Tbsp'name='units' onClick={handleIngredient}>Tbsp</Button>
+              <Button value='oz' name='units' onClick={handleIngredient}>ounces</Button>
+              <Button value='lbs' name='units' onClick={handleIngredient}>lbs</Button>
+              <Button value='c' name='units' onClick={handleIngredient}>cup</Button>
+              <Button value='g' name='units' onClick={handleIngredient}>gram(s)</Button>
+              <Button value='ml' name='units' onClick={handleIngredient}>ml</Button>
+              <Button value='pinch' name='units' onClick={handleIngredient}>pinch</Button>
+              <Button value='slice(s)' name='units' onClick={handleIngredient}>slice(s)</Button>
+              <Button value='cloves' name='units' onClick={handleIngredient}>clove(s)</Button>
+              <Button value='count' name='units' onClick={handleIngredient}>count</Button>
+              <Button value='' name='units' onClick={handleIngredient}>clear</Button>
+            </ButtonGroup>
         </label>
-        <button onClick={handleAddIngredient}>Add Ingredient</button>
-      </>
+        <Button onClick={handleAddIngredient} variant='contained' >Add Ingredient</Button>
+      </form>
     )
   }
 
   const renderSubmit = () => {
     return (
-      <button onClick={handleSubmit}>Submit</button>
+      <Button onClick={handleSubmit}>Submit</Button>
       )
     }
 
     /*----- RENDERER -----*/
     return ReactDOM.createPortal (
       <Background onClick={() => setShowForm(false)}>
-      <FormStyle onClick={(event) => event.stopPropagation()}>
-        <h2>Enter your Recipe</h2>
-        <label>Recipe Name <input type='text' name='recipeName' placeholder='Grilled Cheese' onChange={handleRecipe}/></label>
-        <label>Number of Servings <input type='number' name='servings' placeholder='1' onChange={handleRecipe}/></label>
-        <label>Prep Time <input type='number' name='prepTime' placeholder='30' step='1' onChange={handleRecipe}/><p>minutes</p></label>
-        <RecipePreview ingredients={recipe.ingredients}/>
-        <h4>Add an Ingredient</h4>
-        {renderEnterIngredient()}
-        {renderSubmit()}
-      </FormStyle>
+      <Container onClick={(event) => event.stopPropagation()}>
+        <Column>
+          <h1>Enter your Recipe</h1>
+            <label>
+              <h3 style={{margin: '0', padding: '0'}}>
+              Recipe Name
+              <Input
+                style={{width: '10em'}}
+                type='text'
+                name='recipeName'
+                placeholder='Grilled Cheese'
+                onChange={handleRecipe}
+              />
+              </h3>
+            </label>
+            <Row>
+              <label>
+                Number of Servings
+                <Input
+                  type='number'
+                  name='servings'
+                  placeholder='1'
+                  onChange={handleRecipe}
+                  />
+              </label>
+              <label>
+                <Row>
+                  Prep Time:
+                  <Input
+                    type='number'
+                    name='prepTime'
+                    placeholder='30'
+                    step='1'
+                    onChange={handleRecipe}
+                    />
+                  <p>minutes</p>
+                </Row>
+              </label>
+            </Row>
+          <RecipePreview ingredients={recipe.ingredients}/>
+          <h4>Add Ingredient</h4>
+          {renderEnterIngredient()}
+        </Column>
+        <ButtonContainer>{renderSubmit()}</ButtonContainer>
+      </Container>
     </Background>,
     document.getElementById('portal')
-  )
-}
+    )
+  }
 
 
-/*========== EXPORTS ==========*/
-export default Form;
+  /*========== EXPORTS ==========*/
+  export default Form;
 
 
-/*========== STYLES ==========*/
+  /*========== STYLES ==========*/
 const Background = styled.div`
   position: fixed;
   top: 0;
@@ -124,20 +197,64 @@ const Background = styled.div`
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
+  `;
+
+const Container = styled.div`
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    border-radius: 20px;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3em;
+    background-color: #d8d8d8;
+    /* background-color: #414141; */
+    width: 60vw;
+    min-height: 60vh;
+    box-sizing: border-box;
+    `;
+
+const ButtonContainer = styled.div`
+  margin: 1em;
 `;
 
-export const FormStyle = styled.form`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  border-radius: 20px;
-  transform: translate(-50%, -50%);
-  display: flex;
+const Row = styled.div`
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const Column = styled.div`
+  display:flex;
+  height: 100%;
   flex-direction: column;
   align-items: center;
-  padding: 15px 70px 0;
-  background-color: #d8d8d8;
-  width: 60vw;
-  height: 80vh;
-  box-sizing: border-box;
+  /* justify-content: center; */
 `;
+
+const ButtonGroup = styled.div`
+  display:flex;
+  margin: 10px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+`;
+
+const Input = styled.input`
+  border: solid;
+  border-width: thin;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  outline: none;
+  font-size: 12pt;
+  font-weight: light;
+  background-color: transparent;
+  width: 3em;
+  padding: 2px;
+  margin: 10px;
+  text-align: center;
+  `;
