@@ -6,7 +6,8 @@ import Button from '@mui/material/Button';
 
 /*========== INTERNAL MODULES ==========*/
 import ShoppingList from './ShoppingList.jsx';
-import Form from './Form.jsx';
+import AddRecipe from './AddRecipe.jsx';
+import SearchRecipes from './SearchRecipes.jsx';
 import logo from '../../dist/recip-ease.png';
 import background from '../../../background.png';
 
@@ -16,6 +17,7 @@ function App() {
 
   /*----- STATE HOOKS -----*/
     const [showForm, setShowForm] = useState(false);
+    const [showSearchForm, setShowSearchForm] = useState(false);
     const [recipes, setRecipes] = useState([]);
 
   /*----- LIFESTYLE METHODS -----*/
@@ -44,16 +46,16 @@ function App() {
   const renderSearchRecipes = () => {
     return (
       // launches search recipes modal
-      <Button variant='contained' size='large'>Search Recipes</Button>
+      <Button variant='contained' size='large' onClick={() => setShowSearchForm(true)}>Search Recipes</Button>
     )
   }
 
   const renderAddRecipeForm = () => {
-    return <Form showForm={showForm} setShowForm={setShowForm} setRecipes={setRecipes}/>
+    return <AddRecipe showForm={showForm} setShowForm={setShowForm} setRecipes={setRecipes}/>
   }
 
   const renderSearchRecipeForm = () => {
-    // return <Form showForm={showForm} setShowForm={setShowForm} />
+    return <SearchRecipes showSearchForm={showSearchForm} setShowSearchForm={setShowSearchForm} setRecipes={setRecipes}/>
   }
 
   const renderClearShoppingList = () => {
@@ -79,7 +81,7 @@ function App() {
         <NavBar>{renderAddRecipe()}{renderSearchRecipes()}</NavBar>
         <ShoppingList recipes={recipes}/>
         {renderAddRecipeForm()}
-        {/* {renderSearchRecipeForm()} */}
+        {renderSearchRecipeForm()}
         {renderClearShoppingList()}
       </Page>
     </>
