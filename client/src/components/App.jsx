@@ -64,6 +64,12 @@ function App() {
     }
   }
 
+  const renderMenu = () => {
+    return (
+      <Menu></Menu>
+    )
+  }
+
   /*----- RENDERER -----*/
   return (
     <>
@@ -92,6 +98,9 @@ const Page = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   `;
 
   const GlobalStyle = createGlobalStyle`
@@ -128,4 +137,9 @@ const Header = styled.header`
   font-size: 32pt;
   /* color: white; */
   font-weight: bold;
+`;
+
+const Menu = styled.button`
+  border: none;
+  outline: none;
 `;

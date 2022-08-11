@@ -2,21 +2,31 @@
 
 
 /*========== INTERNAL MODULES ==========*/
-const {addRecipe, findRecipe} = require('../../database');
+const {addRecipe, findRecipes} = require('../../database');
 
 
 
 /*========== ROUTE HANDLERS ==========*/
-const getRecipe = (req, res) => {
-  res.json(req.body);
+const getRecipes = (req, res) => {
+  findRecipes()
+  .then(recipes => res.json(recipes))
+  .catch(err => {
+    console.error(err);
+    return res.status(500).json({Error: 'Something went wrong processing your request'});
+  })
 }
 
 const writeRecipe = (req, res) => {
-  res.json(req.body);
+  addRecipe(req.body)
+  .then(response => res.sendStatus(201))
+  .catch(err => {
+    console.error(err);
+    return res.status(500).json({Error: 'Something went wrong processing your request'});
+  })
 }
 
 /*========== EXPORTS ==========*/
 module.exports = {
   writeRecipe,
-  getRecipe,
+  getRecipes,
 }

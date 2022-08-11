@@ -21,30 +21,32 @@ function RecipePreview({ingredients, recipe, setRecipe}) {
 
   /*----- RENDER METHODS -----*/
   const renderRecipe = () => {
-    return ingredients.map(({name, quantity, units}, index) => {
-      return (
-        <ListItem key={name + index}>
-          <IngredientName
-            name='ingredientName'
-              >{name}
-          </IngredientName>
-          <Quantity
-            name='ingredientQuantity'
-              >Quantity: {quantity} {units}
-          </Quantity>
-          <IconContainer>
-            <IconButton
-              sx={{color: '#e57373'}}
-              name={name}
-              aria-label="delete"
-              // size="small"
-              onClick={handleRemoveIngredient}>
-                <DeleteIcon fontSize="inherit" />
-            </IconButton>
-          </IconContainer>
-        </ListItem>
-      )
-    })
+    if (ingredients) {
+      return ingredients.map(({name, quantity, units}, index) => {
+        return (
+          <ListItem key={name + index}>
+            <IngredientName
+              name='ingredientName'
+                >{name}
+            </IngredientName>
+            <Quantity
+              name='ingredientQuantity'
+                >Quantity: {quantity} {units}
+            </Quantity>
+            <IconContainer>
+              <IconButton
+                sx={{color: '#e57373'}}
+                name={name}
+                aria-label="delete"
+                // size="small"
+                onClick={handleRemoveIngredient}>
+                  <DeleteIcon fontSize="inherit" />
+              </IconButton>
+            </IconContainer>
+          </ListItem>
+        )
+      })
+    }
   }
 
   /*----- RENDERER -----*/
