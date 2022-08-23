@@ -65,7 +65,7 @@ Additional workflow information can be found here: [Git Feature Branch Workflow]
 
 ---
 
-## Requirements
+## Dependencies
 <div>
 <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/nodemon?style=flat-square"/>
  <br/>
