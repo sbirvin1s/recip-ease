@@ -1,5 +1,7 @@
 # Recip<img src='./recip-ease.png' height='32' width='32'>Ease 
 
+<img src="https://img.shields.io/github/license/sbirvin1s/recip-ease?style=flat-square"/>
+
 > A web app intended to simplify the creation of grocery lists by parsing recipes and creating a grocery list based on ingredients and serving amounts
 
 ---
@@ -71,17 +73,25 @@ Additional workflow information can be found here: [Git Feature Branch Workflow]
 ---
 
 ## Requirements
-
- - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/nodemon"/>
- - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/webpack" />
- - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/babel"/>
- - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/react" />
- - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/axios"/>
- - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/express" />
- - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/mongoose" />
- - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/styled-components" />
- - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/@mui/material" />
-
+<div>
+<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/nodemon?style=flat-square"/>
+ <br/>
+<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/webpack?style=flat-square" />
+ <br/>
+<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/babel?style=flat-square"/>
+ <br/>
+<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/react?style=flat-square" />
+ <br/>
+<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/axios?style=flat-square"/>
+ <br/>
+<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/express?style=flat-square" />
+ <br/>
+<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/mongoose?style=flat-square" />
+ <br/>
+<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/styled-components?style=flat-square" />
+ <br/>
+<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/@mui/material?style=flat-square" />
+</div>
  ---
 
 ## Development
