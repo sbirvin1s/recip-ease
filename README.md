@@ -72,14 +72,15 @@ Additional workflow information can be found here: [Git Feature Branch Workflow]
 
 ## Requirements
 
- - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/@mui/material" />
+ - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/nodemon"/>
+ - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/webpack" />
+ - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/babel"/>
+ - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/react" />
+ - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/axios"/>
  - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/express" />
  - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/mongoose" />
  - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/styled-components" />
- - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/react" />
- - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/webpack" />
- - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/axios"/>
- - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/nodemon"/>
+ - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/@mui/material" />
 
  ---
 
