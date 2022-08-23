@@ -10,7 +10,6 @@
 
 1. [Styling](#pencil2-styling)
 1. [Git Workflow](#computer-how-can-i-contribute)
-1. [Usage](#usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
 
@@ -63,12 +62,6 @@ All code submitted to this repo will require a code review prior to being merged
 
 
 Additional workflow information can be found here: [Git Feature Branch Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow)
-
----
-
-## Usage
-
-> Some Usage instructions
 
 ---
 
