@@ -85,6 +85,7 @@ Additional workflow information can be found here: [Git Feature Branch Workflow]
  <br/>
 <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/@mui/material?style=flat-square" />
 </div>
+
  ---
 
 ## Development
