@@ -1,10 +1,3 @@
-<div align="left">
-<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/react" />
-<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/webpack" />
-<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/axios"/>
-<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/nodemon"/>
-</div>
-
 # Recip<img src='./recip-ease.png' height='32' width='32'>Ease 
 
 > A web app intended to simplify the creation of grocery lists by parsing recipes and creating a grocery list based on ingredients and serving amounts
@@ -79,7 +72,14 @@ Additional workflow information can be found here: [Git Feature Branch Workflow]
 
 ## Requirements
 
- - Node `16.14.2`
+ - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/@mui/material" />
+ - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/express" />
+ - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/mongoose" />
+ - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/styled-components" />
+ - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/react" />
+ - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/webpack" />
+ - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/axios"/>
+ - <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/nodemon"/>
 
  ---
 
