@@ -1,9 +1,8 @@
 <div align="left">
-<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin/recip*ease/react" />
-<img src="https://img.shields.io/github/package-json/dependency-version/RFC2205-Team-Jafar/blue-ocean/webpack" />
-<img src="https://img.shields.io/github/package-json/dependency-version/RFC2205-Team-Jafar/blue-ocean/axios"/>
-<img src="https://img.shields.io/github/package-json/dependency-version/RFC2205-Team-Jafar/blue-ocean/nodemon"/>
-<img src="https://img.shields.io/github/package-json/dependency-version/RFC2205-Team-Jafar/blue-ocean/dev/jest"/>
+<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/react" />
+<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/webpack" />
+<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/axios"/>
+<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/nodemon"/>
 </div>
 
 # Recip<img src='./recip-ease.png' height='32' width='32'>Ease 
