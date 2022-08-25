@@ -4,8 +4,7 @@
 
 > A web app intended to simplify the creation of grocery lists by parsing recipes and creating a grocery list based on ingredients and serving amounts
 
-[!Demo Video](https://youtu.be/V43eVw38SlA)
-<iframe width="560" height="315" src="https://www.youtube.com/embed/V43eVw38SlA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![Demo Video](https://res.cloudinary.com/dsfj56bcp/image/upload/v1661459423/Screenshot_2022-08-25_152859_orhlpb.png)](https://youtu.be/V43eVw38SlA)
 
 ---
 
