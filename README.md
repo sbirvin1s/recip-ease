@@ -2,7 +2,7 @@
 
 <img src="https://img.shields.io/github/license/sbirvin1s/recip-ease?style=flat-square"/>
 
-> A web app intended to simplify the creation of grocery lists by parsing recipes and creating a grocery list based on ingredients and serving amounts
+> A web app intended to simplify the creation of grocery lists by saving recipes entered by users and creating a grocery list based on ingredients and serving amounts
 
 [![Demo Video](https://res.cloudinary.com/dsfj56bcp/image/upload/v1661459423/Screenshot_2022-08-25_152859_orhlpb.png)](https://youtu.be/V43eVw38SlA)
 
