@@ -12,7 +12,8 @@ import background from '../../../background.png';
 
 
 
-function App() {
+/*========== EXPORTS ==========*/
+export default function App() {
 
   /*----- STATE HOOKS -----*/
     const [showForm, setShowForm] = useState(false);
@@ -87,8 +88,6 @@ function App() {
 }
 
 
-/*========== EXPORTS ==========*/
-export default App;
 
 
 /*========== STYLES ==========*/

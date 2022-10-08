@@ -2,13 +2,13 @@
 
 
 /*========== INTERNAL MODULES ==========*/
-const {addRecipe, findRecipes} = require('../../database');
+const {addRecipe, findAllRecipes} = require('../../database');
 
 
 
 /*========== ROUTE HANDLERS ==========*/
 const getRecipes = (req, res) => {
-  findRecipes()
+  findAllRecipes()
   .then(recipes => res.json(recipes))
   .catch(err => {
     console.error(err);

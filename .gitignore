@@ -35,3 +35,6 @@ bower_components/
 .floobit
 .floo
 .flooignore
+
+/database/models/sample.json
+FoodData*/

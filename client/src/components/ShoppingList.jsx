@@ -10,7 +10,9 @@ function ShoppingList({recipes}) {
 
   /*----- RENDER METHODS -----*/
   const renderShoppingList = () => {
-    return recipes.map((recipe, index) => <IngredientList key={'shoppingList' + index} recipe={recipe}/>)
+    if (recipes) {
+      return recipes.map((recipe, index) => <IngredientList key={'shoppingList' + index} recipe={recipe}/>)
+    }
   }
 
 

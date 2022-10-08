@@ -4,14 +4,19 @@ import React from 'react';
 /*========== INTERNAL MODULES ==========*/
 import Ingredient from './Ingredient.jsx';
 
-function IngredientList({recipe}) {
+
+/*========== EXPORTS ==========*/
+export default function IngredientList({recipe}) {
   const {ingredients, servings} = recipe;
 
   /*----- RENDER METHODS -----*/
   const renderIngredientList = () => {
-    return ingredients.map((ingredient, index) => {
-      return <Ingredient key={'ingedient' + index} ingredient={ingredient} servings={servings}/>
-    })
+    console.log(recipe);
+    if (ingredients) {
+      return ingredients.map((ingredient, index) => {
+        return <Ingredient key={'ingedient' + index} ingredient={ingredient} servings={servings}/>
+      })
+    }
   }
 
   /*----- RENDERER -----*/
@@ -22,8 +27,5 @@ function IngredientList({recipe}) {
   )
 }
 
-
-/*========== EXPORTS ==========*/
-export default IngredientList;
 
 /*========== STYLES ==========*/
