@@ -53,7 +53,6 @@ CREATE TABLE IF NOT EXISTS ingredients (
   id                SERIAL PRIMARY KEY,
   fdc_id            BIGINT,
   ingredient        TEXT,
-  ingredient_img    TEXT,
   brand             TEXT,
   food_category     TEXT,
   upc               TEXT,
@@ -404,6 +403,10 @@ CREATE TABLE IF NOT EXISTS journal (
       OR
       food_nutrient.nutrient_id = '1092'
     );
+
+  UPDATE ingredients
+  SET ingredient = LOWER(ingredient);
+
   DROP TABLE IF EXISTS food CASCADE;
   DROP TABLE IF EXISTS food_nutrient CASCADE;
   DROP TABLE IF EXISTS branded_foods CASCADE;

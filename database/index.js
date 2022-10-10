@@ -63,6 +63,7 @@ module.exports = {
     * @return {JSON}
   */
   findIngredient: ({ ingredient }) => {
+    ingredient = ingredient.toLowerCase();
     return pool.query('SELECT * FROM ingredients WHERE ingredient = ($1)', [ingredient])
     .then(response => response.rows)
     .catch(err => console.error(`Unable to retrieve ingredient due to ${err}`))
