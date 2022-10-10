@@ -1,20 +1,23 @@
 /*========== DATABASE ==========*/
 
 \c recipease;
-DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS recipes CASCADE;
-DROP TABLE IF EXISTS ingredients CASCADE;
-DROP TABLE IF EXISTS branded_foods CASCADE;
-DROP TABLE IF EXISTS ingredient_list CASCADE;
-DROP TABLE IF EXISTS recipe_book CASCADE;
-DROP TABLE IF EXISTS shopping_list CASCADE;
-DROP TABLE IF EXISTS shopping_trip CASCADE;
-DROP TABLE IF EXISTS workouts CASCADE;
-DROP TABLE IF EXISTS breakfast CASCADE;
-DROP TABLE IF EXISTS lunch CASCADE;
-DROP TABLE IF EXISTS dinner CASCADE;
-DROP TABLE IF EXISTS snack CASCADE;
-DROP TABLE IF EXISTS journal CASCADE;
+-- Drop Tables
+  DROP TABLE IF EXISTS users CASCADE;
+  DROP TABLE IF EXISTS recipes CASCADE;
+  DROP TABLE IF EXISTS ingredients CASCADE;
+  DROP TABLE IF EXISTS branded_foods CASCADE;
+  DROP TABLE IF EXISTS food CASCADE;
+  DROP TABLE IF EXISTS food_nutrient CASCADE;
+  DROP TABLE IF EXISTS ingredient_list CASCADE;
+  DROP TABLE IF EXISTS recipe_book CASCADE;
+  DROP TABLE IF EXISTS shopping_list CASCADE;
+  DROP TABLE IF EXISTS shopping_trip CASCADE;
+  DROP TABLE IF EXISTS workouts CASCADE;
+  DROP TABLE IF EXISTS breakfast CASCADE;
+  DROP TABLE IF EXISTS lunch CASCADE;
+  DROP TABLE IF EXISTS dinner CASCADE;
+  DROP TABLE IF EXISTS snack CASCADE;
+  DROP TABLE IF EXISTS journal CASCADE;
 
 CREATE TABLE IF NOT EXISTS users (
   id                 SERIAL PRIMARY KEY,
@@ -29,7 +32,7 @@ CREATE TABLE IF NOT EXISTS recipes (
   servings          SMALLINT,
   prep_time         SMALLINT,
   instructions      TEXT,
-  calories          SMALLINT,
+  calories          NUMERIC,
   total_fat         NUMERIC,
   sat_fat           NUMERIC,
   trans_fat         NUMERIC,
@@ -75,70 +78,136 @@ CREATE TABLE IF NOT EXISTS ingredients (
   iron              NUMERIC,
   potassium         NUMERIC
 );
-
--- TODO create for loop that will iterate over the fdc_id and make an API call to fetch the rest of the needed data, then write the returned data to the database in the correct columns.
-
-
-CREATE TABLE IF NOT EXISTS branded_foods (
-  -- id                SERIAL PRIMARY KEY,
-  fdc_id            BIGINT,
-  brand_owner       TEXT,
-  brand_name        TEXT,
-  subbrand_name     TEXT,
-  gtin_upc          TEXT,
-  ingredients       TEXT,
-  not_a_sig         TEXT,
-  serving_size      TEXT,
-  serving_unit      TEXT,
-  household_serving TEXT,
-  food_category     TEXT,
-  data_source       TEXT,
-  package           TEXT,
-  modified          TEXT,
-  available         TEXT,
-  market_country    TEXT,
-  discontiued       TEXT,
-  prep              TEXT,
-  trade_channel     TEXT
+CREATE TABLE IF NOT EXISTS ingredient_list (
+  id                SERIAL PRIMARY KEY,
+  recipe_id         SERIAL REFERENCES recipes (id),
+  ingredient_id     SERIAL REFERENCES ingredients (id)
+);
+CREATE TABLE IF NOT EXISTS recipe_book (
+  id                 SERIAL PRIMARY KEY,
+  user_id            SERIAL REFERENCES users (id),
+  recipe_id          SERIAL REFERENCES recipes (id)
+);
+CREATE TABLE IF NOT EXISTS shopping_list (
+  id                SERIAL PRIMARY KEY,
+  user_id           SERIAL REFERENCES users (id),
+  recipe_id         SERIAL REFERENCES recipes (id)
+);
+CREATE TABLE IF NOT EXISTS shopping_trip (
+  id                SERIAL PRIMARY KEY,
+  user_id           SERIAL REFERENCES users (id),
+  list_id           SERIAL REFERENCES shopping_list (id),
+  shopping_date     DATE
+);
+CREATE TABLE IF NOT EXISTS workouts (
+  id                SERIAL PRIMARY KEY,
+  user_id           SERIAL REFERENCES users (id),
+  workout_type      TEXT,
+  workout_date      DATE,
+  duration          SMALLINT,
+  calories_burned   SMALLINT
+);
+CREATE TABLE IF NOT EXISTS breakfast (
+  id                SERIAL PRIMARY KEY,
+  recipe_id         SERIAL REFERENCES recipes (id),
+  ingredient_id     SERIAL REFERENCES ingredients (id)
+);
+CREATE TABLE IF NOT EXISTS lunch (
+  id                SERIAL PRIMARY KEY,
+  recipe_id         SERIAL REFERENCES recipes (id),
+  ingredient_id     SERIAL REFERENCES ingredients (id)
+);
+CREATE TABLE IF NOT EXISTS dinner (
+  id                SERIAL PRIMARY KEY,
+  recipe_id         SERIAL REFERENCES recipes (id),
+  ingredient_id     SERIAL REFERENCES ingredients (id)
+);
+CREATE TABLE IF NOT EXISTS snack (
+  id                SERIAL PRIMARY KEY,
+  recipe_id         SERIAL REFERENCES recipes (id),
+  ingredient_id     SERIAL REFERENCES ingredients (id)
+);
+CREATE TABLE IF NOT EXISTS journal (
+  id                SERIAL PRIMARY KEY,
+  user_id           SERIAL REFERENCES users (id),
+  journal_date      DATE,
+  breakfast_id      SERIAL REFERENCES breakfast (id),
+  lunch_id          SERIAL REFERENCES lunch (id),
+  dinner_id         SERIAL REFERENCES dinner (id),
+  snack_id          SERIAL REFERENCES snack (id)
 );
 
-COPY branded_foods
-  FROM '/home/sbirvin1s/hackreactor/recip-ease/FoodData_Central_branded_food_csv_2022-04-28/branded_food.csv'
-  DELIMITER ','
-  CSV HEADER
-;
-COPY food_nutrient
-  FROM '/home/sbirvin1s/hackreactor/recip-ease/FoodData_Central_branded_food_csv_2022-04-28/food_nutrient.csv'
-  DELIMITER ','
-  CSV HEADER
-;
-CREATE TABLE IF NOT EXISTS food (
-  fdc_id            BIGINT,
-  data_type         TEXT,
-  description       TEXT,
-  food_category_id  TEXT,
-  publication_date  TEXT
-);
-COPY food
-  FROM '/home/sbirvin1s/hackreactor/recip-ease/FoodData_Central_branded_food_csv_2022-04-28/food.csv'
-  DELIMITER ','
-  CSV HEADER
-;
+-- Data Loading
+  CREATE TABLE IF NOT EXISTS branded_foods (
+    -- id                SERIAL PRIMARY KEY,
+    fdc_id            BIGINT,
+    brand_owner       TEXT,
+    brand_name        TEXT,
+    subbrand_name     TEXT,
+    gtin_upc          TEXT,
+    ingredients       TEXT,
+    not_a_sig         TEXT,
+    serving_size      TEXT,
+    serving_unit      TEXT,
+    household_serving TEXT,
+    food_category     TEXT,
+    data_source       TEXT,
+    package           TEXT,
+    modified          TEXT,
+    available         TEXT,
+    market_country    TEXT,
+    discontiued       TEXT,
+    prep              TEXT,
+    trade_channel     TEXT
+  );
+  CREATE TABLE IF NOT EXISTS food (
+    fdc_id            BIGINT,
+    data_type         TEXT,
+    description       TEXT,
+    food_category_id  TEXT,
+    publication_date  TEXT
+  );
+  CREATE TABLE IF NOT EXISTS food_nutrient (
+    id                BIGINT,
+    fdc_id            BIGINT,
+    nutrient_id       TEXT,
+    amount            NUMERIC,
+    data_points       TEXT,
+    derivation_id     TEXT,
+    min               TEXT,
+    max               TEXT,
+    median            TEXT,
+    footnote          TEXT,
+    min_year_acquired TEXT
+  );
+  COPY branded_foods
+    FROM '/home/sbirvin1s/hackreactor/recip-ease/data/FoodData_Central_branded_food_csv_2022-04-28/branded_food.csv'
+    DELIMITER ','
+    CSV HEADER
+  ;
+  COPY food_nutrient
+    FROM '/home/sbirvin1s/hackreactor/recip-ease/data/FoodData_Central_branded_food_csv_2022-04-28/food_nutrient.csv'
+    DELIMITER ','
+    CSV HEADER
+  ;
+  COPY food
+    FROM '/home/sbirvin1s/hackreactor/recip-ease/data/FoodData_Central_branded_food_csv_2022-04-28/food.csv'
+    DELIMITER ','
+    CSV HEADER
+  ;
+  UPDATE branded_foods
+  SET serving_size =
+    CASE
+      WHEN COALESCE(serving_size, '') = ''
+        THEN 0
+      ELSE CAST(serving_size AS NUMERIC)
+    END;
 
-UPDATE branded_foods
-SET serving_size =
-  CASE
-    WHEN COALESCE(serving_size, '') = ''
-      THEN 0
-    ELSE CAST(serving_size AS NUMERIC)
-  END;
+  ALTER TABLE branded_foods
+  ALTER COLUMN serving_size
+  TYPE NUMERIC
+  USING serving_size::NUMERIC;
 
-ALTER TABLE branded_foods
-ALTER COLUMN serving_size
-TYPE NUMERIC
-USING serving_size::NUMERIC;
-
---branded food queries
   INSERT INTO ingredients (fdc_id)
   SELECT fdc_id
   FROM branded_foods;
@@ -160,301 +229,183 @@ USING serving_size::NUMERIC;
   SET calories = food_nutrient.amount
   FROM food_nutrient
   WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '208';
+  AND (
+      food_nutrient.nutrient_id = '208'
+      OR
+      food_nutrient.nutrient_id = '1008'
+    );
 
   UPDATE ingredients
   SET total_fat = food_nutrient.amount
   FROM food_nutrient
   WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '204';
+  AND (
+      food_nutrient.nutrient_id = '204'
+      OR
+      food_nutrient.nutrient_id = '1004'
+    );
 
   UPDATE ingredients
   SET sat_fat = food_nutrient.amount
   FROM food_nutrient
   WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '606';
+  AND (
+      food_nutrient.nutrient_id = '606'
+      OR
+      food_nutrient.nutrient_id = '1258'
+    );
 
   UPDATE ingredients
   SET trans_fat = food_nutrient.amount
   FROM food_nutrient
   WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '605';
+  AND (
+      food_nutrient.nutrient_id = '605'
+      OR
+      food_nutrient.nutrient_id = '1257'
+    );
 
   UPDATE ingredients
   SET poly_fat = food_nutrient.amount
   FROM food_nutrient
   WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '646';
+  AND (
+      food_nutrient.nutrient_id = '646'
+      OR
+      food_nutrient.nutrient_id = '1293'
+    );
 
   UPDATE ingredients
   SET mono_fat = food_nutrient.amount
   FROM food_nutrient
   WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '645';
+  AND (
+      food_nutrient.nutrient_id = '645'
+      OR
+      food_nutrient.nutrient_id = '1292'
+    );
 
   UPDATE ingredients
   SET cholesterol = food_nutrient.amount
   FROM food_nutrient
   WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '601';
+  AND (
+      food_nutrient.nutrient_id = '601'
+      OR
+      food_nutrient.nutrient_id = '1253'
+    );
 
   UPDATE ingredients
   SET sodium = food_nutrient.amount
   FROM food_nutrient
   WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '307';
+  AND (
+      food_nutrient.nutrient_id = '307'
+      OR
+      food_nutrient.nutrient_id = '1093'
+    );
 
   UPDATE ingredients
   SET total_carbs = food_nutrient.amount
   FROM food_nutrient
   WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '205';
+  AND (
+      food_nutrient.nutrient_id = '205'
+      OR
+      food_nutrient.nutrient_id = '1005'
+    );
 
   UPDATE ingredients
   SET fiber = food_nutrient.amount
   FROM food_nutrient
   WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '291';
+  AND (
+      food_nutrient.nutrient_id = '291'
+      OR
+      food_nutrient.nutrient_id = '1079'
+    );
 
   UPDATE ingredients
   SET sugar = food_nutrient.amount
   FROM food_nutrient
   WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '269';
+  AND (
+      food_nutrient.nutrient_id = '269'
+      OR
+      food_nutrient.nutrient_id = '2000'
+    );
 
   UPDATE ingredients
   SET protein = food_nutrient.amount
   FROM food_nutrient
   WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '203';
+  AND (
+      food_nutrient.nutrient_id = '203'
+      OR
+      food_nutrient.nutrient_id = '1003'
+    );
 
   UPDATE ingredients
   SET vitamin_a = food_nutrient.amount
   FROM food_nutrient
   WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '318';
+  AND (
+      food_nutrient.nutrient_id = '318'
+      OR
+      food_nutrient.nutrient_id = '1104'
+    );
 
   UPDATE ingredients
   SET vitamin_c = food_nutrient.amount
   FROM food_nutrient
   WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '401';
+  AND (
+      food_nutrient.nutrient_id = '401'
+      OR
+      food_nutrient.nutrient_id = '1162'
+    );
 
   UPDATE ingredients
   SET vitamin_d = food_nutrient.amount
   FROM food_nutrient
   WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '324';
+  AND (
+      food_nutrient.nutrient_id = '324'
+      OR
+      food_nutrient.nutrient_id = '1110'
+    );
 
   UPDATE ingredients
   SET calcium = food_nutrient.amount
   FROM food_nutrient
   WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '301';
+  AND (
+      food_nutrient.nutrient_id = '301'
+      OR
+      food_nutrient.nutrient_id = '1087'
+    );
 
   UPDATE ingredients
   SET iron = food_nutrient.amount
   FROM food_nutrient
   WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '303';
+  AND (
+      food_nutrient.nutrient_id = '303'
+      OR
+      food_nutrient.nutrient_id = '1089'
+    );
 
   UPDATE ingredients
   SET potassium = food_nutrient.amount
   FROM food_nutrient
   WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '306';
+  AND (
+      food_nutrient.nutrient_id = '306'
+      OR
+      food_nutrient.nutrient_id = '1092'
+    );
+  DROP TABLE IF EXISTS food CASCADE;
+  DROP TABLE IF EXISTS food_nutrient CASCADE;
+  DROP TABLE IF EXISTS branded_foods CASCADE;
 
--- foundation queries
-    INSERT INTO ingredients (fdc_id)
-  SELECT fdc_id
-  FROM branded_foods;
-
-  UPDATE ingredients
-  SET ingredient = food.description
-  FROM food
-  WHERE ingredients.fdc_id = food.fdc_id;
-  UPDATE ingredients
-  SET brand = branded_foods.brand_owner,
-      upc = branded_foods.gtin_upc,
-      serving_unit = branded_foods.serving_unit,
-      food_category = branded_foods.food_category,
-      serving_size = branded_foods.serving_size
-  FROM branded_foods
-  WHERE ingredients.fdc_id = branded_foods.fdc_id;
-
-  UPDATE ingredients
-  SET calories = food_nutrient.amount
-  FROM food_nutrient
-  WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '208';
-
-  UPDATE ingredients
-  SET total_fat = food_nutrient.amount
-  FROM food_nutrient
-  WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '204';
-
-  UPDATE ingredients
-  SET sat_fat = food_nutrient.amount
-  FROM food_nutrient
-  WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '606';
-
-  UPDATE ingredients
-  SET trans_fat = food_nutrient.amount
-  FROM food_nutrient
-  WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '605';
-
-  UPDATE ingredients
-  SET poly_fat = food_nutrient.amount
-  FROM food_nutrient
-  WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '646';
-
-  UPDATE ingredients
-  SET mono_fat = food_nutrient.amount
-  FROM food_nutrient
-  WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '645';
-
-  UPDATE ingredients
-  SET cholesterol = food_nutrient.amount
-  FROM food_nutrient
-  WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '601';
-
-  UPDATE ingredients
-  SET sodium = food_nutrient.amount
-  FROM food_nutrient
-  WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '307';
-
-  UPDATE ingredients
-  SET total_carbs = food_nutrient.amount
-  FROM food_nutrient
-  WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '205';
-
-  UPDATE ingredients
-  SET fiber = food_nutrient.amount
-  FROM food_nutrient
-  WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '291';
-
-  UPDATE ingredients
-  SET sugar = food_nutrient.amount
-  FROM food_nutrient
-  WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '269';
-
-  UPDATE ingredients
-  SET protein = food_nutrient.amount
-  FROM food_nutrient
-  WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '203';
-
-  UPDATE ingredients
-  SET vitamin_a = food_nutrient.amount
-  FROM food_nutrient
-  WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '318';
-
-  UPDATE ingredients
-  SET vitamin_c = food_nutrient.amount
-  FROM food_nutrient
-  WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '401';
-
-  UPDATE ingredients
-  SET vitamin_d = food_nutrient.amount
-  FROM food_nutrient
-  WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '324';
-
-  UPDATE ingredients
-  SET calcium = food_nutrient.amount
-  FROM food_nutrient
-  WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '301';
-
-  UPDATE ingredients
-  SET iron = food_nutrient.amount
-  FROM food_nutrient
-  WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '303';
-
-  UPDATE ingredients
-  SET potassium = food_nutrient.amount
-  FROM food_nutrient
-  WHERE ingredients.fdc_id = food_nutrient.fdc_id
-  AND food_nutrient.nutrient_id = '306';
-CREATE TABLE IF NOT EXISTS ingredient_list (
-  id                SERIAL PRIMARY KEY,
-  recipe_id         SERIAL REFERENCES recipes (id),
-  ingredient_id     SERIAL REFERENCES ingredients (id)
-);
-
-CREATE TABLE IF NOT EXISTS recipe_book (
-  id                 SERIAL PRIMARY KEY,
-  user_id            SERIAL REFERENCES users (id),
-  recipe_id          SERIAL REFERENCES recipes (id)
-);
-
-CREATE TABLE IF NOT EXISTS shopping_list (
-  id                SERIAL PRIMARY KEY,
-  user_id           SERIAL REFERENCES users (id),
-  recipe_id         SERIAL REFERENCES recipes (id)
-);
-
-CREATE TABLE IF NOT EXISTS shopping_trip (
-  id                SERIAL PRIMARY KEY,
-  user_id           SERIAL REFERENCES users (id),
-  list_id           SERIAL REFERENCES shopping_list (id),
-  shopping_date     DATE
-);
-
-CREATE TABLE IF NOT EXISTS workouts (
-  id                SERIAL PRIMARY KEY,
-  user_id           SERIAL REFERENCES users (id),
-  workout_type      TEXT,
-  workout_date      DATE,
-  duration          SMALLINT,
-  calories_burned   SMALLINT
-);
-
-CREATE TABLE IF NOT EXISTS breakfast (
-  id                SERIAL PRIMARY KEY,
-  recipe_id         SERIAL REFERENCES recipes (id),
-  ingredient_id     SERIAL REFERENCES ingredients (id)
-);
-
-CREATE TABLE IF NOT EXISTS lunch (
-  id                SERIAL PRIMARY KEY,
-  recipe_id         SERIAL REFERENCES recipes (id),
-  ingredient_id     SERIAL REFERENCES ingredients (id)
-);
-
-CREATE TABLE IF NOT EXISTS dinner (
-  id                SERIAL PRIMARY KEY,
-  recipe_id         SERIAL REFERENCES recipes (id),
-  ingredient_id     SERIAL REFERENCES ingredients (id)
-);
-
-CREATE TABLE IF NOT EXISTS snack (
-  id                SERIAL PRIMARY KEY,
-  recipe_id         SERIAL REFERENCES recipes (id),
-  ingredient_id     SERIAL REFERENCES ingredients (id)
-);
-
-CREATE TABLE IF NOT EXISTS journal (
-  id                SERIAL PRIMARY KEY,
-  user_id           SERIAL REFERENCES users (id),
-  journal_date      DATE,
-  breakfast_id      SERIAL REFERENCES breakfast (id),
-  lunch_id          SERIAL REFERENCES lunch (id),
-  dinner_id         SERIAL REFERENCES dinner (id),
-  snack_id          SERIAL REFERENCES snack (id)
-);
-
--- CREATE INDEX IF NOT EXISTS something ON something ()
+-- CREATE INDEX IF NOT EXISTS recipe_ingredients ON recipe ()
