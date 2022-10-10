@@ -50,24 +50,42 @@ module.exports = {
     return pool.query('SELECT * FROM recipes WHERE ', [recipe, servings, prepTime, calories])
   },
 
+  /* TODO: add functionality to create scannable barcode for recipes
+    * unique key, with an alpha-numeric composition to prevent collisions with UPCs
+    * generate upon adding to databse and return barcode / QR code to be shared or printed as a label
+  */
   addRecipe: (recipe) => {
 
   },
 
-  /**Searches the database for an ingredient that matches one, or a combination of, the search terms
+  /**Searches the database for an ingredient whose name matches the search term
     * @param {string} ingredient - name of the ingredient
+    * @return {JSON}
+  */
+  findIngredient: ({ ingredient }) => {
+    return pool.query('SELECT * FROM ingredients WHERE ingredient = ($1)', [ingredient])
+    .then(response => response.rows)
+    .catch(err => console.error(`Unable to retrieve ingredient due to ${err}`))
+  },
+
+  /**Searches the database for an ingredient whose name matches the search term
     * @param {string} brand - name of the brand of the ingredient
-    * @param {string} upc - results of scanning the barcode, stored as string.
+    * @return {JSON}
+  */
+  findBrand: ({ brand }) => {
+    return pool.query('SELECT * FROM ingredients WHERE brand = ($1)', [brand])
+    .then(response => response.rows)
+    .catch(err => console.error(`Unable to retrieve ingredient due to ${err}`))
+  },
+
+  /**Searches the database for an ingredient whose name matches the search term
     * @param {string} food_category - selected food category from supplied list
     * @return {JSON}
   */
-  /*
-    NOTE: create conditionals to handle if each value is present or not
-      * API request should always send arguments in the same order
-      * Arguments will be 'null' if none provided
-  */
-  findIngedient: ({ingredient, brand, upc, food_category}) => {
-
+  findCategory: ({ foodCategory }) => {
+    return pool.query('SELECT * FROM ingredients WHERE food_category = ($1)', [foodCategory])
+    .then(response => response.rows)
+    .catch(err => console.error(`Unable to retrieve ingredient due to ${err}`))
   },
 
   /**Searches the database for an ingredient that matches the given UPC
@@ -75,7 +93,7 @@ module.exports = {
     * @return {JSON}
   */
   scanIngedient: ({ upc }) => {
-    return pool.query('SELECT * FROM ingredients WHERE upc = $1', [upc])
+    return pool.query('SELECT * FROM ingredients WHERE upc = ($1)', [upc])
       .then(response => response.rows)
       .catch(err => console.error(`Unable to retrieve ingredient due to ${err}`))
   },
