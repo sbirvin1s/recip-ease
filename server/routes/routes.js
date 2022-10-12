@@ -18,6 +18,11 @@ module.exports = {
     })
   },
 
+  /** Handles requests to write recipes to the database
+   * @param {object} req - expects a recipe object containing all values of the recipe to be passed as a parameter in the request object
+   * @param {object} res
+   * @return {string} status 201 if success or error if not
+  */
   writeRecipe: (req, res) => {
     addRecipe(req.body)
     .then(response => res.sendStatus(201))
@@ -27,6 +32,11 @@ module.exports = {
     })
   },
 
+  /** Handles requests for individual ingredients
+   * @param {object} req - expects an ingredient name to be passed as a parameter in the request object
+   * @param {object} res
+   * @return {JSON} ingredient(s) - contains information on the requested ingredient(s)
+  */
   getIngredient: (req, res) => {
     findIngredient(req.params)
     .then(ingredientData => res.json(ingredientData))
