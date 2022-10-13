@@ -22,10 +22,19 @@ pool.connect()
 /*========== EXPORTS ==========*/
 module.exports = {
   /** Returns all recipes in the database
+   * @param {number} page - page number to return. Default of 1 that adjusts to 0 after logic check
+   * @param {number} count - number of items per page. Default of 20
    * @return {promise}
    */
-  findAllRecipes: () => {
-    return pool.query('SELECT * FROM recipes')
+  findAllRecipes: (page = 1, count = 20) => {
+    let offset = page - 1;
+    if (offset < 0) {
+      offset = 0;
+    } else if (offset > 0) {
+      offset = offset * count;
+    }
+
+    return pool.query('SELECT * FROM recipes OFFSET ($1) ROWS LIMIT ($2)', [offset, count])
     .then(response => response.rows)
     .catch(err => console.error(`Unable to retrieve recipes due to ${err}`))
   },
