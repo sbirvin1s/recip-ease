@@ -34,7 +34,9 @@ module.exports = {
       offset = offset * count;
     }
 
-    return pool.query('SELECT * FROM recipes OFFSET ($1) ROWS LIMIT ($2)', [offset, count])
+    // return pool.query('SELECT * FROM recipes OFFSET ($1) ROWS LIMIT ($2)', [offset, count])
+    return pool.query('SELECT row_to_json(recipe) AS recipes FROM ( \
+      ) recipes OFFSET ($1) ROWS LIMIT ($2)', [offset, count])
     .then(response => response.rows)
     .catch(err => console.error(`Unable to retrieve recipes due to ${err}`))
   },
@@ -72,17 +74,20 @@ module.exports = {
     * will need to perform sum for each nutrient (might have this value stored on each recipe or calculate on demand)
     * will need to insert record of each ingredient (ingredient_id) and recipe_id into ingredient_list table
   */
-  addRecipe: ({ name, img, servings, prep, instructions, ingredients }) => {
-    // const name = 'carrots and potatoes';
-    // const servings = 6;
-    // const prep = 30;
-    // const instructions = 'cook it';
-    // const sampleIngredients = [416236, 636447, 145537, 618610];
+  addRecipe: ({
+    name = 'carrots and potatoes',
+    img = null, servings  = 6,
+    prep = 30, instructions  = 'cook it',
+    ingredients = [[416236, 10, 'g'], [636447, 20, 'g'], [145537, 30, 'g'], [618610, 40, 'g']],
+    userId }) => {
 
     return pool.query('INSERT INTO recipes (recipe_name, recipe_img, servings, prep_time, instructions) VALUES (($1), ($2), ($3), ($4), ($5)) RETURNING id', [name, img, servings, prep, instructions])
     .then(id => {
+      let recipeId = id.rows[0].id;
+      // pool.query('INSERT INTO recipe_book VALUES (($1), ($2))', [userId, recipeId]);
       return ingredients.forEach(ingredient => {
-        return pool.query('INSERT INTO ingredient_list (recipe_id, ingredient_id) VALUES (($1), ($2))', [id.rows[0].id, ingredient])
+        [ingredientName, ingredientAmount, ingredientUnit] = ingredient;
+        return pool.query('INSERT INTO ingredient_list (recipe_id, ingredient_id, ingredient_amount, ingredient_unit) VALUES (($1), ($2), ($3), ($4))', [recipeId, ingredientName, ingredientAmount, ingredientUnit])
         })
       })
     .catch(err => console.error(`Unable to retrieve ingredient due to ${err}`))

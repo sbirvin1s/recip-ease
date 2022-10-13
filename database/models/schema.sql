@@ -80,7 +80,9 @@ CREATE TABLE IF NOT EXISTS ingredients (
 CREATE TABLE IF NOT EXISTS ingredient_list (
   id                SERIAL PRIMARY KEY,
   recipe_id         SERIAL REFERENCES recipes (id),
-  ingredient_id     SERIAL REFERENCES ingredients (id)
+  ingredient_id     SERIAL REFERENCES ingredients (id),
+  ingredient_amount NUMERIC,
+  ingredient_unit   TEXT
 );
 CREATE TABLE IF NOT EXISTS recipe_book (
   id                 SERIAL PRIMARY KEY,
