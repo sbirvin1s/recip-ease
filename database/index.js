@@ -34,9 +34,18 @@ module.exports = {
       offset = offset * count;
     }
 
-    // return pool.query('SELECT * FROM recipes OFFSET ($1) ROWS LIMIT ($2)', [offset, count])
-    return pool.query('SELECT row_to_json(recipe) AS recipes FROM ( \
-      ) recipes OFFSET ($1) ROWS LIMIT ($2)', [offset, count])
+    return pool.query('SELECT row_to_json(recipe) AS recipes \
+    FROM ( \
+      SELECT *, (SELECT json_agg(list) \
+            FROM ( \
+              SELECT * FROM ( \
+                SELECT ingredient_list.recipe_id, ingredients.ingredient, ingredients.calories, ingredient_list.ingredient_amount, ingredient_list.ingredient_unit FROM ingredient_list \
+                INNER JOIN ingredients \
+                ON ingredient_list.ingredient_id = ingredients.id \
+              ) AS ingredients WHERE recipe_id = r.id \
+            ) list \
+    ) AS ingredient_list  \
+    FROM recipes AS r) recipe OFFSET ($1) ROWS LIMIT ($2)', [offset, count])
     .then(response => response.rows)
     .catch(err => console.error(`Unable to retrieve recipes due to ${err}`))
   },
