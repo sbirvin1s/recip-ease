@@ -11,7 +11,7 @@ import axios from 'axios';
 import RecipePreview from './RecipePreview.jsx';
 
 
-function Form({showForm, setShowForm, setRecipes}) {
+function AddRecipe({showForm, setShowForm, setRecipes}) {
   if (!showForm) {
     return null;
   }
@@ -208,7 +208,7 @@ function Form({showForm, setShowForm, setRecipes}) {
 
 
   /*========== EXPORTS ==========*/
-  export default Form;
+  export default AddRecipe;
 
 
   /*========== STYLES ==========*/

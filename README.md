@@ -1,6 +1,10 @@
-# recip-ease
+# Recip<img src='./recip-ease.png' height='32' width='32'>Ease 
 
-> A web app intended to simplify the creation of grocery lists by parsing recipes and creating a grocery list based on ingredients and serving amounts
+<img src="https://img.shields.io/github/license/sbirvin1s/recip-ease?style=flat-square"/>
+
+> A web app intended to simplify the creation of grocery lists by saving recipes entered by users and creating a grocery list based on ingredients and serving amounts
+
+[![Demo Video](https://res.cloudinary.com/dsfj56bcp/image/upload/v1665607432/recipease_demo_trorib.png)](https://youtu.be/V43eVw38SlA)
 
 ---
 
@@ -8,7 +12,6 @@
 
 1. [Styling](#pencil2-styling)
 1. [Git Workflow](#computer-how-can-i-contribute)
-1. [Usage](#usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
 
@@ -64,16 +67,26 @@ Additional workflow information can be found here: [Git Feature Branch Workflow]
 
 ---
 
-## Usage
-
-> Some Usage instructions
-
----
-
-## Requirements
-
- - Node `insert version`
- - etc
+## Dependencies
+<div>
+<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/nodemon?style=flat-square"/>
+ <br/>
+<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/webpack?style=flat-square" />
+ <br/>
+<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/babel?style=flat-square"/>
+ <br/>
+<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/react?style=flat-square" />
+ <br/>
+<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/axios?style=flat-square"/>
+ <br/>
+<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/express?style=flat-square" />
+ <br/>
+<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/mongoose?style=flat-square" />
+ <br/>
+<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/styled-components?style=flat-square" />
+ <br/>
+<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/@mui/material?style=flat-square" />
+</div>
 
  ---
 
@@ -82,7 +95,14 @@ Additional workflow information can be found here: [Git Feature Branch Workflow]
 ### Installing Dependencies
 From within the root directory:
 
-```sh
-npm install -g webpack
-npm install
-```
+> ![npm](./npm.png)
+>```sh
+>npm install
+>```
+
+<br/>
+
+> ![yarn](./yarn.png)
+>```sh
+> yarn install
+>```

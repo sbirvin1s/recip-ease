@@ -11,7 +11,6 @@ export default function IngredientList({recipe}) {
 
   /*----- RENDER METHODS -----*/
   const renderIngredientList = () => {
-    console.log(recipe);
     if (ingredients) {
       return ingredients.map((ingredient, index) => {
         return <Ingredient key={'ingedient' + index} ingredient={ingredient} servings={servings}/>
