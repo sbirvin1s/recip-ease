@@ -8,7 +8,7 @@ import axios from 'axios';
 
 
 /*========== INTERNAL MODULES ==========*/
-import RecipePreview from './RecipePreview.jsx';
+import RecipePreview from './components/RecipePreview.jsx';
 
 
 function AddRecipe({showForm, setShowForm, setRecipes}) {
