@@ -1,8 +1,7 @@
 {
   "plugins": [
     "@babel/syntax-dynamic-import",
-    "styled-components",
-    "macros"
+    "styled-components"
   ],
   "presets": [
     [

@@ -1,17 +1,17 @@
 /*========== EXTERNAL MODULES ==========*/
 import React, {useState, useRef, useEffect} from 'react';
-import ReactDOM from 'react-dom';
 // import Alert from '@mui/material/Alert';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 import styled from 'styled-components';
 import axios from 'axios';
 
 
 /*========== INTERNAL MODULES ==========*/
-import RecipePreview from './components/RecipePreview.jsx';
+import RecipePreview from '../components/RecipePreview.jsx';
 
 
-function AddRecipe({showForm, setShowForm, setRecipes}) {
+/*========== EXPORTS ==========*/
+export default function AddRecipe({showForm, setShowForm, setRecipes}) {
   if (!showForm) {
     return null;
   }
@@ -116,21 +116,21 @@ function AddRecipe({showForm, setShowForm, setRecipes}) {
             <p>{(ingredient && ingredient.units) || ''}</p>
           </Row>
             <ButtonGroup>
-              <Button value='tsp' name='units' onClick={handleIngredient}>tsp</Button>
-              <Button value='Tbsp'name='units' onClick={handleIngredient}>Tbsp</Button>
-              <Button value='oz' name='units' onClick={handleIngredient}>ounces</Button>
-              <Button value='lbs' name='units' onClick={handleIngredient}>lbs</Button>
-              <Button value='c' name='units' onClick={handleIngredient}>cup</Button>
-              <Button value='g' name='units' onClick={handleIngredient}>gram(s)</Button>
-              <Button value='ml' name='units' onClick={handleIngredient}>ml</Button>
-              <Button value='pinch' name='units' onClick={handleIngredient}>pinch</Button>
-              <Button value='slice(s)' name='units' onClick={handleIngredient}>slice(s)</Button>
-              <Button value='cloves' name='units' onClick={handleIngredient}>clove(s)</Button>
-              <Button value='count' name='units' onClick={handleIngredient}>count</Button>
-              <Button value='' name='units' onClick={handleIngredient}>clear</Button>
+              <button value='tsp' name='units' onClick={handleIngredient}>tsp</button>
+              <button value='Tbsp'name='units' onClick={handleIngredient}>Tbsp</button>
+              <button value='oz' name='units' onClick={handleIngredient}>ounces</button>
+              <button value='lbs' name='units' onClick={handleIngredient}>lbs</button>
+              <button value='c' name='units' onClick={handleIngredient}>cup</button>
+              <button value='g' name='units' onClick={handleIngredient}>gram(s)</button>
+              <button value='ml' name='units' onClick={handleIngredient}>ml</button>
+              <button value='pinch' name='units' onClick={handleIngredient}>pinch</button>
+              <button value='slice(s)' name='units' onClick={handleIngredient}>slice(s)</button>
+              <button value='cloves' name='units' onClick={handleIngredient}>clove(s)</button>
+              <button value='count' name='units' onClick={handleIngredient}>count</button>
+              <button value='' name='units' onClick={handleIngredient}>clear</button>
             </ButtonGroup>
         </label>
-        <Button onClick={handleAddIngredient} variant='contained' >Add Ingredient</Button>
+        <button onClick={handleAddIngredient} variant='contained' >Add Ingredient</button>
       </form>
     )
   }
@@ -148,7 +148,7 @@ function AddRecipe({showForm, setShowForm, setRecipes}) {
 
   const renderSubmit = () => {
     return (
-      <Button onClick={handleSubmit}>Submit</Button>
+      <button onClick={handleSubmit}>Submit</button>
       )
     }
 
@@ -205,10 +205,6 @@ function AddRecipe({showForm, setShowForm, setRecipes}) {
     document.getElementById('portal')
     )
   }
-
-
-  /*========== EXPORTS ==========*/
-  export default AddRecipe;
 
 
   /*========== STYLES ==========*/

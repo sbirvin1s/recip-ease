@@ -2,7 +2,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import styled, {createGlobalStyle} from 'styled-components';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 
 /*========== INTERNAL MODULES ==========*/
 import ShoppingList from './ShoppingList.jsx';
@@ -42,12 +42,12 @@ export default function App() {
 
   /*----- RENDER METHODS -----*/
 
-  const renderAddRecipe = () => <Button variant='contained' size='large' onClick={() => setShowForm(true)}>Add Recipe</Button>
+  const renderAddRecipe = () => <button variant='contained' size='large' onClick={() => setShowForm(true)}>Add Recipe</button>
 
   const renderSearchRecipes = () => {
     return (
       // launches search recipes modal
-      <Button variant='contained' size='large' onClick={() => setShowSearchForm(true)}>Search Recipes</Button>
+      <button variant='contained' size='large' onClick={() => setShowSearchForm(true)}>Search Recipes</button>
     )
   }
 
@@ -62,7 +62,7 @@ export default function App() {
   const renderClearShoppingList = () => {
     if (recipes && recipes.length > 0) {
       return (
-      <Button onClick={handleClear}>Clear List</Button>
+      <button onClick={handleClear}>Clear List</button>
       )
     }
   }

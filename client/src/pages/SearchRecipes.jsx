@@ -1,13 +1,12 @@
 /*========== EXTERNAL MODULES ==========*/
 import React, {useState, useRef, useEffect} from 'react';
-import ReactDOM from 'react-dom';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 import styled from 'styled-components';
 import axios from 'axios';
 
 
 /*========== INTERNAL MODULES ==========*/
-import RecipeList from './components/RecipeList.jsx';
+import RecipeList from '../components/RecipeList.jsx';
 
 
 function SearchRecipes({showSearchForm, setShowSearchForm, setRecipes}) {
@@ -50,7 +49,7 @@ function SearchRecipes({showSearchForm, setShowSearchForm, setRecipes}) {
   /*----- RENDER METHODS -----*/
   const renderSubmit = () => {
     return (
-      <Button onClick={handleSubmit}>Submit</Button>
+      <button onClick={handleSubmit}>Submit</button>
       )
     }
 

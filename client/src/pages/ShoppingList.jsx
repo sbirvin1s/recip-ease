@@ -3,7 +3,7 @@ import React from 'react';
 
 
 /*========== INTERNAL MODULES ==========*/
-import IngredientList from './components/IngredientList.jsx';
+import IngredientList from '../components/IngredientList.jsx';
 
 
 function ShoppingList({recipes}) {
