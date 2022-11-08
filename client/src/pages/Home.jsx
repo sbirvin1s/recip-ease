@@ -1,22 +1,20 @@
 /*========== EXTERNAL MODULES ==========*/
 import React, {useState, useEffect} from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import styled, {createGlobalStyle} from 'styled-components';
+// import Button from '@mui/material/Button';
 
 /*========== INTERNAL MODULES ==========*/
-import Home from './Home.jsx';
 import ShoppingList from './ShoppingList.jsx';
 import AddRecipe from './AddRecipe.jsx';
 import Recipes from './Recipes.jsx';
-import RecipeInfo from './RecipeInfo.jsx';
 import logo from '../../dist/recip-ease.png';
 import background from '../../../background.png';
 
 
 
 /*========== EXPORTS ==========*/
-export default function App() {
+export default function Home() {
 
   /*----- STATE HOOKS -----*/
     const [showForm, setShowForm] = useState(false);
@@ -44,19 +42,45 @@ export default function App() {
 
   /*----- RENDER METHODS -----*/
 
+  // const renderAddRecipe = () => <button variant='contained' size='large' onClick={() => setShowForm(true)}>Add Recipe</button>
+
+  // const renderSearchRecipes = () => {
+  //   return (
+  //     // launches search recipes modal
+  //     <button variant='contained' size='large' onClick={() => setShowSearchForm(true)}>Search Recipes</button>
+  //   )
+  // }
+
+  // const renderAddRecipeForm = () => {
+  //   return <AddRecipe showForm={showForm} setShowForm={setShowForm} setRecipes={setRecipes}/>
+  // }
+
+  // const renderSearchRecipeForm = () => {
+  //   return <Recipes showSearchForm={showSearchForm} setShowSearchForm={setShowSearchForm} setRecipes={setRecipes}/>
+  // }
+
+  // const renderClearShoppingList = () => {
+  //   if (recipes && recipes.length > 0) {
+  //     return (
+  //     <button onClick={handleClear}>Clear List</button>
+  //     )
+  //   }
+  // }
+
+  // const renderMenu = () => {
+  //   return (
+  //     <Menu></Menu>
+  //   )
+  // }
+
+
+
   /*----- RENDERER -----*/
   return (
     <>
-      <GlobalStyle />
-        <Routes>
-          <Route path='/' element={<Home/>} />
-          <Route path='Recipes' element={<Recipes />} />
-          <Route path='AddRecipe' element={<AddRecipe />} />
-          <Route path='ShoppingList' element={<ShoppingList recipes={recipes} />} />
-          <Route path='RecipesInfo' element={<RecipeInfo />} />
-
-        </Routes>
-        <NavBar> <Link to='/'>Home</Link> <Link to='Recipes'>Recipes</Link> <Link to='AddRecipe'>Add Recipe</Link> <Link to='ShoppingList'>Shopping List</Link> </NavBar>
+      <Page>
+        <h1>Home Page</h1>
+      </Page>
     </>
   )
 }
@@ -65,22 +89,13 @@ export default function App() {
 
 
 /*========== STYLES ==========*/
-  const GlobalStyle = createGlobalStyle`
 
-    body {
-      font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-      background-color: #fff;
-    }
-    `;
-
-const NavBar = styled.nav`
-  position: fixed;
-  background-color: #000;
-  bottom: 0px;
+const Page = styled.div`
   display: flex;
-  margin-bottom: 0.25em;
-  width: 100vw;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: space-evenly;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   `;

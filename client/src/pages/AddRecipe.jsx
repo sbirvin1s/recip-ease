@@ -12,9 +12,7 @@ import RecipePreview from '../components/RecipePreview.jsx';
 
 /*========== EXPORTS ==========*/
 export default function AddRecipe({showForm, setShowForm, setRecipes}) {
-  if (!showForm) {
-    return null;
-  }
+
   const firstRef = useRef(null);
   const lastRef = useRef(null);
 
@@ -153,56 +151,62 @@ export default function AddRecipe({showForm, setShowForm, setRecipes}) {
     }
 
     /*----- RENDERER -----*/
-    return ReactDOM.createPortal (
-      <Background onClick={() => setShowForm(false)}>
-      <Container onClick={(event) => event.stopPropagation()}>
-        <Column>
-          <h1>Enter your Recipe</h1>
-            <label>
-              <h3 style={{margin: '0', padding: '0'}}>
-              Recipe Name
-              <Input
-                style={{width: '10em'}}
-                type='text'
-                name='recipeName'
-                placeholder='Grilled Cheese'
-                onChange={handleRecipe}
-              />
-              </h3>
-            </label>
-            <Row>
-              <label>
-                Number of Servings
-                <Input
-                  type='number'
-                  name='servings'
-                  placeholder='1'
-                  onChange={handleRecipe}
-                  />
-              </label>
-              <label>
-                <Row>
-                  Prep Time:
-                  <Input
-                    type='number'
-                    name='prepTime'
-                    placeholder='30'
-                    step='1'
-                    onChange={handleRecipe}
-                    />
-                  <p>minutes</p>
-                </Row>
-              </label>
-            </Row>
-          <RecipePreview ingredients={recipe.ingredients} recipe={recipe} setRecipe={setRecipe}/>
-          {/* {renderIngredientAlert()} */}
-          <h4>Add Ingredient</h4>
-          {renderEnterIngredient()}
-        </Column>
-        <ButtonContainer>{renderSubmit()}</ButtonContainer>
-      </Container>
-    </Background>,
-    document.getElementById('portal')
+    // return ReactDOM.createPortal (
+    //   <Background onClick={() => setShowForm(false)}>
+    //   <Container onClick={(event) => event.stopPropagation()}>
+    //     <Column>
+    //       <h1>Enter your Recipe</h1>
+    //         <label>
+    //           <h3 style={{margin: '0', padding: '0'}}>
+    //           Recipe Name
+    //           <Input
+    //             style={{width: '10em'}}
+    //             type='text'
+    //             name='recipeName'
+    //             placeholder='Grilled Cheese'
+    //             onChange={handleRecipe}
+    //           />
+    //           </h3>
+    //         </label>
+    //         <Row>
+    //           <label>
+    //             Number of Servings
+    //             <Input
+    //               type='number'
+    //               name='servings'
+    //               placeholder='1'
+    //               onChange={handleRecipe}
+    //               />
+    //           </label>
+    //           <label>
+    //             <Row>
+    //               Prep Time:
+    //               <Input
+    //                 type='number'
+    //                 name='prepTime'
+    //                 placeholder='30'
+    //                 step='1'
+    //                 onChange={handleRecipe}
+    //                 />
+    //               <p>minutes</p>
+    //             </Row>
+    //           </label>
+    //         </Row>
+    //       <RecipePreview ingredients={recipe.ingredients} recipe={recipe} setRecipe={setRecipe}/>
+    //       {/* {renderIngredientAlert()} */}
+    //       <h4>Add Ingredient</h4>
+    //       {renderEnterIngredient()}
+    //     </Column>
+    //     <ButtonContainer>{renderSubmit()}</ButtonContainer>
+    //   </Container>
+    // </Background>,
+    // document.getElementById('portal')
+    // )
+
+    return (
+      <>
+        <h1>Add Recipe View</h1>
+      </>
     )
   }
 

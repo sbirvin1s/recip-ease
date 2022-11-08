@@ -5,8 +5,8 @@ import React from 'react';
 /*========== INTERNAL MODULES ==========*/
 import IngredientList from '../components/IngredientList.jsx';
 
-
-function ShoppingList({recipes}) {
+/*========== EXPORTS ==========*/
+export default function ShoppingList({recipes}) {
 
   /*----- RENDER METHODS -----*/
   const renderShoppingList = () => {
@@ -21,14 +21,11 @@ function ShoppingList({recipes}) {
 
   return (
     <>
-      {renderShoppingList()}
+      <h1>Shopping List View</h1>
+      {/* {renderShoppingList()} */}
     </>
   )
 }
-
-
-/*========== EXPORTS ==========*/
-export default ShoppingList;
 
 
 /*========== STYLES ==========*/
