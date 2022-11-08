@@ -1,15 +1,15 @@
 /*========== EXTERNAL MODULES ==========*/
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import styled, {createGlobalStyle} from 'styled-components';
+import styled from 'styled-components';
 // import Button from '@mui/material/Button';
 
 /*========== INTERNAL MODULES ==========*/
+import { Page, Column, Row } from '../../dist/styles/index.js';
 import ShoppingList from './ShoppingList.jsx';
 import AddRecipe from './AddRecipe.jsx';
 import Recipes from './Recipes.jsx';
-import logo from '../../dist/recip-ease.png';
-import background from '../../../background.png';
+import DiaryItem from '../components/DiaryItem.jsx';
 
 
 
@@ -73,29 +73,68 @@ export default function Home() {
   //   )
   // }
 
+  const renderDiary = () => {
+    return (
+      <Diary>
+        <DiaryItem meal={'Breakfast Card'}/>
+        <DiaryItem meal={'Lunch Card'}/>
+        <DiaryItem meal={'Dinner Card'}/>
+        <DiaryItem meal={'Snack Card'}/>
+      </Diary>
+    )
+  }
+
+  const renderDateSelector = () => {
+    return (
+      <>
+        <Row>
+          <button>prev</button> November, 11 2022 <button>next</button>
+        </Row>
+      </>
+    )
+  }
+
+  const renderDailyMetrics = () => {
+    return (
+      <>
+        <Background>
+          <h1>Home Page</h1>
+          <div>Carbs Graph</div>
+          <div>Protein Graph</div>
+          <div>Lipds Graph</div>
+          <div>Daily Calorie Graph</div>
+        </Background>
+      </>
+    )
+  }
 
 
   /*----- RENDERER -----*/
   return (
     <>
       <Page>
-        <h1>Home Page</h1>
+        {renderDailyMetrics()}
+        {renderDateSelector()}
+        {renderDiary()}
       </Page>
     </>
   )
 }
 
 
-
-
 /*========== STYLES ==========*/
 
-const Page = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+const Background = styled(Column)`
+  height: 40vh;
+  width: 150vw;
+  margin-top: 0.25rem;
+  background: linear-gradient(38.52deg, rgba(74, 159, 72, 0.555) 15.44%, rgba(26, 206, 152, 0.57) 43.67%);
+  border-radius: 0 0 50% 50%;
+`;
+
+const Diary = styled(Column)`
+  overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;
   }
-  `;
+`;

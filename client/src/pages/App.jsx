@@ -2,7 +2,6 @@
 import React, {useState, useEffect} from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import axios from 'axios';
-import styled, {createGlobalStyle} from 'styled-components';
 
 /*========== INTERNAL MODULES ==========*/
 import Home from './Home.jsx';
@@ -10,9 +9,7 @@ import ShoppingList from './ShoppingList.jsx';
 import AddRecipe from './AddRecipe.jsx';
 import Recipes from './Recipes.jsx';
 import RecipeInfo from './RecipeInfo.jsx';
-import logo from '../../dist/recip-ease.png';
-import background from '../../../background.png';
-
+import { Nav, GlobalStyle } from '../../dist/styles';
 
 
 /*========== EXPORTS ==========*/
@@ -54,9 +51,8 @@ export default function App() {
           <Route path='AddRecipe' element={<AddRecipe />} />
           <Route path='ShoppingList' element={<ShoppingList recipes={recipes} />} />
           <Route path='RecipesInfo' element={<RecipeInfo />} />
-
         </Routes>
-        <NavBar> <Link to='/'>Home</Link> <Link to='Recipes'>Recipes</Link> <Link to='AddRecipe'>Add Recipe</Link> <Link to='ShoppingList'>Shopping List</Link> </NavBar>
+        <Nav> <Link to='/'>Home</Link> <Link to='Recipes'>Recipes</Link> <Link to='AddRecipe'>Add Recipe</Link> <Link to='ShoppingList'>Shopping List</Link> </Nav>
     </>
   )
 }
@@ -65,22 +61,3 @@ export default function App() {
 
 
 /*========== STYLES ==========*/
-  const GlobalStyle = createGlobalStyle`
-
-    body {
-      font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-      background-color: #fff;
-    }
-    `;
-
-const NavBar = styled.nav`
-  position: fixed;
-  background-color: #000;
-  bottom: 0px;
-  display: flex;
-  margin-bottom: 0.25em;
-  width: 100vw;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  `;
