@@ -66,7 +66,7 @@ export const Header = styled.header`
 
 export const Nav = styled.nav`
   position: absolute;
-  background-color: #000;
+  /* background-color: #000; */
   bottom: 0px;
   display: flex;
   margin-bottom: 0.25em;
@@ -92,6 +92,21 @@ export const Page = styled.div`
 `;
 
 export const Container = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border-radius: 20px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3em;
+  background-color: #d8d8d8;
+  /* background-color: #414141; */
+  width: 60vw;
+  min-height: 60vh;
+  box-sizing: border-box;
 `;
 
 export const Div = styled.div``;
@@ -130,6 +145,10 @@ export const ButtonGroup = styled.div`
   align-items: center;
 `;
 
+const ButtonContainer = styled.div`
+  margin: 1em;
+`;
+
 export const ButtonBox = styled(Column)`
   top: 15px;
   right: 10px;
@@ -159,6 +178,19 @@ export const Form = styled.form`
 */
 
 export const Input = styled.input`
+  border: solid;
+  border-width: thin;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  outline: none;
+  font-size: 12pt;
+  font-weight: light;
+  background-color: transparent;
+  width: 3em;
+  padding: 2px;
+  margin: 10px;
+  text-align: center;
 `;
 
 /*

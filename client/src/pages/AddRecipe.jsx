@@ -8,7 +8,20 @@ import axios from 'axios';
 
 /*========== INTERNAL MODULES ==========*/
 import RecipePreview from '../components/RecipePreview.jsx';
+import SearchBar from '../components/SearchBar.jsx';
 
+
+/* TODO: Implement Add Recipe feature
+  * Should be able to add a new Recipe if recipe is not found
+  * When entering recipe, should access Search Ingredient functionality to add the selected ingredients to the recipe
+  * Requires:
+    * Recipe Name
+    * Recipe Total Servings
+    *  Recipe Prep Time in minutes
+    *  Recipe Total Calories
+    *  Recipe Picture (optional)
+  * Should be able to edit Recipe if needed
+*/
 
 /*========== EXPORTS ==========*/
 export default function AddRecipe({showForm, setShowForm, setRecipes}) {
@@ -148,7 +161,14 @@ export default function AddRecipe({showForm, setShowForm, setRecipes}) {
     return (
       <button onClick={handleSubmit}>Submit</button>
       )
-    }
+  }
+
+  const renderSearchIngredient = () => {
+    return (
+      <>
+      </>
+    )
+  }
 
     /*----- RENDERER -----*/
     // return ReactDOM.createPortal (
@@ -206,77 +226,10 @@ export default function AddRecipe({showForm, setShowForm, setRecipes}) {
     return (
       <>
         <h1>Add Recipe View</h1>
+        <SearchBar name='searchRecipes' placeholder='Search . . .'/>
       </>
     )
   }
 
 
-  /*========== STYLES ==========*/
-const Background = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  `;
-
-const Container = styled.div`
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    border-radius: 20px;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 3em;
-    background-color: #d8d8d8;
-    /* background-color: #414141; */
-    width: 60vw;
-    min-height: 60vh;
-    box-sizing: border-box;
-    `;
-
-const ButtonContainer = styled.div`
-  margin: 1em;
-`;
-
-const Row = styled.div`
-  display:flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const Column = styled.div`
-  display:flex;
-  height: 100%;
-  flex-direction: column;
-  align-items: center;
-  /* justify-content: center; */
-`;
-
-const ButtonGroup = styled.div`
-  display:flex;
-  margin: 10px;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-`;
-
-const Input = styled.input`
-  border: solid;
-  border-width: thin;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  outline: none;
-  font-size: 12pt;
-  font-weight: light;
-  background-color: transparent;
-  width: 3em;
-  padding: 2px;
-  margin: 10px;
-  text-align: center;
-  `;
+/*========== STYLES ==========*/
