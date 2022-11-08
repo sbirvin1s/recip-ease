@@ -1,19 +1,14 @@
 /*========== EXTERNAL MODULES ==========*/
 import React, {useState, useRef, useEffect} from 'react';
-import ReactDOM from 'react-dom';
-import Button from '@mui/material/Button';
 import styled from 'styled-components';
 import axios from 'axios';
 
 
 /*========== INTERNAL MODULES ==========*/
-import RecipeList from './RecipeList.jsx';
+import RecipeList from '../components/RecipeList.jsx';
 
-
-function SearchRecipes({showSearchForm, setShowSearchForm, setRecipes}) {
-  if (!showSearchForm) {
-    return null;
-  }
+/*========== EXPORTS ==========*/
+export default function Recipes({showSearchForm, setShowSearchForm, setRecipes}) {
 
   /*----- STATE HOOKS -----*/
   const [recordedRecipes, setRecordedRecipes] = useState();
@@ -50,28 +45,30 @@ function SearchRecipes({showSearchForm, setShowSearchForm, setRecipes}) {
   /*----- RENDER METHODS -----*/
   const renderSubmit = () => {
     return (
-      <Button onClick={handleSubmit}>Submit</Button>
+      <button onClick={handleSubmit}>Submit</button>
       )
     }
 
     /*----- RENDERER -----*/
-    return ReactDOM.createPortal (
-      <Background onClick={() => setShowSearchForm(false)}>
-      <Container onClick={(event) => event.stopPropagation()}>
-        <h1>Select a Recipe</h1>
-        <Column>
-          <RecipeList recipes={recordedRecipes} selectedRecipes={selectedRecipes} setSelectedRecipes={setSelectedRecipes}/>
-        </Column>
-        <ButtonContainer>{renderSubmit()}</ButtonContainer>
-      </Container>
-    </Background>,
-    document.getElementById('portal')
+    // return ReactDOM.createPortal (
+    //   <Background onClick={() => setShowSearchForm(false)}>
+    //   <Container onClick={(event) => event.stopPropagation()}>
+    //     <h1>Select a Recipe</h1>
+    //     <Column>
+    //       <RecipeList recipes={recordedRecipes} selectedRecipes={selectedRecipes} setSelectedRecipes={setSelectedRecipes}/>
+    //     </Column>
+    //     <ButtonContainer>{renderSubmit()}</ButtonContainer>
+    //   </Container>
+    // </Background>,
+    // document.getElementById('portal')
+    // )
+    return (
+      <>
+        <h1>Recipe View</h1>
+        <h2>Select a Recipe</h2>
+      </>
     )
   }
-
-
-  /*========== EXPORTS ==========*/
-  export default SearchRecipes;
 
 
   /*========== STYLES ==========*/

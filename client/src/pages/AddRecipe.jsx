@@ -1,20 +1,18 @@
 /*========== EXTERNAL MODULES ==========*/
 import React, {useState, useRef, useEffect} from 'react';
-import ReactDOM from 'react-dom';
 // import Alert from '@mui/material/Alert';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 import styled from 'styled-components';
 import axios from 'axios';
 
 
 /*========== INTERNAL MODULES ==========*/
-import RecipePreview from './RecipePreview.jsx';
+import RecipePreview from '../components/RecipePreview.jsx';
 
 
-function AddRecipe({showForm, setShowForm, setRecipes}) {
-  if (!showForm) {
-    return null;
-  }
+/*========== EXPORTS ==========*/
+export default function AddRecipe({showForm, setShowForm, setRecipes}) {
+
   const firstRef = useRef(null);
   const lastRef = useRef(null);
 
@@ -116,21 +114,21 @@ function AddRecipe({showForm, setShowForm, setRecipes}) {
             <p>{(ingredient && ingredient.units) || ''}</p>
           </Row>
             <ButtonGroup>
-              <Button value='tsp' name='units' onClick={handleIngredient}>tsp</Button>
-              <Button value='Tbsp'name='units' onClick={handleIngredient}>Tbsp</Button>
-              <Button value='oz' name='units' onClick={handleIngredient}>ounces</Button>
-              <Button value='lbs' name='units' onClick={handleIngredient}>lbs</Button>
-              <Button value='c' name='units' onClick={handleIngredient}>cup</Button>
-              <Button value='g' name='units' onClick={handleIngredient}>gram(s)</Button>
-              <Button value='ml' name='units' onClick={handleIngredient}>ml</Button>
-              <Button value='pinch' name='units' onClick={handleIngredient}>pinch</Button>
-              <Button value='slice(s)' name='units' onClick={handleIngredient}>slice(s)</Button>
-              <Button value='cloves' name='units' onClick={handleIngredient}>clove(s)</Button>
-              <Button value='count' name='units' onClick={handleIngredient}>count</Button>
-              <Button value='' name='units' onClick={handleIngredient}>clear</Button>
+              <button value='tsp' name='units' onClick={handleIngredient}>tsp</button>
+              <button value='Tbsp'name='units' onClick={handleIngredient}>Tbsp</button>
+              <button value='oz' name='units' onClick={handleIngredient}>ounces</button>
+              <button value='lbs' name='units' onClick={handleIngredient}>lbs</button>
+              <button value='c' name='units' onClick={handleIngredient}>cup</button>
+              <button value='g' name='units' onClick={handleIngredient}>gram(s)</button>
+              <button value='ml' name='units' onClick={handleIngredient}>ml</button>
+              <button value='pinch' name='units' onClick={handleIngredient}>pinch</button>
+              <button value='slice(s)' name='units' onClick={handleIngredient}>slice(s)</button>
+              <button value='cloves' name='units' onClick={handleIngredient}>clove(s)</button>
+              <button value='count' name='units' onClick={handleIngredient}>count</button>
+              <button value='' name='units' onClick={handleIngredient}>clear</button>
             </ButtonGroup>
         </label>
-        <Button onClick={handleAddIngredient} variant='contained' >Add Ingredient</Button>
+        <button onClick={handleAddIngredient} variant='contained' >Add Ingredient</button>
       </form>
     )
   }
@@ -148,67 +146,69 @@ function AddRecipe({showForm, setShowForm, setRecipes}) {
 
   const renderSubmit = () => {
     return (
-      <Button onClick={handleSubmit}>Submit</Button>
+      <button onClick={handleSubmit}>Submit</button>
       )
     }
 
     /*----- RENDERER -----*/
-    return ReactDOM.createPortal (
-      <Background onClick={() => setShowForm(false)}>
-      <Container onClick={(event) => event.stopPropagation()}>
-        <Column>
-          <h1>Enter your Recipe</h1>
-            <label>
-              <h3 style={{margin: '0', padding: '0'}}>
-              Recipe Name
-              <Input
-                style={{width: '10em'}}
-                type='text'
-                name='recipeName'
-                placeholder='Grilled Cheese'
-                onChange={handleRecipe}
-              />
-              </h3>
-            </label>
-            <Row>
-              <label>
-                Number of Servings
-                <Input
-                  type='number'
-                  name='servings'
-                  placeholder='1'
-                  onChange={handleRecipe}
-                  />
-              </label>
-              <label>
-                <Row>
-                  Prep Time:
-                  <Input
-                    type='number'
-                    name='prepTime'
-                    placeholder='30'
-                    step='1'
-                    onChange={handleRecipe}
-                    />
-                  <p>minutes</p>
-                </Row>
-              </label>
-            </Row>
-          <RecipePreview ingredients={recipe.ingredients} recipe={recipe} setRecipe={setRecipe}/>
-          {/* {renderIngredientAlert()} */}
-          <h4>Add Ingredient</h4>
-          {renderEnterIngredient()}
-        </Column>
-        <ButtonContainer>{renderSubmit()}</ButtonContainer>
-      </Container>
-    </Background>,
-    document.getElementById('portal')
+    // return ReactDOM.createPortal (
+    //   <Background onClick={() => setShowForm(false)}>
+    //   <Container onClick={(event) => event.stopPropagation()}>
+    //     <Column>
+    //       <h1>Enter your Recipe</h1>
+    //         <label>
+    //           <h3 style={{margin: '0', padding: '0'}}>
+    //           Recipe Name
+    //           <Input
+    //             style={{width: '10em'}}
+    //             type='text'
+    //             name='recipeName'
+    //             placeholder='Grilled Cheese'
+    //             onChange={handleRecipe}
+    //           />
+    //           </h3>
+    //         </label>
+    //         <Row>
+    //           <label>
+    //             Number of Servings
+    //             <Input
+    //               type='number'
+    //               name='servings'
+    //               placeholder='1'
+    //               onChange={handleRecipe}
+    //               />
+    //           </label>
+    //           <label>
+    //             <Row>
+    //               Prep Time:
+    //               <Input
+    //                 type='number'
+    //                 name='prepTime'
+    //                 placeholder='30'
+    //                 step='1'
+    //                 onChange={handleRecipe}
+    //                 />
+    //               <p>minutes</p>
+    //             </Row>
+    //           </label>
+    //         </Row>
+    //       <RecipePreview ingredients={recipe.ingredients} recipe={recipe} setRecipe={setRecipe}/>
+    //       {/* {renderIngredientAlert()} */}
+    //       <h4>Add Ingredient</h4>
+    //       {renderEnterIngredient()}
+    //     </Column>
+    //     <ButtonContainer>{renderSubmit()}</ButtonContainer>
+    //   </Container>
+    // </Background>,
+    // document.getElementById('portal')
+    // )
+
+    return (
+      <>
+        <h1>Add Recipe View</h1>
+      </>
     )
   }
-
-
-  /*========== EXPORTS ==========*/
-  export default AddRecipe;
 
 
   /*========== STYLES ==========*/

@@ -4,7 +4,9 @@ import React from 'react';
 /*========== INTERNAL MODULES ==========*/
 import Ingredient from './Ingredient.jsx';
 
-function IngredientList({recipe}) {
+
+/*========== EXPORTS ==========*/
+export default function IngredientList({recipe}) {
   const {ingredients, servings} = recipe;
 
   /*----- RENDER METHODS -----*/
@@ -24,8 +26,5 @@ function IngredientList({recipe}) {
   )
 }
 
-
-/*========== EXPORTS ==========*/
-export default IngredientList;
 
 /*========== STYLES ==========*/
