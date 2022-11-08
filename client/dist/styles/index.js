@@ -15,6 +15,15 @@ body {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   color: #171816;
   background-color: #fff;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
 }
 `;
 
@@ -49,9 +58,10 @@ export const modalBG = styled.div`
   background-color: rgba(0, 0, 0, 0.7);
 `;
 
-export const StyledHeader = styled.header`
-  background-color: #ebfbff;
-  padding: 40px 0;
+export const Header = styled.header`
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
 `;
 
 export const Nav = styled.nav`
@@ -75,6 +85,7 @@ export const Page = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
   &::-webkit-scrollbar {
     display: none;
   }

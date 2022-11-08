@@ -16,7 +16,8 @@ const {writeRecipe, getRecipes, getIngredient} = require('./routes/routes');
 app.use('/', express.static(path.join(__dirname,'../client', '/dist')));
 app.use(express.json());
 
-
+/*TODO: Update add SSR and to use rename current 'Routes' to controllers
+ */
 /*========== ROUTES ==========*/
 app.get('/recipes', getRecipes);
 app.get('/ingredient/:ingredient', getIngredient);

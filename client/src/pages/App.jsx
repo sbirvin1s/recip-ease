@@ -9,7 +9,7 @@ import ShoppingList from './ShoppingList.jsx';
 import AddRecipe from './AddRecipe.jsx';
 import Recipes from './Recipes.jsx';
 import RecipeInfo from './RecipeInfo.jsx';
-import { Nav, GlobalStyle } from '../../dist/styles';
+import { Nav, Header, GlobalStyle } from '../../dist/styles';
 
 
 /*========== EXPORTS ==========*/
@@ -38,13 +38,15 @@ export default function App() {
 
   }
 
-
   /*----- RENDER METHODS -----*/
 
   /*----- RENDERER -----*/
   return (
     <>
       <GlobalStyle />
+        <Header>
+          <h5>Profile</h5>
+        </Header>
         <Routes>
           <Route path='/' element={<Home/>} />
           <Route path='Recipes' element={<Recipes />} />
@@ -58,7 +60,6 @@ export default function App() {
     </>
   )
 }
-
 
 
 
