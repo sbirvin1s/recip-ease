@@ -50,7 +50,9 @@ export default function App() {
           <Route path='Recipes' element={<Recipes />} />
           <Route path='AddRecipe' element={<AddRecipe />} />
           <Route path='ShoppingList' element={<ShoppingList recipes={recipes} />} />
-          <Route path='RecipesInfo' element={<RecipeInfo />} />
+          {/* <Route path='RecipesInfo' element={<RecipeInfo />} /> */}
+          {/* <Route path='DetailedMetrics' element={<DetailedMetrics />} /> */}
+          {/* <Route path='Camera' element={<Camera />} /> */}
         </Routes>
         <Nav> <Link to='/'>Home</Link> <Link to='Recipes'>Recipes</Link> <Link to='AddRecipe'>Add Recipe</Link> <Link to='ShoppingList'>Shopping List</Link> </Nav>
     </>

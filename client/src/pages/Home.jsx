@@ -133,7 +133,8 @@ const Background = styled(Column)`
 `;
 
 const Diary = styled(Column)`
-  overflow-y: scroll;
+  height: 50vh;
+  overflow: scroll;
   &::-webkit-scrollbar {
     display: none;
   }
