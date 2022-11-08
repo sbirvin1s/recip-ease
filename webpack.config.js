@@ -44,7 +44,7 @@ const config = {
     devServer: {
         port: 5000,
         static: {
-            directory: path.join(__dirname, './client', '/dist'),
+            directory: path.resolve(__dirname, './client', 'dist'),
         },
         compress: true,
     }

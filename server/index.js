@@ -9,18 +9,16 @@ const {PORT} = process.env;
 
 
 /*========== INTERNAL MODULES ==========*/
-const {writeRecipe, getRecipes, getIngredient} = require('./routes/routes');
+const {writeRecipe, getRecipes} = require('./routes/routes');
 
 
 /*========== MIDDLEWARE ==========*/
 app.use('/', express.static(path.join(__dirname,'../client', '/dist')));
 app.use(express.json());
 
-/*TODO: Update add SSR and to use rename current 'Routes' to controllers
- */
+
 /*========== ROUTES ==========*/
 app.get('/recipes', getRecipes);
-app.get('/ingredient/:ingredient', getIngredient);
 app.post('/recipes', writeRecipe);
 
 

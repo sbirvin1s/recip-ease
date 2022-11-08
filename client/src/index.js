@@ -1,18 +1,13 @@
 /*========== EXTERNAL MODULES ==========*/
 import React from 'react';
-import ReactDOM, { createRoot } from 'react-dom/client';
-import { BrowserRouter as Router} from 'react-router-dom';
+import ReactDOM, {createRoot} from 'react-dom/client';
 
 /*========== INTERNAL MODULES ==========*/
-import App from './pages/App.jsx';
+import App from './components/App.jsx';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root')
 );
 
 /*========== EXPORTS ==========*/
-root.render(
-  <Router>
-    <App/>
-  </Router>
-);
+root.render(<App />);
