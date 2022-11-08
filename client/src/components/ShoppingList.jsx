@@ -3,16 +3,14 @@ import React from 'react';
 
 
 /*========== INTERNAL MODULES ==========*/
-import IngredientList from '../components/IngredientList.jsx';
+import IngredientList from './IngredientList.jsx';
 
-/*========== EXPORTS ==========*/
-export default function ShoppingList({recipes}) {
+
+function ShoppingList({recipes}) {
 
   /*----- RENDER METHODS -----*/
   const renderShoppingList = () => {
-    if (recipes) {
-      return recipes.map((recipe, index) => <IngredientList key={'shoppingList' + index} recipe={recipe}/>)
-    }
+    return recipes.map((recipe, index) => <IngredientList key={'shoppingList' + index} recipe={recipe}/>)
   }
 
 
@@ -21,11 +19,14 @@ export default function ShoppingList({recipes}) {
 
   return (
     <>
-      <h1>Shopping List View</h1>
-      {/* {renderShoppingList()} */}
+      {renderShoppingList()}
     </>
   )
 }
+
+
+/*========== EXPORTS ==========*/
+export default ShoppingList;
 
 
 /*========== STYLES ==========*/
