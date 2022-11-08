@@ -1,7 +1,5 @@
 /*========== EXTERNAL MODULES ==========*/
 import React, {useState, useRef, useEffect} from 'react';
-// import Alert from '@mui/material/Alert';
-// import Button from '@mui/material/Button';
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -226,6 +224,9 @@ export default function AddRecipe({showForm, setShowForm, setRecipes}) {
     return (
       <>
         <h1>Add Recipe View</h1>
+        <h3>Recipe Info Tracker</h3>
+        <h3>Ingredient List</h3>
+        <h3>Add Ingredient CTA</h3>
         <SearchBar name='searchRecipes' placeholder='Search . . .'/>
       </>
     )
