@@ -1,6 +1,6 @@
 /*========== EXTERNAL MODULES ==========*/
 import React, {useState, useRef, useEffect} from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -230,7 +230,7 @@ export default function AddRecipe({showForm, setShowForm, setRecipes}) {
         <h3>Recipe Info Tracker</h3>
         <h3>Ingredient List</h3>
         <h3>Add Ingredient CTA</h3>
-        <Link>Add Ingredient</Link>
+        <Link to={'../AddIngredient'}>Add Ingredient</Link>
         <SearchBar name='searchRecipes' placeholder='Search . . .'/>
       </>
     )
