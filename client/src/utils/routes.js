@@ -1,6 +1,10 @@
 /*========== EXTERNAL MODULES ==========*/
 import React from 'react';
-import { createBrowserRouter } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+} from 'react-router-dom';
 
 /*========== INTERNAL MODULE ==========*/
 import App from '../pages/App.jsx';
@@ -13,36 +17,15 @@ import RecipeInfo from '../pages/RecipeInfo.jsx';
 import Error from '../pages/Error.jsx';
 
 /*========== EXPORTS ==========*/
-export const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-    errorElement: <Error />,
-    children: [
-      {
-        path: 'Home',
-        element: <Home />,
-      },
-      {
-        path: 'Recipes',
-        element: <Recipes />,
-      },
-      {
-        path: 'AddRecipe',
-        element: <AddRecipe />,
-      },
-      {
-        path: 'ShoppingList',
-        element: <ShoppingList/>,
-      },
-      {
-        path: 'AddIngredient',
-        element: <AddIngredient />,
-      },
-      {
-        path: 'RecipeInfo',
-        element: <RecipeInfo />,
-      },
-    ]
-  }
-]);
+export const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path='/' element={<App />} errorElement={<Error />}>
+      <Route index element={<Home />} />
+      <Route path='Recipes' element={<Recipes />} />
+      <Route path='AddRecipe' element={<AddRecipe />} />
+      <Route path='ShoppingList' element={<ShoppingList />} />
+      <Route path='AddIngredient' element={<AddIngredient />} />
+      <Route path='RecipeInfo' element={<RecipeInfo />} />
+    </Route>
+  )
+);

@@ -1,6 +1,6 @@
 /*========== EXTERNAL MODULES ==========*/
 import React, {useState, useEffect} from 'react';
-import { Routes, Route, Link, Outlet } from 'react-router-dom';
+import { matchPath, Link, Outlet, redirect } from 'react-router-dom';
 import axios from 'axios';
 
 /*========== INTERNAL MODULES ==========*/
@@ -12,7 +12,7 @@ import Recipes from './Recipes.jsx';
 import RecipeInfo from './RecipeInfo.jsx';
 import Header from '../components/Header.jsx';
 import NavBar from '../components/NavBar.jsx';
-import { Nav, GlobalStyle } from '../../dist/stylesheets';
+import { GlobalStyle } from '../../dist/stylesheets';
 
 
 /*========== EXPORTS ==========*/
