@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 
 /*========== INTERNAL MODULES ==========*/
-import { Row } from '../../dist/styles';
+import { Row } from '../../dist/stylesheets';
 
 /*========== EXPORTS ==========*/
 export default function DiaryItem({ meal }) {

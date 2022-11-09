@@ -3,7 +3,9 @@
 
 /*========== INTERNAL MODULES ==========*/
 const {
-  addRecipe, findAllRecipes, findIngredient,
+  addRecipe,
+  findAllRecipes,
+  findIngredient,
   findBrand,
 } = require('../../database');
 

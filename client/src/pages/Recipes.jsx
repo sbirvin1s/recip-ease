@@ -15,18 +15,18 @@ export default function Recipes({showSearchForm, setShowSearchForm, setRecipes})
   const [selectedRecipes, setSelectedRecipes] = useState();
 
   /*----- LIFESTYLE METHODS -----*/
-  useEffect(() => {
-    axios.get('/recipes')
-    .then(recipes => setRecordedRecipes(recipes.data))
-    // .then(recipes => {
-    //   const newRecipes = recipes.data;
-    //   setRecordedRecipes(prevRecipes => ({
-    //   ...prevRecipes,
-    //   newRecipes
-    //   }))
-    // })
-    .catch(err => console.error(err))
-  }, [])
+  // useEffect(() => {
+  //   axios.get('/recipes')
+  //   .then(recipes => setRecordedRecipes(recipes.data))
+  //   // .then(recipes => {
+  //   //   const newRecipes = recipes.data;
+  //   //   setRecordedRecipes(prevRecipes => ({
+  //   //   ...prevRecipes,
+  //   //   newRecipes
+  //   //   }))
+  //   // })
+  //   .catch(err => console.error(err))
+  // }, [])
 
 
   /*----- EVENT HANDLERS -----*/
