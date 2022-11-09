@@ -5,7 +5,7 @@ import React from 'react';
 import { Input } from '../../dist/stylesheets';
 
 /*========== EXPORTS ==========*/
-export default function SearchBar({ children, ...props }) {
+export default function NavBar({ children, ...props }) {
 
   /*----- STATE HOOKS -----*/
 

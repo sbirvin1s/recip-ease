@@ -1,11 +1,13 @@
 /*========== EXTERNAL MODULES ==========*/
 import React, {useState, useRef, useEffect} from 'react';
+import { Link, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
 
 /*========== INTERNAL MODULES ==========*/
 import RecipePreview from '../components/RecipePreview.jsx';
+import AddIngredient from './AddIngredient.jsx';
 import SearchBar from '../components/SearchBar.jsx';
 
 
@@ -223,10 +225,12 @@ export default function AddRecipe({showForm, setShowForm, setRecipes}) {
 
     return (
       <>
+        {/* <Route path='AddIngredient' element={<AddIngredient />} /> */}
         <h1>Add Recipe View</h1>
         <h3>Recipe Info Tracker</h3>
         <h3>Ingredient List</h3>
         <h3>Add Ingredient CTA</h3>
+        <Link>Add Ingredient</Link>
         <SearchBar name='searchRecipes' placeholder='Search . . .'/>
       </>
     )

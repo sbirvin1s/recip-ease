@@ -2,7 +2,7 @@
 import React from 'react';
 
 /*========== INTERNAL MODULES ==========*/
-import { Input } from '../../dist/styles';
+import { Input } from '../../dist/stylesheets';
 
 /*========== EXPORTS ==========*/
 export default function AddIngredient({ children, ...props }) {
@@ -18,7 +18,7 @@ export default function AddIngredient({ children, ...props }) {
   /*----- RENDERER -----*/
   return (
     <>
-
+      <h1>Add and Search Ingredients</h1>
     </>
   )
 }

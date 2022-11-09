@@ -5,7 +5,7 @@ import styled from 'styled-components';
 // import Button from '@mui/material/Button';
 
 /*========== INTERNAL MODULES ==========*/
-import { Page, Column, Row } from '../../dist/styles/index.js';
+import { Page, Column, Row } from '../../dist/stylesheets';
 import ShoppingList from './ShoppingList.jsx';
 import AddRecipe from './AddRecipe.jsx';
 import Recipes from './Recipes.jsx';

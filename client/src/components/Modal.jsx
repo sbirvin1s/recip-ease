@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 /*========== INTERNAL MODULES ==========*/
-import { ModalBG } from '../../dist/styles';
+import { ModalBG } from '../../dist/stylesheets';
 
 /*========== EXPORTS ==========*/
 export default function Modal({ showForm, setShowForm, children, ...props }) {

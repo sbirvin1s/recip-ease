@@ -1,15 +1,18 @@
 /*========== EXTERNAL MODULES ==========*/
 import React, {useState, useEffect} from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, Outlet } from 'react-router-dom';
 import axios from 'axios';
 
 /*========== INTERNAL MODULES ==========*/
 import Home from './Home.jsx';
 import ShoppingList from './ShoppingList.jsx';
 import AddRecipe from './AddRecipe.jsx';
+import AddIngredient from './AddIngredient.jsx';
 import Recipes from './Recipes.jsx';
 import RecipeInfo from './RecipeInfo.jsx';
-import { Nav, Header, GlobalStyle } from '../../dist/styles';
+import Header from '../components/Header.jsx';
+import NavBar from '../components/NavBar.jsx';
+import { Nav, GlobalStyle } from '../../dist/stylesheets';
 
 
 /*========== EXPORTS ==========*/
@@ -44,19 +47,9 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-        <Header>
-          <h5>Profile</h5>
-        </Header>
-        <Routes>
-          <Route path='/' element={<Home/>} />
-          <Route path='Recipes' element={<Recipes />} />
-          <Route path='AddRecipe' element={<AddRecipe />} />
-          <Route path='ShoppingList' element={<ShoppingList recipes={recipes} />} />
-          {/* <Route path='RecipesInfo' element={<RecipeInfo />} /> */}
-          {/* <Route path='DetailedMetrics' element={<DetailedMetrics />} /> */}
-          {/* <Route path='Camera' element={<Camera />} /> */}
-        </Routes>
-        <Nav> <Link to='/'>Home</Link> <Link to='Recipes'>Recipes</Link> <Link to='AddRecipe'>Add Recipe</Link> <Link to='ShoppingList'>Shopping List</Link> </Nav>
+        <Header><h5>Profile</h5></Header>
+        <Outlet />
+        <NavBar> <Link to={'/'}>Home</Link> <Link to={'Recipes'}>Recipes</Link> <Link to={'AddRecipe'}>Add Recipe</Link> <Link to={'ShoppingList'}>Shopping List</Link> </NavBar>
     </>
   )
 }

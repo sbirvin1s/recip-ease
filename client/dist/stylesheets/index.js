@@ -15,9 +15,9 @@ body {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   color: #171816;
   background-color: #fff;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+  /* margin: 0;
+  padding: 0; */
+  /* overflow: hidden; */
   display: flex;
   flex-direction: column;
   &::-webkit-scrollbar {
@@ -49,7 +49,7 @@ export const Button = styled.button``;
 =====================================
 */
 
-export const modalBG = styled.div`
+export const ModalBG = styled.div`
   position: fixed;
   top: 0;
   left: 0;
