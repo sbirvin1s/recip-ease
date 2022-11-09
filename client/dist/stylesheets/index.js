@@ -58,7 +58,7 @@ export const ModalBG = styled.div`
   background-color: rgba(0, 0, 0, 0.7);
 `;
 
-export const Header = styled.header`
+export const ProfileHeader = styled.header`
   position: absolute;
   top: 0.25rem;
   right: 0.25rem;

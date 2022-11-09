@@ -49,7 +49,7 @@ export default function App() {
       <GlobalStyle />
         <Header><h5>Profile</h5></Header>
         <Outlet />
-        <NavBar> <Link to={'/'}>Home</Link> <Link to={'Recipes'}>Recipes</Link> <Link to={'AddRecipe'}>Add Recipe</Link> <Link to={'ShoppingList'}>Shopping List</Link> </NavBar>
+        <NavBar> <Link to={'Home'}>Home</Link> <Link to={'Recipes'}>Recipes</Link> <Link to={'AddRecipe'}>Add Recipe</Link> <Link to={'ShoppingList'}>Shopping List</Link> </NavBar>
     </>
   )
 }

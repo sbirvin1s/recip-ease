@@ -2,7 +2,7 @@
 import React from 'react';
 
 /*========== INTERNAL MODULES ==========*/
-import { Input } from '../../dist/stylesheets';
+import { Nav } from '../../dist/stylesheets';
 
 /*========== EXPORTS ==========*/
 export default function NavBar({ children, ...props }) {
@@ -17,10 +17,7 @@ export default function NavBar({ children, ...props }) {
 
   /*----- RENDERER -----*/
   return (
-    <form>
-      <Input {...props}>{children}</Input>
-
-    </form>
+    <Nav {...props}>{children}</Nav>
   )
 }
 

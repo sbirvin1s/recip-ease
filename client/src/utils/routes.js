@@ -3,6 +3,7 @@ import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
 /*========== INTERNAL MODULE ==========*/
+import App from '../pages/App.jsx';
 import Home from '../pages/Home.jsx';
 import Recipes from '../pages/Recipes.jsx';
 import AddRecipe from '../pages/AddRecipe.jsx';
@@ -15,9 +16,13 @@ import Error from '../pages/Error.jsx';
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <Home />,
+    element: <App />,
     errorElement: <Error />,
     children: [
+      {
+        path: 'Home',
+        element: <Home />,
+      },
       {
         path: 'Recipes',
         element: <Recipes />,
