@@ -46,6 +46,12 @@ const config = {
         static: {
             directory: path.join(__dirname, './client', '/dist'),
         },
+        proxy: [
+          {
+            context: ['/ingredient', '/recipes'],
+            target: 'http://localhost:3000'
+          }
+        ],
         compress: true,
     }
 };

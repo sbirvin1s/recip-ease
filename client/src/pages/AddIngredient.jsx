@@ -1,9 +1,9 @@
 /*========== EXTERNAL MODULES ==========*/
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 /*========== INTERNAL MODULES ==========*/
-import { Input } from '../../dist/stylesheets';
+import { Row } from '../../dist/stylesheets';
 import SearchBar from '../components/SearchBar.jsx';
 
 
@@ -25,26 +25,32 @@ import SearchBar from '../components/SearchBar.jsx';
 
 export default function AddIngredient({ children, ...props }) {
 
-  /*----- STATE HOOKS -----*/
-  const [searchTerm, setSearchTerm] = useState();
+/*----- STATE HOOKS -----*/
+  const [searchTerm, setSearchTerm] = useState('');
+  const [ingredients, setIngredients] = useState();
 
-  /*----- LIFECYCLE METHODS -----*/
+/*----- LIFECYCLE METHODS -----*/
+  useEffect(() => {
+    if (searchTerm && searchTerm.length > 0) {
+      axios.get('ingredient/'+ searchTerm)
+      .then(ingredientSearch => setIngredients(ingredientSearch.data))
+      .catch(err => console.error(err))
+    }
+  }, [searchTerm])
 
-  /*----- EVENT HANDLERS -----*/
-  const handleSubmit = event => {
-    event.preventDefault();
-    setSearchTerm()
-  }
+/*----- EVENT HANDLERS -----*/
 
-  /*----- RENDER METHODS -----*/
+/*----- RENDER METHODS -----*/
 
-  /*----- RENDERER -----*/
+/*----- RENDERER -----*/
   return (
     <>
       <h1>Add and Search Ingredients</h1>
       <SearchBar placeholder='Search . . .' searchState={setSearchTerm} type='text'/>
-      <h3>Scan Ingredient</h3>
-      <h3>Enter Ingredient</h3>
+      <Row>
+        <h3>Scan Ingredient</h3>
+        <h3>Enter Ingredient</h3>
+      </Row>
       <ol>Search Results
         <li>Ingredient    [ADD]</li>
         <li>Ingredient    [ADD]</li>
