@@ -79,7 +79,6 @@ export const Nav = styled.nav`
 export const Footer = styled.footer`
 `;
 
-
 export const Page = styled.div`
   display: flex;
   flex-direction: column;
@@ -108,8 +107,6 @@ export const Container = styled.div`
   min-height: 60vh;
   box-sizing: border-box;
 `;
-
-export const Div = styled.div``;
 
 export const Column = styled.div`
   display: flex;
@@ -143,10 +140,6 @@ export const ButtonGroup = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-`;
-
-const ButtonContainer = styled.div`
-  margin: 1em;
 `;
 
 export const ButtonBox = styled(Column)`

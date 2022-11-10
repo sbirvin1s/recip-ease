@@ -1,8 +1,11 @@
 /*========== EXTERNAL MODULES ==========*/
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 /*========== INTERNAL MODULES ==========*/
 import { Input } from '../../dist/stylesheets';
+import SearchBar from '../components/SearchBar.jsx';
+
 
 /*========== EXPORTS ==========*/
 
@@ -23,10 +26,15 @@ import { Input } from '../../dist/stylesheets';
 export default function AddIngredient({ children, ...props }) {
 
   /*----- STATE HOOKS -----*/
+  const [searchTerm, setSearchTerm] = useState();
 
   /*----- LIFECYCLE METHODS -----*/
 
   /*----- EVENT HANDLERS -----*/
+  const handleSubmit = event => {
+    event.preventDefault();
+    setSearchTerm()
+  }
 
   /*----- RENDER METHODS -----*/
 
@@ -34,6 +42,19 @@ export default function AddIngredient({ children, ...props }) {
   return (
     <>
       <h1>Add and Search Ingredients</h1>
+      <SearchBar placeholder='Search . . .' searchState={setSearchTerm} type='text'/>
+      <h3>Scan Ingredient</h3>
+      <h3>Enter Ingredient</h3>
+      <ol>Search Results
+        <li>Ingredient    [ADD]</li>
+        <li>Ingredient    [ADD]</li>
+        <li>Ingredient    [ADD]</li>
+        <li>Ingredient    [ADD]</li>
+        <li>Ingredient    [ADD]</li>
+        <li>Ingredient    [ADD]</li>
+        <li>Ingredient    [ADD]</li>
+        <li>Ingredient    [ADD]</li>
+      </ol>
     </>
   )
 }
