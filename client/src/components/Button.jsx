@@ -7,11 +7,8 @@ import React from 'react';
 export default function Button({ children, ...props }) {
 
   /*----- STATE HOOKS -----*/
-
   /*----- LIFECYCLE METHODS -----*/
-
   /*----- EVENT HANDLERS -----*/
-
   /*----- RENDER METHODS -----*/
 
   /*----- RENDERER -----*/

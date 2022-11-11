@@ -4,7 +4,9 @@ import axios from 'axios';
 
 /*========== INTERNAL MODULES ==========*/
 import { Row } from '../../dist/stylesheets';
+import Button from '../components/Button.jsx';
 import SearchBar from '../components/SearchBar.jsx';
+import ListItem from '../components/ListItem.jsx';
 
 
 /*========== EXPORTS ==========*/
@@ -29,6 +31,7 @@ export default function AddIngredient({ children, ...props }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [ingredients, setIngredients] = useState();
 
+
 /*----- LIFECYCLE METHODS -----*/
   useEffect(() => {
     if (searchTerm && searchTerm.length > 0) {
@@ -42,25 +45,38 @@ export default function AddIngredient({ children, ...props }) {
 
 /*----- RENDER METHODS -----*/
 
+const renderIngredients = () => {
+  if (ingredients && ingredients.length > 0) {
+    return ingredients.map((ingredient, index) => {
+      return (
+        <ListItem
+          key={'ingredient' + index}
+          id={'ingredient' + index}
+          enableButton={true}
+          buttonValue={'ADD'}
+        >
+          <Row>{ingredient.ingredient}</Row>
+          <p>{ingredient.brand}  {ingredient.food_category}</p>
+        </ListItem>
+      )
+    })
+  } else if (ingredients && ingredients.length === 0) {
+    return <h4>No Ingredients that matched your search could be found</h4>
+  } else {
+    return <></>
+  }
+}
+
 /*----- RENDERER -----*/
   return (
     <>
       <h1>Add and Search Ingredients</h1>
       <SearchBar placeholder='Search . . .' searchState={setSearchTerm} type='text'/>
       <Row>
-        <h3>Scan Ingredient</h3>
-        <h3>Enter Ingredient</h3>
+        <Button>Scan Ingredient</Button>
+        <Button>Enter Ingredient</Button>
       </Row>
-      <ol>Search Results
-        <li>Ingredient    [ADD]</li>
-        <li>Ingredient    [ADD]</li>
-        <li>Ingredient    [ADD]</li>
-        <li>Ingredient    [ADD]</li>
-        <li>Ingredient    [ADD]</li>
-        <li>Ingredient    [ADD]</li>
-        <li>Ingredient    [ADD]</li>
-        <li>Ingredient    [ADD]</li>
-      </ol>
+      {renderIngredients()}
     </>
   )
 }

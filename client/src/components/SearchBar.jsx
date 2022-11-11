@@ -6,7 +6,14 @@ import styled from 'styled-components';
 import { Input } from '../../dist/stylesheets';
 
 /*========== EXPORTS ==========*/
-export default function SearchBar({ children, searchState, ...props }) {
+
+/** SearchBar component that takes props, and a searchState function to modify local state
+ *
+ * @param {function} searchState - searchState={local set state function}
+ * @prop {*} props - any property or tag that needs to be passed to the component
+ * @returns {Component} configured SearchBar component
+ */
+export default function SearchBar({ searchState, ...props }) {
   const searchRef = useRef();
   /*----- STATE HOOKS -----*/
 
@@ -31,9 +38,7 @@ export default function SearchBar({ children, searchState, ...props }) {
         ref={searchRef}
         id='search'
         {...props}
-      >
-        {children}
-      </Input>
+      />
       <button onClick={handleSubmit}>Go</button>
     </Bar>
   )

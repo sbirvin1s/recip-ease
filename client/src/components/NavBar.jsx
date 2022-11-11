@@ -8,11 +8,8 @@ import { Nav } from '../../dist/stylesheets';
 export default function NavBar({ children, ...props }) {
 
   /*----- STATE HOOKS -----*/
-
   /*----- LIFECYCLE METHODS -----*/
-
   /*----- EVENT HANDLERS -----*/
-
   /*----- RENDER METHODS -----*/
 
   /*----- RENDERER -----*/
