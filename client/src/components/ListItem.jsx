@@ -16,6 +16,7 @@ import Button from './Button.jsx';
  * @param {boolean} enableCheckbox - true to enable checkboxes, Default is false
  * @param {boolean} enableButton - true to enable a button, Default is false
  * @param {string} buttonValue - string defining name of button
+ * @param {func} buttonClick - passes a function to ListItem button, Default disabled
  * @props any property that should be passed to the component
  * @returns {Component} configured ListItem component
  */
@@ -25,6 +26,7 @@ export default function ListItem({
   enableCheckbox = false,
   enableButton = false,
   buttonValue,
+  buttonClick = false,
   ...props
 }) {
   const listRef = useRef();
@@ -38,6 +40,8 @@ export default function ListItem({
     // searchState(searchRef.current.value);
   }
 
+  buttonClick = buttonClick || handleSubmit;
+
 /*----- RENDER METHODS -----*/
   const renderCheckbox = () => {
     return enableCheckbox ? <Checkbox
@@ -49,7 +53,7 @@ export default function ListItem({
 
   const renderButton = () => {
     return enableButton ? <Button
-    onClick={handleSubmit}
+    onClick={buttonClick}
   >
     {buttonValue}
   </Button> : <></>;

@@ -30,6 +30,7 @@ export default function AddIngredient({ children, ...props }) {
 /*----- STATE HOOKS -----*/
   const [searchTerm, setSearchTerm] = useState('');
   const [ingredients, setIngredients] = useState();
+  const [selectedIngredients, setSelectedIngredients] = useState([]);
 
 
 /*----- LIFECYCLE METHODS -----*/
@@ -42,6 +43,17 @@ export default function AddIngredient({ children, ...props }) {
   }, [searchTerm])
 
 /*----- EVENT HANDLERS -----*/
+const handleSelect = ingredient => {
+  setSelectedIngredients(prev => ([
+    ...prev, ingredient
+  ]));
+}
+
+const handleRemove = ingredient => {
+  const currentIngredients = [...selectedIngredients];
+  currentIngredients.splice(ingredient, 1);
+  setSelectedIngredients(currentIngredients);
+}
 
 /*----- RENDER METHODS -----*/
 
@@ -52,11 +64,13 @@ const renderIngredients = () => {
         <ListItem
           key={'ingredient' + index}
           id={'ingredient' + index}
+          ingredient={ingredient}
           enableButton={true}
           buttonValue={'ADD'}
+          buttonClick={() => handleSelect(ingredient)}
         >
-          <Row>{ingredient.ingredient}</Row>
-          <p>{ingredient.brand}  {ingredient.food_category}</p>
+          <p>{ingredient.ingredient}</p>
+          <p>{ingredient.brand} {ingredient.food_category}</p>
         </ListItem>
       )
     })
@@ -67,11 +81,34 @@ const renderIngredients = () => {
   }
 }
 
+const renderSelected = () => {
+  if (selectedIngredients && selectedIngredients.length) {
+    return selectedIngredients.map((ingredient, index) => {
+      return (
+        <ListItem
+          key={'selectedIngredient' + index}
+          id={'selectedIngredient' + index}
+          ingredient={ingredient}
+          enableButton={true}
+          buttonValue={'X'}
+          buttonClick={() => handleRemove(ingredient)}
+        >
+          <p>{ingredient.ingredient}</p>
+          <p>{ingredient.brand} {ingredient.food_category}</p>
+        </ListItem>
+      )
+    })
+  } else {
+    return <></>
+  }
+}
+
 /*----- RENDERER -----*/
   return (
     <>
       <h1>Add and Search Ingredients</h1>
       <SearchBar placeholder='Search . . .' searchState={setSearchTerm} type='text'/>
+      {renderSelected()}
       <Row>
         <Button>Scan Ingredient</Button>
         <Button>Enter Ingredient</Button>

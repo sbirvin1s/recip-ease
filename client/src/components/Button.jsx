@@ -4,6 +4,11 @@ import React from 'react';
 /*========== INTERNAL MODULES ==========*/
 
 /*========== EXPORTS ==========*/
+/**
+ *
+ * @param {*} param0
+ * @returns
+ */
 export default function Button({ children, ...props }) {
 
   /*----- STATE HOOKS -----*/
