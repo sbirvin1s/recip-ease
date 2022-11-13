@@ -4,12 +4,14 @@ import React from 'react';
 /*========== INTERNAL MODULES ==========*/
 
 /*========== EXPORTS ==========*/
-/**
+
+/** Button constructor that takes:
  *
- * @param {*} param0
- * @returns
+* @param {*} children - any component that should be rendered on the modal
+ * @prop {*} props - any property or tag that needs to be passed to the component
+ * @returns {Component}
  */
-export default function Button({ children, ...props }) {
+export default function Button({ children, ...props}) {
 
   /*----- STATE HOOKS -----*/
   /*----- LIFECYCLE METHODS -----*/
@@ -17,12 +19,7 @@ export default function Button({ children, ...props }) {
   /*----- RENDER METHODS -----*/
 
   /*----- RENDERER -----*/
-  return (
-    <>
-      <button {...props}
-      >{children}</button>
-    </>
-  )
+  return <button {...props}>{children}</button>
 }
 
 

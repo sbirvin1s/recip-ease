@@ -7,13 +7,18 @@ import { Input } from '../../dist/stylesheets';
 
 /*========== EXPORTS ==========*/
 
-/** SearchBar component that takes props, and a searchState function to modify local state
+/** SearchBar constructor that takes:
  *
+ * @param {*} children - any additional buttons that should be added to the SearchBar
  * @param {function} searchState - searchState={local set state function}
  * @prop {*} props - any property or tag that needs to be passed to the component
  * @returns {Component} configured SearchBar component
  */
-export default function SearchBar({ searchState, ...props }) {
+export default function SearchBar({
+  children,
+  searchState,
+   ...props
+  }) {
   const searchRef = useRef();
   /*----- STATE HOOKS -----*/
 
@@ -39,6 +44,7 @@ export default function SearchBar({ searchState, ...props }) {
         id='search'
         {...props}
       />
+      {children}
       <button onClick={handleSubmit}>Go</button>
     </Bar>
   )

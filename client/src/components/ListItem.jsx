@@ -9,7 +9,7 @@ import Button from './Button.jsx';
 
 /*========== EXPORTS ==========*/
 
-/** ListItem component that takes:
+/** ListItem constructor that takes:
  *
  * @param {string} id - unique identifier for ListItem, recommend using React "key"
  * @param {*} children - anything that is contained inside the ListItem component

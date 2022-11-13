@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 /*========== INTERNAL MODULES ==========*/
-import { Row, Page } from '../../dist/stylesheets';
+import { Row, Page, Label, Input } from '../../dist/stylesheets';
 import Button from '../components/Button.jsx';
 import SearchBar from '../components/SearchBar.jsx';
 import ListItem from '../components/ListItem.jsx';
@@ -33,6 +33,8 @@ export default function AddIngredient({ children, ...props }) {
   const [ingredients, setIngredients] = useState();
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [filterFoodCategories, setFilterFoodCategories] = useState([]);
+  const [filterBrands, setFilterBrands] = useState([]);
 
 
 /*----- LIFECYCLE METHODS -----*/
@@ -57,6 +59,21 @@ const handleRemove = ingredient => {
   setSelectedIngredients(currentIngredients);
 }
 
+const handleScan = () => {
+
+  setSelectedIngredients(prev => ([
+    ...prev, ingredient
+  ]));
+}
+
+const handleFilterFoodCategories = () => {
+
+}
+
+const handleFilterBrands = () => {
+
+}
+
 /*----- RENDER METHODS -----*/
 
 const renderFilters = () => {
@@ -64,9 +81,21 @@ const renderFilters = () => {
     return (
       <>
         <p>Filter By:</p>
-        <Button>Brand</Button>
-        <Button>Category</Button>
-        <Button>Serving</Button>
+        <Label htmlFor='filterBrands'>
+          Brand:
+          <Input
+            id='filterBrands'
+            name='Brand'
+          >
+          </Input>
+          <Button
+            id='filterBrandsButton'
+            onClick={handleFilterBrands}
+          >
+            Apply
+          </Button>
+        </Label>
+        <Button onClick={handleFilterFoodCategories}>Category</Button>
       </>
     )
   } else {
@@ -123,11 +152,13 @@ const renderSelected = () => {
 /*----- RENDERER -----*/
   return (
     <>
-      <SearchBar placeholder='Search . . .' searchState={setSearchTerm} type='text'/>
+      <SearchBar placeholder='Search . . .' searchState={setSearchTerm} type='text'>
+        <Button onClick={handleScan}>[||||]</Button>
+      </SearchBar>
       {renderFilters()}
       {renderSelected()}
       <Row>
-        <Button>Add Ingredient</Button>
+        <Button onClick={() => setShowModal(true)}>Add Ingredient</Button>
       </Row>
       <Page style={{
         postition: 'absolute',
@@ -139,10 +170,8 @@ const renderSelected = () => {
         {renderIngredients()}
       </Page>
       <Modal showModal={showModal} setShowModal={setShowModal}>
-
-      </Modal>
-      <Modal showModal={showModal} setShowModal={setShowModal}>
-
+        <h1>Add Ingredients</h1>
+        <Button onClick={handleScan}>Scan</Button>
       </Modal>
     </>
   )
