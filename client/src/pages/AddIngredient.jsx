@@ -3,10 +3,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 /*========== INTERNAL MODULES ==========*/
-import { Row } from '../../dist/stylesheets';
+import { Row, Page } from '../../dist/stylesheets';
 import Button from '../components/Button.jsx';
 import SearchBar from '../components/SearchBar.jsx';
 import ListItem from '../components/ListItem.jsx';
+import Modal from '../components/Modal.jsx';
 
 
 /*========== EXPORTS ==========*/
@@ -31,6 +32,7 @@ export default function AddIngredient({ children, ...props }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [ingredients, setIngredients] = useState();
   const [selectedIngredients, setSelectedIngredients] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
 
 /*----- LIFECYCLE METHODS -----*/
@@ -56,6 +58,21 @@ const handleRemove = ingredient => {
 }
 
 /*----- RENDER METHODS -----*/
+
+const renderFilters = () => {
+  if (searchTerm && searchTerm.length > 0) {
+    return (
+      <>
+        <p>Filter By:</p>
+        <Button>Brand</Button>
+        <Button>Category</Button>
+        <Button>Serving</Button>
+      </>
+    )
+  } else {
+    return <></>
+  }
+}
 
 const renderIngredients = () => {
   if (ingredients && ingredients.length > 0) {
@@ -106,14 +123,27 @@ const renderSelected = () => {
 /*----- RENDERER -----*/
   return (
     <>
-      <h1>Add and Search Ingredients</h1>
       <SearchBar placeholder='Search . . .' searchState={setSearchTerm} type='text'/>
+      {renderFilters()}
       {renderSelected()}
       <Row>
-        <Button>Scan Ingredient</Button>
-        <Button>Enter Ingredient</Button>
+        <Button>Add Ingredient</Button>
       </Row>
-      {renderIngredients()}
+      <Page style={{
+        postition: 'absolute',
+        bottom: '800px',
+        maxHeight:'80vh',
+        minHeight:'50vh',
+        overflow: 'scroll',
+      }}>
+        {renderIngredients()}
+      </Page>
+      <Modal showModal={showModal} setShowModal={setShowModal}>
+
+      </Modal>
+      <Modal showModal={showModal} setShowModal={setShowModal}>
+
+      </Modal>
     </>
   )
 }

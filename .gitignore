@@ -38,3 +38,4 @@ bower_components/
 
 /database/models/sample.json
 data*/
+/client/src/pages/test.jsx

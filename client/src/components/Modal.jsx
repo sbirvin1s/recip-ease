@@ -1,14 +1,23 @@
 /*========== EXTERNAL MODULES ==========*/
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 /*========== INTERNAL MODULES ==========*/
 import { ModalBG } from '../../dist/stylesheets';
 
 /*========== EXPORTS ==========*/
-export default function Modal({ showForm, setShowForm, children, ...props }) {
 
-  if (!showForm) return null;
+/** Modal component that takes:
+ *
+ * @param {boolean} showModal - state boolean that controls if the Modal is shown
+ * @param {function} setShowModal - modifies showModal to either true or false
+ * @param {*} children - anything that is contained inside the ListItem component
+ * @prop {*} props - any property or tag that needs to be passed to the component
+ * @returns {Component} configured ListItem component
+ */
+export default function Modal({ showModal, setShowModal, children, ...props }) {
+
+  if (!showModal) return null;
 
 /*----- STATE HOOKS -----*/
 
@@ -20,7 +29,7 @@ export default function Modal({ showForm, setShowForm, children, ...props }) {
 
 /*----- RENDERER -----*/
   return ReactDOM.createPortal(
-    <ModalBG onClick={() => setShowForm(false)}>
+    <ModalBG onClick={() => setShowModal(false)}>
       <form onClick={event => event.stopPropagation()} {...props}>
         {children}
       </form>
