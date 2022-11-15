@@ -14,16 +14,16 @@ import Modal from '../components/Modal.jsx';
 
 /* TODO: Create a page/view that allows the end user to search the current database for a specific ingredient and add a new ingredient if it is not in the database
 
-  * Should be able to search current database by ingredient
-  * should support searching by:
-  * Ingredient Name
-  * Ingredient Brand
-  * Ingredient Barcode / UPC
-  * Ingredient Category
-  * Should be able to add new ingredient to database if not already present
-  * Supports scanning of nutrition label to auto fill nutrition information
-  * Should request the end user scan the ingredients barcode during adding process
-  * Should provide list of food categories for ingredient to be added into
+  - [x] Should be able to search current database by ingredient
+  - [] Should support searching by:
+    - [x] Ingredient Name
+    - [] Ingredient Brand
+    - [] Ingredient Barcode / UPC
+    - [] Ingredient Category
+  - [] Should be able to add new ingredient to database if not already present
+  - [] Supports scanning of nutrition label to auto fill nutrition information
+  - [] Should request the end user scan the ingredients barcode during adding process
+  - [] Should provide list of food categories for ingredient to be added into
 */
 
 export default function AddIngredient({ children, ...props }) {
@@ -31,6 +31,7 @@ export default function AddIngredient({ children, ...props }) {
 /*----- STATE HOOKS -----*/
   const [searchTerm, setSearchTerm] = useState('');
   const [ingredients, setIngredients] = useState();
+  const [filteredIngredients, setFilteredIngredients] = useState();
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [filterFoodCategories, setFilterFoodCategories] = useState([]);
@@ -41,7 +42,10 @@ export default function AddIngredient({ children, ...props }) {
   useEffect(() => {
     if (searchTerm && searchTerm.length > 0) {
       axios.get('ingredient/'+ searchTerm)
-      .then(ingredientSearch => setIngredients(ingredientSearch.data))
+      .then(ingredientSearch => {
+        setIngredients(ingredientSearch.data)
+        setFilteredIngredients(ingredientSearch.data)
+      })
       .catch(err => console.error(err))
     }
   }, [searchTerm])
@@ -70,11 +74,34 @@ const handleFilterFoodCategories = () => {
 
 }
 
-const handleFilterBrands = () => {
-
+const handleFilterBrands = ({ target: {value} }) => {
+  const filteredByBrand = ingredients.filter(ingredient => ingredient.brand === value);
+  setFilteredIngredients(filteredByBrand);
 }
 
 /*----- RENDER METHODS -----*/
+
+const renderFilterOptions = () => {
+  const brandFilter = {}
+
+  if (ingredients && ingredients.length > 0) {
+    ingredients.map(ingredient => {
+      brandFilter[ingredient.brand] = ingredient.brand;
+    })
+
+    return Object.keys(brandFilter).map((brand, index) => {
+      return (
+        <option
+          key={'brand' + index}
+          id={brand + 'Filter'}
+          value={brand}
+        >
+          {brand}
+        </option>
+      )
+    })
+  }
+}
 
 const renderFilters = () => {
   if (searchTerm && searchTerm.length > 0) {
@@ -83,16 +110,19 @@ const renderFilters = () => {
         <p>Filter By:</p>
         <Label htmlFor='filterBrands'>
           Brand:
-          <Input
+          <select
             id='filterBrands'
             name='Brand'
+            onChange={handleFilterBrands}
           >
-          </Input>
+            <option></option>
+            {renderFilterOptions()}
+          </select>
           <Button
             id='filterBrandsButton'
-            onClick={handleFilterBrands}
+            onClick={() => setFilteredIngredients(ingredients)}
           >
-            Apply
+            Clear
           </Button>
         </Label>
         <Button onClick={handleFilterFoodCategories}>Category</Button>
@@ -104,8 +134,8 @@ const renderFilters = () => {
 }
 
 const renderIngredients = () => {
-  if (ingredients && ingredients.length > 0) {
-    return ingredients.map((ingredient, index) => {
+  if (filteredIngredients && filteredIngredients.length > 0) {
+    return filteredIngredients.map((ingredient, index) => {
       return (
         <ListItem
           key={'ingredient' + index}
@@ -120,7 +150,7 @@ const renderIngredients = () => {
         </ListItem>
       )
     })
-  } else if (ingredients && ingredients.length === 0) {
+  } else if (filteredIngredients && filteredIngredients.length === 0) {
     return <h4>No Ingredients that matched your search could be found</h4>
   } else {
     return <></>
