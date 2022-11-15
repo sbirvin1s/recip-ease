@@ -1,5 +1,5 @@
 /*========== EXTERNAL MODULES ==========*/
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 /*========== INTERNAL MODULES ==========*/
@@ -17,7 +17,7 @@ import Modal from '../components/Modal.jsx';
   - [x] Should be able to search current database by ingredient
   - [] Should support searching by:
     - [x] Ingredient Name
-    - [] Ingredient Brand
+    - [x] Ingredient Brand
     - [] Ingredient Barcode / UPC
     - [] Ingredient Category
   - [] Should be able to add new ingredient to database if not already present
@@ -34,9 +34,6 @@ export default function AddIngredient({ children, ...props }) {
   const [filteredIngredients, setFilteredIngredients] = useState();
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [filterFoodCategories, setFilterFoodCategories] = useState([]);
-  const [filterBrands, setFilterBrands] = useState([]);
-
 
 /*----- LIFECYCLE METHODS -----*/
   useEffect(() => {
@@ -51,133 +48,177 @@ export default function AddIngredient({ children, ...props }) {
   }, [searchTerm])
 
 /*----- EVENT HANDLERS -----*/
-const handleSelect = ingredient => {
-  setSelectedIngredients(prev => ([
-    ...prev, ingredient
-  ]));
-}
+  const handleSelect = ingredient => {
+    setSelectedIngredients(prev => ([
+      ...prev, ingredient
+    ]));
+  }
 
-const handleRemove = ingredient => {
-  const currentIngredients = [...selectedIngredients];
-  currentIngredients.splice(ingredient, 1);
-  setSelectedIngredients(currentIngredients);
-}
+  const handleRemove = ingredient => {
+    const currentIngredients = [...selectedIngredients];
+    currentIngredients.splice(ingredient, 1);
+    setSelectedIngredients(currentIngredients);
+  }
 
-const handleScan = () => {
+  const handleScan = () => {
 
-  setSelectedIngredients(prev => ([
-    ...prev, ingredient
-  ]));
-}
+    setSelectedIngredients(prev => ([
+      ...prev, ingredient
+    ]));
+  }
 
-const handleFilterFoodCategories = () => {
+  const handleFilterFoodCategories = ({ target: {value} }) => {
+    const filteredByCategories = ingredients.filter(ingredient => ingredient.food_category === value);
+    setFilteredIngredients(filteredByCategories);
+  }
 
-}
-
-const handleFilterBrands = ({ target: {value} }) => {
-  const filteredByBrand = ingredients.filter(ingredient => ingredient.brand === value);
-  setFilteredIngredients(filteredByBrand);
-}
+  const handleFilterBrands = ({ target: {value} }) => {
+    const filteredByBrand = ingredients.filter(ingredient => ingredient.brand === value);
+    setFilteredIngredients(filteredByBrand);
+  }
 
 /*----- RENDER METHODS -----*/
 
-const renderFilterOptions = () => {
-  const brandFilter = {}
+  const renderFilterOptions = () => {
+    const brandFilter = {}
 
-  if (ingredients && ingredients.length > 0) {
-    ingredients.map(ingredient => {
-      brandFilter[ingredient.brand] = ingredient.brand;
-    })
+    if (ingredients && ingredients.length > 0) {
+      ingredients.map(ingredient => {
+        brandFilter[ingredient.brand] = ingredient.brand;
+      })
 
-    return Object.keys(brandFilter).map((brand, index) => {
-      return (
-        <option
-          key={'brand' + index}
-          id={brand + 'Filter'}
-          value={brand}
-        >
-          {brand}
-        </option>
-      )
-    })
-  }
-}
-
-const renderFilters = () => {
-  if (searchTerm && searchTerm.length > 0) {
-    return (
-      <>
-        <p>Filter By:</p>
-        <Label htmlFor='filterBrands'>
-          Brand:
-          <select
-            id='filterBrands'
-            name='Brand'
-            onChange={handleFilterBrands}
+      return Object.keys(brandFilter).map((brand, index) => {
+        return (
+          <option
+            key={'brand' + index}
+            id={brand + 'Filter'}
+            value={brand}
           >
-            <option></option>
-            {renderFilterOptions()}
-          </select>
+            {brand}
+          </option>
+        )
+      })
+    }
+  }
+
+  const renderFilterCategoriesOptions = () => {
+    const categoryFilter = {}
+
+    if (ingredients && ingredients.length > 0) {
+      ingredients.map(ingredient => {
+        categoryFilter[ingredient.food_category] = ingredient.food_category;
+      })
+
+      return Object.keys(categoryFilter).map((category, index) => {
+        return (
+          <option
+            key={'category' + index}
+            id={category + 'Filter'}
+            value={category}
+          >
+            {category}
+          </option>
+        )
+      })
+    }
+  }
+
+  const renderFilters = () => {
+    const brandRef = useRef();
+    const categoryRef = useRef();
+
+    if (searchTerm && searchTerm.length > 0) {
+      return (
+        <>
+          <p>Filter By:</p>
+          <Label htmlFor='filterBrands'>
+            Brand:
+            <select
+              id='filterBrands'
+              name='Brand'
+              onChange={handleFilterBrands}
+              defaultValue=''
+              ref={brandRef}
+            >
+              <option></option>
+              {renderFilterOptions()}
+            </select>
+          </Label>
+          <Label htmlFor='filterCategories'>
+            Food Category:
+            <select
+              id='filterCategories'
+              name='Category'
+              onChange={handleFilterFoodCategories}
+              defaultValue=''
+              ref={categoryRef}
+            >
+              <option></option>
+              {renderFilterCategoriesOptions()}
+            </select>
+          </Label>
           <Button
-            id='filterBrandsButton'
-            onClick={() => setFilteredIngredients(ingredients)}
+            id='filterClearButton'
+            onClick={() => {
+              brandRef.current.value = null;
+              categoryRef.current.value = null;
+              setFilteredIngredients(ingredients);
+            }}
           >
             Clear
           </Button>
-        </Label>
-        <Button onClick={handleFilterFoodCategories}>Category</Button>
-      </>
-    )
-  } else {
-    return <></>
-  }
-}
-
-const renderIngredients = () => {
-  if (filteredIngredients && filteredIngredients.length > 0) {
-    return filteredIngredients.map((ingredient, index) => {
-      return (
-        <ListItem
-          key={'ingredient' + index}
-          id={'ingredient' + index}
-          ingredient={ingredient}
-          enableButton={true}
-          buttonValue={'ADD'}
-          buttonClick={() => handleSelect(ingredient)}
-        >
-          <p>{ingredient.ingredient}</p>
-          <p>{ingredient.brand} {ingredient.food_category}</p>
-        </ListItem>
+        </>
       )
-    })
-  } else if (filteredIngredients && filteredIngredients.length === 0) {
-    return <h4>No Ingredients that matched your search could be found</h4>
-  } else {
-    return <></>
+    } else {
+      return <></>
+    }
   }
-}
 
-const renderSelected = () => {
-  if (selectedIngredients && selectedIngredients.length) {
-    return selectedIngredients.map((ingredient, index) => {
-      return (
-        <ListItem
-          key={'selectedIngredient' + index}
-          id={'selectedIngredient' + index}
-          ingredient={ingredient}
-          enableButton={true}
-          buttonValue={'X'}
-          buttonClick={() => handleRemove(ingredient)}
-        >
-          <p>{ingredient.ingredient}</p>
-          <p>{ingredient.brand} {ingredient.food_category}</p>
-        </ListItem>
-      )
-    })
-  } else {
-    return <></>
+  const renderIngredients = () => {
+    if (filteredIngredients && filteredIngredients.length > 0) {
+      return filteredIngredients.map((ingredient, index) => {
+        return (
+          <ListItem
+            key={'ingredient' + index}
+            id={'ingredient' + index}
+            ingredient={ingredient}
+            enableButton={true}
+            buttonValue={'ADD'}
+            buttonClick={() => handleSelect(ingredient)}
+          >
+            <p>{ingredient.ingredient}</p>
+            <p>{ingredient.brand} {ingredient.food_category}</p>
+          </ListItem>
+        )
+      })
+    } else if (filteredIngredients && filteredIngredients.length === 0) {
+      return <h4>No Ingredients that matched your search could be found</h4>
+    } else {
+      return <></>
+    }
   }
-}
+
+  const renderSelected = () => {
+    if (selectedIngredients && selectedIngredients.length) {
+      return selectedIngredients.map((ingredient, index) => {
+        return (
+          <ListItem
+            key={'selectedIngredient' + index}
+            id={'selectedIngredient' + index}
+            ingredient={ingredient}
+            enableButton={true}
+            buttonValue={'X'}
+            buttonClick={() => handleRemove(ingredient)}
+          >
+            <p>{ingredient.ingredient}</p>
+            <p>{ingredient.brand} {ingredient.food_category}</p>
+          </ListItem>
+        )
+      })
+    } else {
+      return <></>
+    }
+  }
 
 /*----- RENDERER -----*/
   return (
