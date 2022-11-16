@@ -1,9 +1,9 @@
 /*========== EXTERNAL MODULES ==========*/
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 /*========== INTERNAL MODULES ==========*/
-import { Input } from '../../dist/stylesheets';
+import Input from './Input.jsx';
 
 /*========== EXPORTS ==========*/
 
@@ -19,29 +19,28 @@ export default function SearchBar({
   searchState,
    ...props
   }) {
-  const searchRef = useRef();
-  /*----- STATE HOOKS -----*/
+
+    /*----- STATE HOOKS -----*/
+    const [searchTerm, setSearchTerm] = useState();
 
   /*----- LIFECYCLE METHODS -----*/
 
   /*----- EVENT HANDLERS -----*/
   const handleSubmit = event => {
     event.preventDefault();
-    searchState(searchRef.current.value);
+    searchState(searchTerm);
   }
+
+  const handleChange = ({ target:{value} }) => setSearchTerm(value);
 
   /*----- RENDER METHODS -----*/
 
   /*----- RENDERER -----*/
   return (
     <Bar role='search'>
-      <label htmlFor='search'/>
       <Input
-        style={{
-          width:'100%',
-        }}
-        ref={searchRef}
-        id='search'
+        name={'search'}
+        onChange={handleChange}
         {...props}
       />
       {children}

@@ -88,6 +88,7 @@ const Item = styled.li`
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
+  scroll-snap-stop: always;
   width: 80vw;
   min-width: 150px;
   max-width: 1000px;

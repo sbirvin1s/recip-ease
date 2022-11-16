@@ -3,7 +3,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 /*========== INTERNAL MODULES ==========*/
-import { Row, Page, Label, Input } from '../../dist/stylesheets';
+import { Feed, Row, Page, Label } from '../../dist/stylesheets';
+import Input from '../components/Input.jsx';
 import Button from '../components/Button.jsx';
 import SearchBar from '../components/SearchBar.jsx';
 import ListItem from '../components/ListItem.jsx';
@@ -19,7 +20,7 @@ import Modal from '../components/Modal.jsx';
     - [x] Ingredient Name
     - [x] Ingredient Brand
     - [] Ingredient Barcode / UPC
-    - [] Ingredient Category
+    - [x] Ingredient Category
   - [] Should be able to add new ingredient to database if not already present
   - [] Supports scanning of nutrition label to auto fill nutrition information
   - [] Should request the end user scan the ingredients barcode during adding process
@@ -33,6 +34,7 @@ export default function AddIngredient({ children, ...props }) {
   const [ingredients, setIngredients] = useState();
   const [filteredIngredients, setFilteredIngredients] = useState();
   const [selectedIngredients, setSelectedIngredients] = useState([]);
+  const [newIngredient, setNewIngredient] = useState();
   const [showModal, setShowModal] = useState(false);
 
 /*----- LIFECYCLE METHODS -----*/
@@ -61,10 +63,10 @@ export default function AddIngredient({ children, ...props }) {
   }
 
   const handleScan = () => {
-
-    setSelectedIngredients(prev => ([
-      ...prev, ingredient
-    ]));
+    window.alert('Placeholder: Launches Camera View');
+    // setSelectedIngredients(prev => ([
+    //   ...prev, ingredient
+    // ]));
   }
 
   const handleFilterFoodCategories = ({ target: {value} }) => {
@@ -77,8 +79,14 @@ export default function AddIngredient({ children, ...props }) {
     setFilteredIngredients(filteredByBrand);
   }
 
-/*----- RENDER METHODS -----*/
+  const updateNewIngredient = ({ target: {name, value} }) => {
+    setNewIngredient(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
 
+/*----- RENDER METHODS -----*/
   const renderFilterOptions = () => {
     const brandFilter = {}
 
@@ -224,25 +232,57 @@ export default function AddIngredient({ children, ...props }) {
   return (
     <>
       <SearchBar placeholder='Search . . .' searchState={setSearchTerm} type='text'>
-        <Button onClick={handleScan}>[||||]</Button>
       </SearchBar>
+      <Button onClick={handleScan}>[||||]</Button>
       {renderFilters()}
+      <Button onClick={() => setShowModal(true)}>Add Ingredient</Button>
       {renderSelected()}
-      <Row>
-        <Button onClick={() => setShowModal(true)}>Add Ingredient</Button>
-      </Row>
-      <Page style={{
-        postition: 'absolute',
-        bottom: '800px',
-        maxHeight:'80vh',
-        minHeight:'50vh',
-        overflow: 'scroll',
-      }}>
+      <Page
+        style={{
+          position: 'absolute',
+          bottom: '40px',
+          maxHeight:'60vh',
+          minHeight:'40vh',
+          overflow: 'scroll',
+        }}
+      >
         {renderIngredients()}
       </Page>
       <Modal showModal={showModal} setShowModal={setShowModal}>
-        <h1>Add Ingredients</h1>
-        <Button onClick={handleScan}>Scan</Button>
+        <div
+          style={{
+            backgroundColor: '#fff',
+          }}
+        >
+          <h1>Add Ingredients</h1>
+          <Button onClick={handleScan}>Scan</Button>
+            <Input onChange={updateNewIngredient} placeholder='Corn' labelName={'ingredientName'} name={'ingredientName'}/>
+            <Input onChange={updateNewIngredient} placeholder='Green Giant' labelName={'brand'} name={'brand'}/>
+            <Input onChange={updateNewIngredient} placeholder='Canned Goods' labelName={'foodCategory'} name={'foodCategory'}/>
+            <Input onChange={updateNewIngredient} placeholder='91' labelName={'servingSize'} name={'servingSize'}/>
+            <Input onChange={updateNewIngredient} placeholder='g' labelName={'servingUnit'} name={'servingUnit'}/>
+            <Input onChange={updateNewIngredient} placeholder='5' labelName={'servingPerContainer'} name={'servingPerContainer'}/>
+            <Input onChange={updateNewIngredient} placeholder='120' labelName={'calories'} name={'calories'}/>
+            <Input onChange={updateNewIngredient} placeholder='1.5' labelName={'totalFat'} name={'totalFat'}/>
+            <Input onChange={updateNewIngredient} placeholder='0' labelName={'satFat'} name={'satFat'}/>
+            <Input onChange={updateNewIngredient} placeholder='0' labelName={'transFat'} name={'transFat'}/>
+            <Input onChange={updateNewIngredient} placeholder='0' labelName={'polyUnSatFat'} name={'polyUnSatFat'}/>
+            <Input onChange={updateNewIngredient} placeholder='0' labelName={'monoUnSatFat'} name={'monoUnSatFat'}/>
+            <Input onChange={updateNewIngredient} placeholder='10' labelName={'cholesterol'} name={'cholesterol'}/>
+            <Input onChange={updateNewIngredient} placeholder='105' labelName={'sodium'} name={'sodium'}/>
+            <Input onChange={updateNewIngredient} placeholder='27' labelName={'totalCarbs'} name={'totalCarbs'}/>
+            <Input onChange={updateNewIngredient} placeholder='0' labelName={'fiber'} name={'fiber'}/>
+            <Input onChange={updateNewIngredient} placeholder='20' labelName={'sugar'} name={'sugar'}/>
+            <Input onChange={updateNewIngredient} placeholder='0' labelName={'protein'} name={'protein'}/>
+            <Input onChange={updateNewIngredient} placeholder='0' labelName={'vitaminA'} name={'vitaminA'}/>
+            <Input onChange={updateNewIngredient} placeholder='0' labelName={'vitaminC'} name={'vitaminC'}/>
+            <Input onChange={updateNewIngredient} placeholder='0' labelName={'vitaminD'} name={'vitaminD'}/>
+            <Input onChange={updateNewIngredient} placeholder='0' labelName={'calcium'} name={'calcium'}/>
+            <Input onChange={updateNewIngredient} placeholder='0' labelName={'iron'} name={'iron'}/>
+            <Input onChange={updateNewIngredient} placeholder='0' labelName={'potassium'} name={'potassium'}/>
+            <Button>Submit</Button>
+          <Button>ADD</Button>
+        </div>
       </Modal>
     </>
   )
