@@ -1,6 +1,7 @@
 /*========== EXTERNAL MODULES ==========*/
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 
 /*========== INTERNAL MODULES ==========*/
 import { Feed, Row, Page, Label, Column } from '../../dist/stylesheets';
@@ -194,9 +195,9 @@ export default function AddIngredient({ children, ...props }) {
             buttonValue={'ADD'}
             buttonClick={() => handleSelect(ingredient)}
           >
-            <p>{ingredient.ingredient}</p>
-            <p>{ingredient.brand}</p>
-            <p>{ingredient.food_category}</p>
+            <IngredientName>{ingredient.ingredient}</IngredientName>
+            <IngredientInfo>{ingredient.brand}</IngredientInfo>
+            <IngredientInfo>{ingredient.food_category}</IngredientInfo>
           </ListItem>
         )
       })
@@ -219,9 +220,9 @@ export default function AddIngredient({ children, ...props }) {
             buttonValue={'X'}
             buttonClick={() => handleRemove(ingredient)}
           >
-            <p>{ingredient.ingredient}</p>
-            <p>{ingredient.brand}</p>
-            <p>{ingredient.food_category}</p>
+            <IngredientName>{ingredient.ingredient}</IngredientName>
+            <IngredientInfo>{ingredient.brand}</IngredientInfo>
+            <IngredientInfo>{ingredient.food_category}</IngredientInfo>
           </ListItem>
         )
       })
@@ -246,18 +247,14 @@ export default function AddIngredient({ children, ...props }) {
         <Button onClick={handleScan}>[||||]</Button>
       </Row>
       {renderFilters()}
-      {renderSelected()}
-      <Page
-        style={{
-          position: 'absolute',
-          bottom: '40px',
-          maxHeight:'60vh',
-          minHeight:'40vh',
-          overflow: 'scroll',
-        }}
-      >
-        {renderIngredients()}
-      </Page>
+      <IngredientFeed>
+        <SelectedIngredientList>
+          {renderSelected()}
+        </SelectedIngredientList>
+        <IngredientList>
+          {renderIngredients()}
+        </IngredientList>
+      </IngredientFeed>
       <Modal showModal={showModal} setShowModal={setShowModal}>
         <Row>
           <h1>Add Ingredients</h1>
@@ -347,3 +344,31 @@ export default function AddIngredient({ children, ...props }) {
 
 
 /*========== STYLES ==========*/
+const IngredientName = styled.p`
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+`;
+
+const IngredientInfo = styled.p`
+  font-size: 0.8rem;
+  margin: 0;
+  padding: 0;
+`;
+
+const IngredientFeed = styled(Page)`
+  height: 75vh;
+`;
+
+const SelectedIngredientList = styled(Page)`
+  max-height: 50%;
+  min-height: 25%;
+  margin: 15px;
+  overflow: scroll;
+`;
+
+const IngredientList = styled(Page)`
+  max-height: 100%;
+  min-height: 50%;
+  overflow: scroll;
+`;

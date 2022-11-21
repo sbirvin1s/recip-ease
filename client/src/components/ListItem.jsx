@@ -92,6 +92,7 @@ const Item = styled.li`
   width: 80vw;
   min-width: 150px;
   max-width: 1000px;
+  margin: 4px;
 `;
 
 const Checkbox = styled.input`
