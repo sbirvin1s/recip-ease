@@ -1,9 +1,10 @@
 /*========== EXTERNAL MODULES ==========*/
 import React from 'react';
 import ReactDOM from 'react-dom';
+import styled from 'styled-components';
 
 /*========== INTERNAL MODULES ==========*/
-import { ModalBG } from '../../dist/stylesheets';
+import { ModalBG, Button } from '../../dist/stylesheets';
 
 /*========== EXPORTS ==========*/
 
@@ -27,10 +28,22 @@ export default function Modal({
 /*----- RENDERER -----*/
   return ReactDOM.createPortal(
     <ModalBG onClick={() => setShowModal(false)}>
-      <form onClick={event => event.stopPropagation()} {...props}>
-        <button role='close modal' onClick={() => {setShowModal(false)}}>X</button>
+      <Button
+        role='close modal'
+        onClick={() => {setShowModal(false)}}
+        style={{
+          alignSelf: 'end',
+          marginRight: '5.5vw',
+        }}
+      >
+        X
+      </Button>
+      <ModalForm
+        onClick={event => event.stopPropagation()}
+        {...props}
+      >
         {children}
-      </form>
+      </ModalForm>
     </ModalBG>,
     document.getElementById('portal')
   )
@@ -38,3 +51,9 @@ export default function Modal({
 
 
 /*========== STYLES ==========*/
+const ModalForm = styled.form`
+  background-color: #fff;
+  height: 90vh;
+  width: 90vw;
+  overflow: scroll;
+`;

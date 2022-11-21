@@ -23,10 +23,12 @@ export default function Input({
 
   /*----- RENDERER -----*/
   return (
-    <label
+    <LabelStyle
       htmlFor={name}
     >
-      {labelName}
+      <InputTitle>
+        {labelName}
+      </InputTitle>
       <InputStyle
         id={name}
         name={name}
@@ -34,7 +36,7 @@ export default function Input({
       >
         {children}
       </InputStyle>
-    </label>
+    </LabelStyle>
   )
 }
 
@@ -42,17 +44,34 @@ export default function Input({
 
 
 /*========== STYLES ==========*/
-const InputStyle = styled.input`
+const LabelStyle = styled.label`
+  position: relative;
   border: solid;
   border-width: thin;
-  border-top: none;
-  border-left: none;
-  border-right: none;
   outline: none;
-  /* font-size: 12pt; */
+  background-color: transparent;
+  border-radius: 5px;
+  margin: 12px;
+`;
+
+const InputTitle = styled.div`
+  position: absolute;
+  top: -0.5rem;
+  left: 0.5rem;
+  font-weight: light;
+  padding-left: 4px;
+  padding-right: 4px;
+  background-color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 0.9rem;
+`;
+
+const InputStyle = styled.input`
+  border: none;
+  outline: none;
   font-weight: light;
   background-color: transparent;
-  padding: 2px;
-  margin: 10px;
+  padding: 5px;
   text-align: center;
 `;

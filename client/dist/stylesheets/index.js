@@ -15,9 +15,9 @@ body {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   color: #171816;
   background-color: #fff;
-  /* margin: 0;
-  padding: 0; */
-  /* overflow: hidden; */
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   &::-webkit-scrollbar {
@@ -49,6 +49,14 @@ h6 {
 }
 
 p {
+  font-size: 1rem;
+}
+
+select {
+  font-size: 1rem;
+}
+
+button {
   font-size: 1rem;
 }
 
@@ -108,6 +116,7 @@ export const Button = styled.button``;
 export const ModalBG = styled.div`
   position: fixed;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   top: 0;
@@ -125,7 +134,6 @@ export const ProfileHeader = styled.header`
 
 export const Nav = styled.nav`
   position: absolute;
-  /* background-color: #000; */
   bottom: 0px;
   display: flex;
   margin-bottom: 0.25em;
@@ -229,21 +237,21 @@ export const Form = styled.form`
 =====================================
 */
 
-export const Input = styled.input`
-  border: solid;
-  border-width: thin;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  outline: none;
-  font-size: 12pt;
-  font-weight: light;
-  background-color: transparent;
-  width: 3em;
-  padding: 2px;
-  margin: 10px;
-  text-align: center;
-`;
+// export const Input = styled.input`
+//   border: solid;
+//   border-width: thin;
+//   border-top: none;
+//   border-left: none;
+//   border-right: none;
+//   outline: none;
+//   font-size: 12pt;
+//   font-weight: light;
+//   background-color: transparent;
+//   width: 3em;
+//   padding: 2px;
+//   margin: 10px;
+//   text-align: center;
+// `;
 
 /*
 =====================================
