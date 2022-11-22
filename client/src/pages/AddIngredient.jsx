@@ -4,7 +4,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 /*========== INTERNAL MODULES ==========*/
-import { Feed, Row, Page, Label, Column } from '../../dist/stylesheets';
+import { Row, Page, Label, Column } from '../../dist/stylesheets';
 import Input from '../components/Input.jsx';
 import Button from '../components/Button.jsx';
 import SearchBar from '../components/SearchBar.jsx';
@@ -23,6 +23,10 @@ import Modal from '../components/Modal.jsx';
     - [] Ingredient Barcode / UPC
     - [x] Ingredient Category
   - [] Should be able to add new ingredient to database if not already present
+    - [] Upon submission of the new ingredient form:
+      - [] should submit to database
+      - [] return added item
+      - [] add new item to selected items list
   - [] Supports scanning of nutrition label to auto fill nutrition information
   - [] Should request the end user scan the ingredients barcode during adding process
   - [] Should provide list of food categories for ingredient to be added into
@@ -107,6 +111,10 @@ export default function AddIngredient({ children, ...props }) {
       ...prev,
       [name]: value
     }))
+  }
+
+  const handleSubmit = () => {
+    // axios.post()
   }
 
 /*----- RENDER METHODS -----*/
@@ -246,8 +254,11 @@ export default function AddIngredient({ children, ...props }) {
             buttonClick={() => handleRemove(ingredient)}
           >
             <IngredientName>{ingredient.ingredient}</IngredientName>
-            <IngredientInfo>{ingredient.brand}</IngredientInfo>
-            <IngredientInfo>{ingredient.food_category}</IngredientInfo>
+            <IngredientInfo>
+              <IngredientSubtext>{'🔥 ' + Math.floor(ingredient.calories)}</IngredientSubtext>
+              <IngredientSubtext>{ingredient.brand}</IngredientSubtext>
+              <IngredientSubtext>{ingredient.food_category}</IngredientSubtext>
+            </IngredientInfo>
           </ListItem>
         )
       })
@@ -378,8 +389,7 @@ export default function AddIngredient({ children, ...props }) {
             <Input onChange={updateNewIngredient} placeholder='0' labelName={'Potassium'} name={'potassium'}/>
         </Column>
         <Row>
-          <Button>Submit</Button>
-          <Button>ADD</Button>
+          <Button onClick={handleSubmit}>Submit</Button>
         </Row>
       </Modal>
       <Modal role='show selected ingredients'
