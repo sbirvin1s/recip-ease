@@ -37,6 +37,7 @@ export default function AddIngredient({ children, ...props }) {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState();
   const [showModal, setShowModal] = useState(false);
+  const [showSelectedIngredients, setShowSelectedIngredients] = useState(false);
 
 /*----- LIFECYCLE METHODS -----*/
   useEffect(() => {
@@ -58,6 +59,7 @@ export default function AddIngredient({ children, ...props }) {
   }
 
   const handleRemove = ingredient => {
+    event.preventDefault();
     const currentIngredients = [...selectedIngredients];
     currentIngredients.splice(ingredient, 1);
     setSelectedIngredients(currentIngredients);
@@ -231,6 +233,23 @@ export default function AddIngredient({ children, ...props }) {
     }
   }
 
+  const renderRecipeButton = () => {
+    return (
+      <>
+        <Button
+        onClick={() => setShowSelectedIngredients(true)}
+        style={{
+          position: 'fixed',
+          right: '140px',
+          bottom: '40px',
+        }}
+      >
+        Show Recipe List
+      </Button>
+      </>
+    )
+  }
+
 /*----- RENDERER -----*/
   return (
     <>
@@ -248,14 +267,14 @@ export default function AddIngredient({ children, ...props }) {
       </Row>
       {renderFilters()}
       <IngredientFeed>
-        <SelectedIngredientList>
-          {renderSelected()}
-        </SelectedIngredientList>
         <IngredientList>
           {renderIngredients()}
         </IngredientList>
       </IngredientFeed>
-      <Modal showModal={showModal} setShowModal={setShowModal}>
+      <Modal role='add ingredients'
+        showModal={showModal}
+        setShowModal={setShowModal}
+      >
         <Row>
           <h1>Add Ingredients</h1>
           <Button onClick={handleScan}>Scan</Button>
@@ -326,6 +345,14 @@ export default function AddIngredient({ children, ...props }) {
           <Button>ADD</Button>
         </Row>
       </Modal>
+      <Modal role='show selected ingredients'
+        showModal={showSelectedIngredients}
+        setShowModal={setShowSelectedIngredients}
+        selectedIngredients={selectedIngredients}
+        setSelectedIngredients={setSelectedIngredients}
+      >
+        {renderSelected()}
+      </Modal>
       <Button
         onClick={() => setShowModal(true)}
         style={{
@@ -336,6 +363,7 @@ export default function AddIngredient({ children, ...props }) {
       >
         Add Ingredient
       </Button>
+      {renderRecipeButton()}
     </>
   )
 }

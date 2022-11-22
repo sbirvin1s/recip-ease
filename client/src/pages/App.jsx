@@ -1,6 +1,7 @@
 /*========== EXTERNAL MODULES ==========*/
 import React, {useState, useEffect} from 'react';
 import { matchPath, Link, Outlet, redirect } from 'react-router-dom';
+import styled from 'styled-components';
 import axios from 'axios';
 
 /*========== INTERNAL MODULES ==========*/
@@ -47,7 +48,9 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-        <Header><h5>Profile</h5></Header>
+        <Header>
+          <ProfilePlaceholder>P</ProfilePlaceholder>
+        </Header>
         <Outlet />
         <NavBar> <Link to={'/'}>Home</Link> <Link to={'Recipes'}>Recipes</Link> <Link to={'AddRecipe'}>Add Recipe</Link> <Link to={'ShoppingList'}>Shopping List</Link> </NavBar>
     </>
@@ -57,3 +60,16 @@ export default function App() {
 
 
 /*========== STYLES ==========*/
+const ProfilePlaceholder = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  color: #fff;
+  font-size: 14pt;
+  border-radius: 99%;
+  height: 50px;
+  width: 50px;
+  background-color: #979797;
+`;
