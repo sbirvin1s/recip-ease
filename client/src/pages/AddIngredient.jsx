@@ -218,8 +218,11 @@ export default function AddIngredient({ children, ...props }) {
             buttonClick={() => handleSelect(ingredient)}
           >
             <IngredientName>{ingredient.ingredient}</IngredientName>
-            <IngredientInfo>{ingredient.brand}</IngredientInfo>
-            <IngredientInfo>{ingredient.food_category}</IngredientInfo>
+            <IngredientInfo>
+              <IngredientSubtext>{'🔥 ' + Math.floor(ingredient.calories)}</IngredientSubtext>
+              <IngredientSubtext>{ingredient.brand}</IngredientSubtext>
+              <IngredientSubtext>{ingredient.food_category}</IngredientSubtext>
+            </IngredientInfo>
           </ListItem>
         )
       })
@@ -412,14 +415,19 @@ const IngredientName = styled.p`
   padding: 0;
 `;
 
-const IngredientInfo = styled.p`
+const IngredientInfo = styled(Row)`
+  justify-content: space-evenly;
+`;
+
+const IngredientSubtext = styled.p`
   font-size: 0.8rem;
   margin: 0;
   padding: 0;
 `;
 
 const IngredientFeed = styled(Page)`
-  height: 60vh;
+  height: 70vh;
+  padding-top: 10px;
   overflow: scroll;
 `;
 
