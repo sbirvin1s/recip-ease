@@ -73,20 +73,13 @@ Additional workflow information can be found here: [Git Feature Branch Workflow]
  <br/>
 <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/webpack?style=flat-square" />
  <br/>
-<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/babel?style=flat-square"/>
- <br/>
 <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/react?style=flat-square" />
  <br/>
 <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/axios?style=flat-square"/>
  <br/>
 <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/express?style=flat-square" />
  <br/>
-<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/mongoose?style=flat-square" />
- <br/>
 <img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/styled-components?style=flat-square" />
- <br/>
-<img src="https://img.shields.io/github/package-json/dependency-version/sbirvin1s/recip-ease/@mui/material?style=flat-square" />
-</div>
 
  ---
 
