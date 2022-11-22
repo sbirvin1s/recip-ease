@@ -24,7 +24,7 @@
 
 ## :computer: How can I contribute?
 
-#### Start with the main branch
+#### Start with the dev branch
 All feature branches are created off the latest code state of a project. This guide assumes this is maintained and updated in the `dev` branch.
 
 ```jsx
