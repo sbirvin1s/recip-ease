@@ -53,7 +53,9 @@ export default function Modal({
 /*========== STYLES ==========*/
 const ModalForm = styled.form`
   background-color: #fff;
-  height: 90vh;
+  border-radius: 12px;
+  min-height: 40vh;
+  max-height: 90vh;
   width: 90vw;
   overflow: scroll;
 `;

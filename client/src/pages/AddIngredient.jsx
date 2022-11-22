@@ -38,6 +38,8 @@ export default function AddIngredient({ children, ...props }) {
   const [newIngredient, setNewIngredient] = useState();
   const [showModal, setShowModal] = useState(false);
   const [showSelectedIngredients, setShowSelectedIngredients] = useState(false);
+  const [showIngredientAdded, setShowIngredientAdded] = useState(false);
+  const [ingredientCount, setIngredientCount] = useState(0);
 
 /*----- LIFECYCLE METHODS -----*/
   useEffect(() => {
@@ -50,6 +52,24 @@ export default function AddIngredient({ children, ...props }) {
       .catch(err => console.error(err))
     }
   }, [searchTerm])
+
+  useEffect(() => {
+    if (selectedIngredients && selectedIngredients.length === 0) {
+      setShowSelectedIngredients(false);
+    }
+  }, [selectedIngredients])
+
+  useEffect(() => {
+    if (selectedIngredients.length > ingredientCount) {
+      setIngredientCount(prev => prev + 1);
+      setShowIngredientAdded(true);
+      setTimeout(() => setShowIngredientAdded(false), 2000)
+    }
+
+    if (selectedIngredients.length < ingredientCount) {
+      setIngredientCount(selectedIngredients.length);
+    }
+  }, [selectedIngredients])
 
 /*----- EVENT HANDLERS -----*/
   const handleSelect = ingredient => {
@@ -234,20 +254,35 @@ export default function AddIngredient({ children, ...props }) {
   }
 
   const renderRecipeButton = () => {
-    return (
-      <>
-        <Button
-        onClick={() => setShowSelectedIngredients(true)}
-        style={{
-          position: 'fixed',
-          right: '140px',
-          bottom: '40px',
-        }}
-      >
-        Show Recipe List
-      </Button>
-      </>
-    )
+    if (selectedIngredients && selectedIngredients.length > 0) {
+      return (
+        <>
+          <IngredientCounter>{selectedIngredients.length}</IngredientCounter>
+          <Button
+          onClick={() => setShowSelectedIngredients(true)}
+          style={{
+            position: 'fixed',
+            right: '140px',
+            bottom: '40px',
+          }}
+        >
+          Show Recipe List
+        </Button>
+        </>
+      )
+    } else {
+      return <></>
+    }
+  }
+
+  const renderIngredientAdded = () => {
+    if (showIngredientAdded) {
+      return (
+        <Alert>
+          <p>Ingredient Added</p>
+        </Alert>
+      )
+    }
   }
 
 /*----- RENDERER -----*/
@@ -267,10 +302,9 @@ export default function AddIngredient({ children, ...props }) {
       </Row>
       {renderFilters()}
       <IngredientFeed>
-        <IngredientList>
-          {renderIngredients()}
-        </IngredientList>
+        {renderIngredients()}
       </IngredientFeed>
+      {renderIngredientAdded()}
       <Modal role='add ingredients'
         showModal={showModal}
         setShowModal={setShowModal}
@@ -385,18 +419,35 @@ const IngredientInfo = styled.p`
 `;
 
 const IngredientFeed = styled(Page)`
-  height: 75vh;
-`;
-
-const SelectedIngredientList = styled(Page)`
-  max-height: 50%;
-  min-height: 25%;
-  margin: 15px;
+  height: 60vh;
   overflow: scroll;
 `;
 
-const IngredientList = styled(Page)`
-  max-height: 100%;
-  min-height: 50%;
-  overflow: scroll;
+const IngredientCounter = styled.div`
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  z-index: 4;
+  height: 20px;
+  width: 20px;
+  left: 20rem;
+  top: 64.5rem;
+  border-radius: 50%;
+  background-color: red;
+`;
+
+const Alert = styled.div`
+  position: fixed;
+  top: 60rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #8FC645;
+  border-radius: 8px;
+  z-index: 6;
+  height: 50px;
+  width: 75%;
 `;
