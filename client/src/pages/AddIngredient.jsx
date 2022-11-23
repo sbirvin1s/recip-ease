@@ -216,28 +216,45 @@ export default function AddIngredient({ children, ...props }) {
   const renderIngredients = () => {
     if (filteredIngredients && filteredIngredients.length > 0) {
       return filteredIngredients.map((ingredient, index) => {
+        const {
+          brand,
+          calories,
+          food_category,
+          serving_size,
+          serving_unit
+        } = ingredient;
+
+        let rounded_serving_size = Number.parseFloat(serving_size).toFixed(2);
+
+        if (Number(rounded_serving_size) === Math.floor(rounded_serving_size)) {
+          rounded_serving_size = Math.floor(rounded_serving_size);
+        }
+
         return (
           <ListItem
             key={'ingredient' + index}
             id={'ingredient' + index}
             ingredient={ingredient}
             enableButton={true}
-            buttonValue={'ADD'}
+            buttonValue={'+'}
             buttonClick={() => handleSelect(ingredient)}
           >
-            <IngredientName>{ingredient.ingredient}</IngredientName>
             <IngredientInfo>
-              <IngredientSubtext>{'🔥 ' + Math.floor(ingredient.calories)}</IngredientSubtext>
-              <IngredientSubtext>{ingredient.brand}</IngredientSubtext>
-              <IngredientSubtext>{ingredient.food_category}</IngredientSubtext>
+              <IngredientName>{ingredient.ingredient}</IngredientName>
+              <IngredientSubtext>{brand}</IngredientSubtext>
+            </IngredientInfo>
+            <IngredientInfo>
+              <IngredientSubtext>{'🔥 ' + Math.floor(calories)}</IngredientSubtext>
+              <IngredientSubtext>{rounded_serving_size + serving_unit}</IngredientSubtext>
+              <IngredientSubtext>{food_category}</IngredientSubtext>
             </IngredientInfo>
           </ListItem>
         )
       })
     } else if (filteredIngredients && filteredIngredients.length === 0) {
-      return <h4>No Ingredients that matched your search could be found</h4>
+      return <h4>No foods matching your search could be found</h4>
     } else {
-      return <></>
+      return <Column><h4>Search for a food in the database or add a new food to get started!</h4></Column>
     }
   }
 
@@ -426,7 +443,7 @@ const IngredientName = styled.p`
 `;
 
 const IngredientInfo = styled(Row)`
-  justify-content: space-evenly;
+  justify-content: space-between;
 `;
 
 const IngredientSubtext = styled.p`

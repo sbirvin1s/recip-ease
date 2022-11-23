@@ -1,10 +1,8 @@
 /*========== EXTERNAL MODULES ==========*/
 import React, { useRef } from 'react';
-import { render } from 'react-dom';
 import styled from 'styled-components';
 
 /*========== INTERNAL MODULES ==========*/
-import { Input } from '../../dist/stylesheets';
 import Button from './Button.jsx';
 
 /*========== EXPORTS ==========*/
@@ -20,6 +18,7 @@ import Button from './Button.jsx';
  * @props any property that should be passed to the component
  * @returns {Component} configured ListItem component
  */
+
 export default function ListItem({
   id,
   children,
@@ -29,15 +28,12 @@ export default function ListItem({
   buttonClick = false,
   ...props
 }) {
-  const listRef = useRef();
-/*----- STATE HOOKS -----*/
 
-/*----- LIFECYCLE METHODS -----*/
+  const listRef = useRef();
 
 /*----- EVENT HANDLERS -----*/
   const handleSubmit = event => {
     event.preventDefault();
-    // searchState(searchRef.current.value);
   }
 
   buttonClick = buttonClick || handleSubmit;
@@ -51,13 +47,8 @@ export default function ListItem({
   /> : <></>;
   }
 
-  const renderButton = () => {
-    return enableButton ? <Button
-    onClick={buttonClick}
-  >
-    {buttonValue}
-  </Button> : <></>;
-  }
+  const renderButton = () => enableButton ? <Button onClick={buttonClick}>{buttonValue}</Button> : <></>;
+
 /*----- RENDERER -----*/
   return (
     <Item>
@@ -89,7 +80,7 @@ const Item = styled.li`
   align-items: center;
   justify-content: space-evenly;
   scroll-snap-stop: always;
-  width: 80vw;
+  width: 85vw;
   min-width: 150px;
   max-width: 1000px;
   margin: 4px;
