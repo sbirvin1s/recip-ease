@@ -149,27 +149,27 @@ module.exports = {
    * @return {promise}
   */
   addIngredient: (newIngredient) => {
-    // const {
-      //   ingredient, brand, food_category,
-      //   upc, serving_size, serving_unit,
-      //   calories, total_fat, sat_fat,
-      //   trans_fat, poly_fat, mono_fat,
-      //   cholesterol, sodium, total_carbs,
-      //   fiber, sugar, protein,
-      //   vitamin_a, vitamin_c, vitamin_d,
-      //   calcium, iron, potassium
-      // } = newIngredient;
-      // return pool.query('INSERT INTO ingredients VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24);', [
-        //   ingredient, brand, food_category,
-        //   upc, serving_size, serving_unit,
-        //   calories, total_fat, sat_fat,
-    //   trans_fat, poly_fat, mono_fat,
-    //   cholesterol, sodium, total_carbs,
-    //   fiber, sugar, protein,
-    //   vitamin_a, vitamin_c, vitamin_d,
-    //   calcium, iron, potassium
-    // ])
-    return pool.query('INSERT INTO ingredients VALUES ($1);', [newIngredient]);
+    const {
+        ingredientName, brand, foodCategory,
+        barcode, servingSize, servingUnit,
+        calories, totalFat, satFat,
+        transFat, polyUnSatFat, monoUnSatFat,
+        cholesterol, sodium, totalCarbs,
+        fiber, sugar, protein,
+        vitaminA, vitaminC, vitaminD,
+        calcium, iron, potassium
+      } = newIngredient;
+
+      return pool.query('INSERT INTO ingredients (ingredient, brand, food_category, upc, serving_size, serving_unit, calories, total_fat, sat_fat, trans_fat, poly_fat, mono_fat, cholesterol, sodium, total_carbs, fiber, sugar, protein, vitamin_a, vitamin_c, vitamin_d, calcium, iron, potassium) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24);', [
+        ingredientName, brand, foodCategory,
+        barcode, servingSize, servingUnit,
+        calories, totalFat, satFat,
+        transFat, polyUnSatFat, monoUnSatFat,
+        cholesterol, sodium, totalCarbs,
+        fiber, sugar, protein,
+        vitaminA, vitaminC, vitaminD,
+        calcium, iron, potassium
+      ])
   },
 
 }

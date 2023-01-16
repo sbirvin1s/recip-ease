@@ -114,7 +114,12 @@ export default function AddIngredient({ children, ...props }) {
   }
 
   const handleSubmit = () => {
-    // axios.post()
+    event.preventDefault();
+    setShowModal(false);
+
+    axios.post('/ingredient/new', newIngredient)
+    .then(submitResponse => setNewIngredient({}))
+    .catch(err => console.error(err))
   }
 
 /*----- RENDER METHODS -----*/
@@ -364,6 +369,7 @@ export default function AddIngredient({ children, ...props }) {
                   <option value={'Dairy'}>Dairy</option>
                   <option value={'Poultry'}>Poultry</option>
                   <option value={'Red Meat'}>Red Meat</option>
+                  <option value={'TEST'}>TEST</option>
                 </select>
             </Label>
             <Row>
