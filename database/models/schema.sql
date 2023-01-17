@@ -223,7 +223,7 @@ CREATE TABLE IF NOT EXISTS journal (
       upc = branded_foods.gtin_upc,
       serving_unit = branded_foods.serving_unit,
       food_category = branded_foods.food_category,
-      serving_size = branded_foods.serving_size,
+      serving_size = branded_foods.serving_size
   FROM branded_foods
   WHERE ingredients.fdc_id = branded_foods.fdc_id;
 

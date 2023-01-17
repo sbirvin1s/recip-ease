@@ -24,7 +24,7 @@ import Modal from '../components/Modal.jsx';
     - [x] Ingredient Category
   - [] Should be able to add new ingredient to database if not already present
     - [] Upon submission of the new ingredient form:
-      - [] should submit to database
+      - [x] should submit to database
       - [] return added item
       - [] add new item to selected items list
   - [] Supports scanning of nutrition label to auto fill nutrition information
