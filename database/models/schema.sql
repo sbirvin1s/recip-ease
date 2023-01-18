@@ -407,8 +407,8 @@ CREATE TABLE IF NOT EXISTS journal (
       food_nutrient.nutrient_id = '1092'
     );
 
-  UPDATE ingredients
-  SET ingredient = LOWER(ingredient);
+  -- UPDATE ingredients
+  -- SET ingredient = LOWER(ingredient);
 
   DROP TABLE IF EXISTS food CASCADE;
   DROP TABLE IF EXISTS food_nutrient CASCADE;
