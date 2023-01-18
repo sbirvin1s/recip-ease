@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS ingredients (
   upc                      TEXT,
   serving_size             NUMERIC,
   serving_unit             TEXT,
-  serving_per_container    NUMERIC,
+  servings_per_container    NUMERIC,
   calories                 NUMERIC,
   total_fat                NUMERIC,
   sat_fat                  NUMERIC,

@@ -22,11 +22,11 @@ import Modal from '../components/Modal.jsx';
     - [x] Ingredient Brand
     - [] Ingredient Barcode / UPC
     - [x] Ingredient Category
-  - [] Should be able to add new ingredient to database if not already present
-    - [] Upon submission of the new ingredient form:
+  - [x] Should be able to add new ingredient to database if not already present
+    - [x] Upon submission of the new ingredient form:
       - [x] should submit to database
-      - [] return added item
-      - [] add new item to selected items list
+      - [x] return added item
+      - [x] add new item to selected items list
   - [] Supports scanning of nutrition label to auto fill nutrition information
   - [] Should request the end user scan the ingredients barcode during adding process
   - [] Should provide list of food categories for ingredient to be added into
@@ -118,7 +118,10 @@ export default function AddIngredient({ children, ...props }) {
     setShowModal(false);
 
     axios.post('/ingredient/new', newIngredient)
-    .then(submitResponse => setNewIngredient({}))
+    .then(submitResponse => {
+      handleSelect(submitResponse.data);
+      setNewIngredient({});
+    })
     .catch(err => console.error(err))
   }
 

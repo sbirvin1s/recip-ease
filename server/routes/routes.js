@@ -58,9 +58,11 @@ module.exports = {
    * @return {string} status 201 and index of new ingredient if success OR error if fails
   */
   writeIngredient: (req, res) => {
-    const newIngredient = req.body;
     addIngredient(req.body)
-    .then(response => res.sendStatus(201))
+    .then(response => {
+      res.statusCode = 201;
+      res.json(response.rows[0]);
+    })
     .catch(err => {
       console.error(err);
       return res.status(500).json({Error: 'Something went wrong while adding your ingredient'});
