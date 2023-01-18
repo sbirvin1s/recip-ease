@@ -15,15 +15,79 @@ body {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   color: #171816;
   background-color: #fff;
-  /* margin: 0;
-  padding: 0; */
-  /* overflow: hidden; */
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   &::-webkit-scrollbar {
     display: none;
   }
+}
+h1 {
+  font-size: 2.5rem;
+}
 
+h2 {
+  font-size: 2.25rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.75rem;
+}
+
+h5 {
+  font-size: 1.5rem;
+}
+
+h6 {
+  font-size: 1.25rem;
+}
+
+p {
+  font-size: 1rem;
+}
+
+select {
+  font-size: 1rem;
+}
+
+button {
+  font-size: 1rem;
+}
+
+@media (max-width: 480px) {
+  html {
+      font-size: 12px;
+  }
+}
+
+@media (min-width: 480px) {
+  html {
+      font-size: 13px;
+  }
+}
+
+@media (min-width: 768px) {
+  html {
+      font-size: 14px;
+  }
+}
+
+@media (min-width: 992px) {
+  html {
+      font-size: 15px;
+  }
+}
+
+@media (min-width: 1200px) {
+  html {
+      font-size: 16px;
+  }
 }
 `;
 
@@ -51,6 +115,10 @@ export const Button = styled.button``;
 
 export const ModalBG = styled.div`
   position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   top: 0;
   left: 0;
   right: 0;
@@ -66,7 +134,6 @@ export const ProfileHeader = styled.header`
 
 export const Nav = styled.nav`
   position: absolute;
-  /* background-color: #000; */
   bottom: 0px;
   display: flex;
   margin-bottom: 0.25em;
@@ -78,7 +145,6 @@ export const Nav = styled.nav`
 
 export const Footer = styled.footer`
 `;
-
 
 export const Page = styled.div`
   display: flex;
@@ -108,8 +174,6 @@ export const Container = styled.div`
   min-height: 60vh;
   box-sizing: border-box;
 `;
-
-export const Div = styled.div``;
 
 export const Column = styled.div`
   display: flex;
@@ -145,10 +209,6 @@ export const ButtonGroup = styled.div`
   align-items: center;
 `;
 
-const ButtonContainer = styled.div`
-  margin: 1em;
-`;
-
 export const ButtonBox = styled(Column)`
   top: 15px;
   right: 10px;
@@ -177,21 +237,21 @@ export const Form = styled.form`
 =====================================
 */
 
-export const Input = styled.input`
-  border: solid;
-  border-width: thin;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  outline: none;
-  font-size: 12pt;
-  font-weight: light;
-  background-color: transparent;
-  width: 3em;
-  padding: 2px;
-  margin: 10px;
-  text-align: center;
-`;
+// export const Input = styled.input`
+//   border: solid;
+//   border-width: thin;
+//   border-top: none;
+//   border-left: none;
+//   border-right: none;
+//   outline: none;
+//   font-size: 12pt;
+//   font-weight: light;
+//   background-color: transparent;
+//   width: 3em;
+//   padding: 2px;
+//   margin: 10px;
+//   text-align: center;
+// `;
 
 /*
 =====================================

@@ -4,7 +4,8 @@ import styled from 'styled-components';
 
 
 /*========== INTERNAL MODULES ==========*/
-import { Row } from '../../dist/stylesheets';
+import { Column } from '../../dist/stylesheets';
+import { Link } from 'react-router-dom';
 
 /*========== EXPORTS ==========*/
 export default function DiaryItem({ meal }) {
@@ -38,6 +39,8 @@ export default function DiaryItem({ meal }) {
   return (
     <Card>
       <h3>{meal}</h3>
+      <p></p>
+      <Link to={'../AddIngredient'}>Add Ingredient</Link>
     </Card>
   )
 }
@@ -45,7 +48,7 @@ export default function DiaryItem({ meal }) {
 
 /*========== STYLES ==========*/
 
-const Card = styled(Row)`
+const Card = styled(Column)`
   margin-top: 0.5rem;
   margin-bottom: 0.25rem;
   min-height: 15vh;

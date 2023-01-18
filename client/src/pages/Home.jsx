@@ -2,7 +2,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-// import Button from '@mui/material/Button';
 
 /*========== INTERNAL MODULES ==========*/
 import { Page, Column, Row } from '../../dist/stylesheets';
@@ -12,7 +11,6 @@ import Recipes from './Recipes.jsx';
 import DiaryItem from '../components/DiaryItem.jsx';
 
 
-
 /*========== EXPORTS ==========*/
 export default function Home() {
 
@@ -20,6 +18,8 @@ export default function Home() {
     const [showForm, setShowForm] = useState(false);
     const [showSearchForm, setShowSearchForm] = useState(false);
     const [recipes, setRecipes] = useState([]);
+
+    // console.log('it is this time: ', time);
 
   /*----- LIFESTYLE METHODS -----*/
   useEffect(() =>  {
@@ -88,7 +88,7 @@ export default function Home() {
     return (
       <>
         <Row>
-          <button>prev</button> November, 11 2022 <button>next</button>
+          <button>prev</button> November 11th, 2022 <button>next</button>
         </Row>
       </>
     )
