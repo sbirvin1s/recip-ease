@@ -5,11 +5,17 @@ const path = require('path');
 
 /*========== SYSTEM VARIABLES ==========*/
 const app = express();
-const {PORT} = process.env;
+const { PORT } = process.env;
 
 
 /*========== INTERNAL MODULES ==========*/
 const {
+  getAPI,
+  getAuthDomain,
+  getProjectID,
+  getStorageBucket,
+  getMessageSenderID,
+  getAppID,
   writeRecipe,
   getRecipes,
   getIngredient,
@@ -38,6 +44,14 @@ app.use(express.json());
 */
 
 /*========== ROUTES ==========*/
+/*--- AUTH ROUTES ---*/
+app.get('/auth/firebaseAPI', getAPI);
+app.get('/auth/firebaseDomain', getAuthDomain);
+app.get('/auth/firebaseProjectID', getProjectID);
+app.get('/auth/firebaseStorage', getStorageBucket);
+app.get('/auth/firebaseMessageID', getMessageSenderID);
+app.get('/auth/firebaseAppID', getAppID);
+
 /*--- GET ---*/
 app.get('/recipes', getRecipes);
 app.get('/ingredient/:ingredient', getIngredient);
