@@ -22,9 +22,22 @@
 CREATE TABLE IF NOT EXISTS users (
   id                       SERIAL PRIMARY KEY,
   username                 TEXT,
-  calories                 SMALLINT,
-  activity_level           SMALLINT
+  calorie_goal             SMALLINT,
+  activity_level           SMALLINT,
+  weight                   SMALLINT,
+  weight_goal              TEXT
 );
+
+CREATE TABLE IF NOT EXISTS user_meta_data (
+  id                       SERIAL PRIMARY KEY,
+  user_id                  SERIAL REFERENCES users (id),
+  date                     DATE,
+  calorie_goal             SMALLINT,
+  activity_level           SMALLINT,
+  weight                   SMALLINT,
+  weight_goal              TEXT
+);
+
 CREATE TABLE IF NOT EXISTS recipes (
   id                       SERIAL PRIMARY KEY,
   recipe_name              TEXT,
@@ -58,7 +71,7 @@ CREATE TABLE IF NOT EXISTS ingredients (
   upc                      TEXT,
   serving_size             NUMERIC,
   serving_unit             TEXT,
-  servings_per_container    NUMERIC,
+  servings_per_container   NUMERIC,
   calories                 NUMERIC,
   total_fat                NUMERIC,
   sat_fat                  NUMERIC,
