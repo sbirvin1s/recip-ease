@@ -13,7 +13,9 @@ const {
   writeRecipe,
   getRecipes,
   getIngredient,
-  writeIngredient
+  writeIngredient,
+  getUser,
+  updateUserProfile,
 } = require('./routes/routes');
 
 
@@ -39,13 +41,14 @@ app.use(express.json());
 /*--- GET ---*/
 app.get('/recipes', getRecipes);
 app.get('/ingredient/:ingredient', getIngredient);
+app.get('/user/:username', getUser);
 
 /*--- POST ---*/
 app.post('/ingredient/new', writeIngredient);
 app.post('/recipes', writeRecipe);
 
 /*--- PUT ---*/
-app.put('/user')
+app.put('/user/update', updateUserProfile); // creates/updates user profile
 
 
 /*========== SERVER CONNECTIONS ==========*/

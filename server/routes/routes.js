@@ -37,6 +37,15 @@ module.exports = {
     })
   },
 
+  /** Handles requests for individual users
+   *
+   * @param {*} req -
+   * @param {*} res
+   */
+  getUser: (req, res) => {
+    res.json(req.params);
+  },
+
 /*--- POST REQUESTS ---*/
   /** Handles requests to write recipes to the database
    * @param {object} req - expects a recipe object containing all values of the recipe to be passed as a parameter in the request object
@@ -67,5 +76,15 @@ module.exports = {
       console.error(err);
       return res.status(500).json({Error: 'Something went wrong while adding your ingredient'});
     })
+  },
+
+/*--- PUT REQUESTS ---*/
+  /** Handles creating and updating the targeted user profile
+   * @param {object} req - expects a user profile object containing all values for the user profile
+   * @param {object} res
+   * @return {string} status 201 if success or error if not
+  */
+  updateUserProfile: (req, res) => {
+    res.json(req.body);
   },
 }
