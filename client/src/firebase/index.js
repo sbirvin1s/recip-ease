@@ -1,9 +1,9 @@
 /*========== EXTERNAL MODULES ==========*/
 import axios from 'axios';
+import { initializeApp } from "firebase/app";
+import 'firebase/auth';
 
 /*========== INTERNAL MODULES ==========*/
-import axios from "axios";
-import { initializeApp } from "firebase/app";
 
 
 // Import the functions you need from the SDKs you need
@@ -25,6 +25,7 @@ const app = initializeApp(firebaseConfig);
 
 
 /*========== EXPORTS ==========*/
-
+export const auth = app.auth();
+export default app;
 
 /*========== STYLES ==========*/

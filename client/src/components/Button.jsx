@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 /** Button constructor that takes:
  *
-* @param {*} children - any component that should be rendered on the modal
+ * @param {*} children - any component that should be rendered on the modal
  * @prop {*} props - any property or tag that needs to be passed to the component
  * @returns {Component}
  */
