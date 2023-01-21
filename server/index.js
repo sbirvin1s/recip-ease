@@ -43,15 +43,16 @@ app.use(express.json());
     - [ ] Add / Update weight loss goals
 */
 
-/*========== ROUTES ==========*/
-/*--- AUTH ROUTES ---*/
-app.get('/auth/firebaseAPI', getAPI);
-app.get('/auth/firebaseDomain', getAuthDomain);
-app.get('/auth/firebaseProjectID', getProjectID);
-app.get('/auth/firebaseStorage', getStorageBucket);
-app.get('/auth/firebaseMessageID', getMessageSenderID);
-app.get('/auth/firebaseAppID', getAppID);
+/*NOTE: Server route request logging
+ */
+// app.use((req,res,next) => {
+//   console.log(
+//     `*=== \x1b[34mNew Request Logged:\x1b[0m Type: \x1b[33m${req.method}\x1b[0m REQUEST, URL: \x1b[33m${req.url}\x1b[0m ===*`
+//   );
+//   next();
+// })
 
+/*========== ROUTES ==========*/
 /*--- GET ---*/
 app.get('/recipes', getRecipes);
 app.get('/ingredient/:ingredient', getIngredient);

@@ -21,33 +21,6 @@ const {
 
 /*========== EXPORTS ==========*/
 module.exports = {
-
-/*--- AUTH REQUESTS ---*/
-  getAPI: (req, res) => {
-    res.json(FIREBASE_API_KEY);
-  },
-
-  getAuthDomain: (req, res) => {
-    res.json(FIREBASE_AUTH_DOMAIN);
-  },
-
-  getProjectID: (req, res) => {
-    res.json(FIREBASE_PROJECT_ID);
-  },
-
-  getStorageBucket: (req, res) => {
-    res.json(FIREBASE_STORAGE_BUCKET);
-  },
-
-  getMessageSenderID: (req, res) => {
-    res.json(FIREBASE_MESSAGING_SENDER_ID);
-  },
-
-  getAppID: (req, res) => {
-    res.json(FIREBASE_APP_ID);
-  },
-
-
 /*--- GET REQUESTS ---*/
   getRecipes: (req, res) => {
     findAllRecipes()

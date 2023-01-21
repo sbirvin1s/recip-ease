@@ -44,7 +44,8 @@ export default function App() {
   const renderSignInStatus = () => {
     if (!signIn) {
       return (
-        <ProfilePlaceholder onClick={() => setShowSignIn(true)}>Sign In</ProfilePlaceholder>
+        <Link to={'SignUp'}>Sign In</Link>
+        // <ProfilePlaceholder onClick={() => setShowSignIn(true)}>Sign In</ProfilePlaceholder>
       )
     } else {
       return (

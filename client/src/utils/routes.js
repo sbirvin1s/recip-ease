@@ -16,6 +16,7 @@ import AddIngredient from '../pages/AddIngredient.jsx';
 import RecipeInfo from '../pages/RecipeInfo.jsx';
 import Profile from '../pages/Profile.jsx';
 import Error from '../pages/Error.jsx';
+import SignUp from '../pages/SignUp.jsx';
 
 /*========== EXPORTS ==========*/
 export const router = createBrowserRouter(
@@ -28,6 +29,7 @@ export const router = createBrowserRouter(
       <Route path='AddIngredient' element={<AddIngredient />} />
       <Route path='RecipeInfo' element={<RecipeInfo />} />
       <Route path='Profile' element={<Profile />} />
+      <Route path='SignUp' element={<SignUp />} />
     </Route>
   )
 );

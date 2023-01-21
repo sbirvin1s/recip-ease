@@ -1,5 +1,8 @@
 /*========== EXTERNAL MODULES ==========*/
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+
+/*========== INTERNAL MODULES ==========*/
+import { auth } from '../firebase';
 
 
 const AuthContext = React.createContext();
@@ -17,7 +20,22 @@ export function AuthProvider({ children }) {
 
 
   const value = {
-    currentUser
+    currentUser,
+    signUp,
+  }
+
+  /*----- LIFECYCLE METHODS -----*/
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      setCurrrentUser(user)
+    })
+
+    return unsubscribe;
+  }, [])
+
+  /*----- EVENT HANDLERS -----*/
+  const signUp = (email, password) => {
+    return auth.createUserWithEmailAndPassword(email, password)
   }
 
   /*----- RENDERER -----*/

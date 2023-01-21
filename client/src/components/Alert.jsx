@@ -32,9 +32,9 @@ export default function Alert({ variant = '', message, ...props}) {
   }
 }
 
-Alert.propTypes = {
-  variant: React.PropTypes.oneOf(['success', 'warn', 'fail'])
-}
+// Alert.propTypes = {
+//   variant: React.PropTypes.oneOf(['success', 'warn', 'fail'])
+// }
 
 /*========== STYLES ==========*/
 

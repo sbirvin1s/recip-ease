@@ -1,31 +1,23 @@
 /*========== EXTERNAL MODULES ==========*/
-import axios from 'axios';
 import { initializeApp } from "firebase/app";
-import 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 
 /*========== INTERNAL MODULES ==========*/
 
-
-// Import the functions you need from the SDKs you need
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: axios.get('auth/firebaseAPI'),
-  authDomain: axios.get('auth/firebaseDomain'),
-  projectId: axios.get('auth/firebaseProjectID'),
-  storageBucket: axios.get('auth/firebaseStorage'),
-  messagingSenderId: axios.get('auth/firebaseMessageID'),
-  appId: axios.get('auth/firebaseAppID')
+  apiKey:"AIzaSyCNzX85xIaph3O0JNtZxEC3onFHv_ylZLI",
+  authDomain:"recip-ease-23b62.firebaseapp.com",
+  projectId:"recip-ease-23b62",
+  storageBucket:"recip-ease-23b62.appspot.com",
+  messagingSenderId:"449255269437",
+  appId:"1:449255269437:web:af61da28dcaf02a85eb654",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-
 /*========== EXPORTS ==========*/
-export const auth = app.auth();
+export const auth = getAuth(app);
 export default app;
 
 /*========== STYLES ==========*/
