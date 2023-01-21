@@ -10,12 +10,6 @@ const { PORT } = process.env;
 
 /*========== INTERNAL MODULES ==========*/
 const {
-  getAPI,
-  getAuthDomain,
-  getProjectID,
-  getStorageBucket,
-  getMessageSenderID,
-  getAppID,
   writeRecipe,
   getRecipes,
   getIngredient,
