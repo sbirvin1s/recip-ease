@@ -1,8 +1,10 @@
 /*========== EXTERNAL MODULES ==========*/
 import React, { useContext, useState, useEffect } from 'react';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 /*========== INTERNAL MODULES ==========*/
-import { auth } from '../firebase';
+import { default as app } from '../firebase';
+// import { auth } from '../firebase';
 
 
 const AuthContext = React.createContext();
@@ -14,15 +16,10 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
+  const auth = getAuth(app);
 
   /*----- STATE HOOKS -----*/
   const [currentUser, setCurrrentUser] = useState();
-
-
-  const value = {
-    currentUser,
-    signUp,
-  }
 
   /*----- LIFECYCLE METHODS -----*/
   useEffect(() => {
@@ -35,7 +32,28 @@ export function AuthProvider({ children }) {
 
   /*----- EVENT HANDLERS -----*/
   const signUp = (email, password) => {
-    return auth.createUserWithEmailAndPassword(email, password)
+    return createUserWithEmailAndPassword(auth, email, password)
+    // .then((userCredential) => {
+    //   // Signed in
+    //   const user = userCredential.user;
+    // })
+    // .catch((error) => {
+    //   const errorCode = error.code;
+    //   const errorMessage = error.message;
+    // });
+
+
+
+
+    // return auth.createUserWithEmailAndPassword(email, password);
+
+
+
+  }
+
+  const value = {
+    currentUser,
+    signUp,
   }
 
   /*----- RENDERER -----*/

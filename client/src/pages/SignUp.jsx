@@ -16,7 +16,7 @@ export default function SignUp() {
   const [email, setEmail]  = useState();
   const [password, setPassword] = useState();
   const [passwordConfirmation, setPasswordConfirmation] = useState();
-  const { signUp } = useAuth();
+  const { signUp, currentUser } = useAuth();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -39,7 +39,8 @@ export default function SignUp() {
       setLoading(true);
       await signUp(email, password);
 
-    } catch {
+    } catch (err){
+      console.error(err);
       setError('Failed to Sign Up');
     }
 
@@ -47,24 +48,20 @@ export default function SignUp() {
   }
 
   /*----- RENDER METHODS -----*/
-  const renderError = () => {
-    if (error) {
-      console.log(error);
-      return <Alert variant={'fail'}>{error}</Alert>
-    } else {
-      return <></>
-    }
-  }
-
   /*----- RENDERER -----*/
   return (
     <>
       <h1>Sign Up</h1>
-      <Form>
-        {renderError()}
-        <Input name={'Email'} labelName={'email'} onChange={handleEmailEntry} required/>
-        <Input name={'Password'} labelName={'password'} onChange={handlePasswordEntry} required/>
-        <Input name={'Confirm Password'} labelName={'confirmPassword'} onChange={handlePasswordConfirmationEntry} required/>
+      <Form
+        style={{
+          height: '100vh',
+          width: '100vw',
+        }}
+      >
+        {error && <Alert variant='fail'>{error}</Alert>}
+        <Input name={'email'} labelName={'Email'} onChange={handleEmailEntry} required type='email'/>
+        <Input name={'password'} labelName={'Password'} onChange={handlePasswordEntry} required type='password'/>
+        <Input name={'confirmPassword'} labelName={'Confirm Password'} onChange={handlePasswordConfirmationEntry} required type='password'/>
         <Button onClick={handleSubmit} disabled={loading}>Submit</Button>
         <Row>Already have an account? </Row>
       </Form>

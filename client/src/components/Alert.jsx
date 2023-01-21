@@ -21,13 +21,13 @@ export default function Alert({ variant = '', children, ...props}) {
 /*----- RENDER METHODS -----*/
   switch(variant) {
     case 'success':
-      return <SuccessStyle {...props}>{children}</SuccessStyle>
+      return <SuccessAlert {...props}>{children}</SuccessAlert>
     case 'warn':
-        return <WarnStyle {...props}>{children}</WarnStyle>
+        return <WarnAlert {...props}>{children}</WarnAlert>
     case 'fail':
-      return <FailStyle {...props}>{children}</FailStyle>
+      return <FailAlert {...props}>{children}</FailAlert>
     default:
-      return <DefaultStyle {...props}>{children}</DefaultStyle>
+      return <DefaultAlert {...props}>{children}</DefaultAlert>
   }
 }
 
@@ -37,55 +37,7 @@ export default function Alert({ variant = '', children, ...props}) {
 
 /*========== STYLES ==========*/
 
-const SuccessStyle = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin: 4px;
-  padding: 20px;
-  width: 100%;
-  max-width: 600px;
-  font-weight: bold;
-  color: #53ff1a;
-  background-color: #c6ffb3;
-  border: none;
-  outline: none;
-`;
-
-const WarnStyle = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin: 4px;
-  padding: 20px;
-  width: 100%;
-  max-width: 600px;
-  font-weight: bold;
-  color: #b38600;
-  background-color: #ffecb3;
-  border: none;
-  outline: none;
-`;
-
-const FailStyle = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin: 4px;
-  padding: 20px;
-  width: 100%;
-  max-width: 600px;
-  font-weight: bold;
-  color: #ff4d4d;
-  background-color: #ffb3b3;
-  border: none;
-  outline: none;
-`;
-
-const DefaultStyle = styled.div`
+const DefaultAlert = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -99,4 +51,21 @@ const DefaultStyle = styled.div`
   background-color: #ffffcc;
   border: none;
   outline: none;
+  z-index: 2;
 `;
+
+const SuccessAlert = styled(DefaultAlert)`
+  color: #53ff1a;
+  background-color: #c6ffb3;
+`;
+
+const WarnAlert = styled(DefaultAlert)`
+  color: #b38600;
+  background-color: #ffecb3;
+`;
+
+const FailAlert = styled(DefaultAlert)`
+  color: #ff4d4d;
+  background-color: #ffb3b3;
+`;
+
