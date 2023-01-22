@@ -10,7 +10,7 @@ import Button from '../components/Button.jsx';
 import Header from '../components/Header.jsx';
 import NavBar from '../components/NavBar.jsx';
 import { GlobalStyle, Page, Row } from '../../dist/stylesheets';
-import { AuthProvider } from '../contexts/AuthContext.js';
+import { useAuth } from '../contexts/AuthContext.js';
 
 
 /*========== EXPORTS ==========*/
@@ -20,7 +20,7 @@ export default function App() {
     const [showSignIn, setShowSignIn] = useState(false);
     const [showSearchForm, setShowSearchForm] = useState(false);
     const [recipes, setRecipes] = useState([]);
-    const [signIn, setSignIn] = useState(false)
+    const { currentUser } = useAuth();
 
   /*----- LIFECYCLE METHODS -----*/
   useEffect(() =>  {
@@ -42,9 +42,9 @@ export default function App() {
 
   /*----- RENDER METHODS -----*/
   const renderSignInStatus = () => {
-    if (!signIn) {
+    if (!currentUser) {
       return (
-        <Link to={'SignUp'}>Sign In</Link>
+        <Link to={'LogIn'}>Sign In</Link>
         // <ProfilePlaceholder onClick={() => setShowSignIn(true)}>Sign In</ProfilePlaceholder>
       )
     } else {
@@ -73,19 +73,17 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-      <AuthProvider>
-        <Header>
-          {renderSignInStatus()}
-        </Header>
-          {renderSignInForm()}
-        <Outlet />
-        <NavBar>
-          <Link to={'/'}>Home</Link>
-          <Link to={'Recipes'}>Recipes</Link>
-          <Link to={'AddRecipe'}>Add Recipe</Link>
-          <Link to={'ShoppingList'}>Shopping List</Link>
-        </NavBar>
-      </AuthProvider>
+      <Header>
+        {renderSignInStatus()}
+      </Header>
+        {renderSignInForm()}
+      <Outlet />
+      <NavBar>
+        <Link to={'/'}>Home</Link>
+        <Link to={'Recipes'}>Recipes</Link>
+        <Link to={'AddRecipe'}>Add Recipe</Link>
+        <Link to={'ShoppingList'}>Shopping List</Link>
+      </NavBar>
     </>
   )
 }

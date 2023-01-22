@@ -17,11 +17,13 @@ import RecipeInfo from '../pages/RecipeInfo.jsx';
 import Profile from '../pages/Profile.jsx';
 import Error from '../pages/Error.jsx';
 import SignUp from '../pages/SignUp.jsx';
+import LogIn from '../pages/LogIn.jsx';
 
 /*========== EXPORTS ==========*/
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />} errorElement={<Error />}>
+      <Route path='SignUp' element={<SignUp />} />
       <Route index element={<Home />} />
       <Route path='Recipes' element={<Recipes />} />
       <Route path='AddRecipe' element={<AddRecipe />} />
@@ -29,7 +31,7 @@ export const router = createBrowserRouter(
       <Route path='AddIngredient' element={<AddIngredient />} />
       <Route path='RecipeInfo' element={<RecipeInfo />} />
       <Route path='Profile' element={<Profile />} />
-      <Route path='SignUp' element={<SignUp />} />
+      <Route path='LogIn' element={<LogIn />} />
     </Route>
-  )
+    )
 );

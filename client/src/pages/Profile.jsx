@@ -1,10 +1,15 @@
 /*========== EXTERNAL MODULES ==========*/
 import React, {useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 
 /*========== INTERNAL MODULES ==========*/
 import { Page, Column, Row } from '../../dist/stylesheets';
+import { useAuth } from '../contexts/AuthContext';
+import Button from '../components/Button.jsx';
+import Alert from '../components/Alert.jsx';
+import Input from '../components/Input.jsx';
 
 /** TODO: #31 User Profile - Client Implementation
   - [ ] Create User Profile Interface that allows:
@@ -19,9 +24,23 @@ import { Page, Column, Row } from '../../dist/stylesheets';
 export default function Profile() {
 
   /*----- STATE HOOKS -----*/
-  /*----- LIFESTYLE METHODS -----*/
+  const { logOut, currentUser } = useAuth();
+  const [error, setError] = useState();
+  const navigate = useNavigate();
+
+  /*----- LIFECYCLE METHODS -----*/
   /*----- EVENT HANDLERS -----*/
 
+    const handleLogOut = async () => {
+      setError('');
+
+      try {
+        await logOut();
+        navigate('/LogIn');
+      } catch {
+        setError('Failed to Log Out')
+      }
+    }
   /*----- RENDER METHODS -----*/
 
 
@@ -29,20 +48,24 @@ export default function Profile() {
   return (
     <>
       <Page>
-        This is the Profile Page
+        <h1>Welcome {currentUser.email}</h1>
         <Column>
           Placeholders:
-          Weight:
-          Fitness Level
-          Weight Loss Goals
-          Total Daily Caloric Goal
+          <Input name={'weight'} labelName={'Weight'}></Input>
+          <Input name={'fitnessLevel'} labelName={'Fitness Level'}></Input>
+          <Input name={'weightGoal'} labelName={'Weight Loss Goal'}></Input>
+          <h4>Total Daily Caloric Goal</h4>
         </Column>
         <Column>
           Modifiers:
-          Weight
-          Fitness Level
-          Weight Loss Goals
+          <Input name={'modifyWeight'} labelName={'Weight'}></Input>
+          <Input name={'modifyFitnessLevel'} labelName={'Fitness Level'}></Input>
+          <Input name={'modifyWeightGoal'} labelName={'Weight Loss Goal'}></Input>
         </Column>
+        <Row>
+          <Button variant='link' onClick={handleLogOut}>Log Out</Button>
+        </Row>
+        {error && <Alert variant='fail'>{error}</Alert>}
       </Page>
     </>
   )
