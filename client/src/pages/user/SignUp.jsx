@@ -4,12 +4,11 @@ import { Link, useNavigate } from 'react-router-dom';
 
 
 /*========== INTERNAL MODULES ==========*/
-import { useAuth } from '../contexts/AuthContext';
-import { Form, Row } from '../../dist/stylesheets';
-import Alert from '../components/Alert.jsx';
-import Input from '../components/Input.jsx';
-import Button from '../components/Button.jsx';
-import axios from 'axios';
+import { useAuth } from '../../contexts/AuthContext';
+import { Form, Row } from '../../../dist/stylesheets';
+import Alert from '../../components/Alert.jsx';
+import Input from '../../components/Input.jsx';
+import Button from '../../components/Button.jsx';
 
 /*========== EXPORTS ==========*/
 export default function SignUp() {
@@ -48,7 +47,7 @@ export default function SignUp() {
     }
 
     setLoading(false);
-    // navigate('MakeProfile');
+    navigate('/WeightSelector');
   }
 
   /*----- RENDER METHODS -----*/

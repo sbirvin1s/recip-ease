@@ -54,20 +54,20 @@ export default function App() {
     }
   }
 
-  const renderSignInForm = () => {
-    return (
-      <Modal
-        showModal={showSignIn}
-        setShowModal={setShowSignIn}
-      >
-        <Page style={{alignItems: 'space-evenly'}}>
-          <Button>Sign In</Button>
-          <Button>Sign In with Google</Button>
-          <Button>Create Account</Button>
-        </Page>
-      </Modal>
-    )
-  }
+  // const renderSignInForm = () => {
+  //   return (
+  //     <Modal
+  //       showModal={showSignIn}
+  //       setShowModal={setShowSignIn}
+  //     >
+  //       <Page style={{alignItems: 'space-evenly'}}>
+  //         <Button>Sign In</Button>
+  //         <Button>Sign In with Google</Button>
+  //         <Button>Create Account</Button>
+  //       </Page>
+  //     </Modal>
+  //   )
+  // }
 
   /*----- RENDERER -----*/
   return (
@@ -76,7 +76,6 @@ export default function App() {
       <Header>
         {renderSignInStatus()}
       </Header>
-        {renderSignInForm()}
       <Outlet />
       <NavBar>
         <Link to={'/'}>Home</Link>

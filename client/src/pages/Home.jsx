@@ -88,7 +88,12 @@ export default function Home() {
   const renderDateSelector = () => {
     return (
       <>
-        <Row>
+        <Row
+          style={{
+            justifyContent: 'space-evenly',
+            width: '100%',
+          }}
+        >
           <Button>prev</Button> November 11th, 2022 <Button>next</Button>
         </Row>
       </>

@@ -14,10 +14,13 @@ import AddRecipe from '../pages/AddRecipe.jsx';
 import ShoppingList from '../pages/ShoppingList.jsx';
 import AddIngredient from '../pages/AddIngredient.jsx';
 import RecipeInfo from '../pages/RecipeInfo.jsx';
-import Profile from '../pages/Profile.jsx';
+import Profile from '../pages/user/Profile.jsx';
 import Error from '../pages/Error.jsx';
-import SignUp from '../pages/SignUp.jsx';
-import LogIn from '../pages/LogIn.jsx';
+import SignUp from '../pages/user/SignUp.jsx';
+import LogIn from '../pages/user/LogIn.jsx';
+import WeightSelector from '../pages/user/WeightSelector.jsx';
+import FitnessLevelSelector from '../pages/user/FitnessLevelSelector.jsx';
+import WeightGoals from '../pages/user/WeightGoals.jsx';
 
 /*========== EXPORTS ==========*/
 export const router = createBrowserRouter(
@@ -32,6 +35,9 @@ export const router = createBrowserRouter(
       <Route path='RecipeInfo' element={<RecipeInfo />} />
       <Route path='Profile' element={<Profile />} />
       <Route path='LogIn' element={<LogIn />} />
+      <Route path='WeightSelector' element={<WeightSelector />} />
+      <Route path='FitnessLevelSelector' element={<FitnessLevelSelector />} />
+      <Route path='WeightGoals' element={<WeightGoals />} />
     </Route>
     )
 );
