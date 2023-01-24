@@ -28,7 +28,6 @@ export function UserProvider({ children }) {
     }))
   }
 
-
   /*----- RENDERER -----*/
   return (
     <UserContext.Provider
