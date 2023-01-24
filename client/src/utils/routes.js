@@ -21,6 +21,7 @@ import LogIn from '../pages/user/LogIn.jsx';
 import WeightSelector from '../pages/user/WeightSelector.jsx';
 import FitnessLevelSelector from '../pages/user/FitnessLevelSelector.jsx';
 import WeightGoals from '../pages/user/WeightGoals.jsx';
+import BasicInfo from '../pages/user/BasicInfo.jsx';
 
 /*========== EXPORTS ==========*/
 export const router = createBrowserRouter(
@@ -38,6 +39,7 @@ export const router = createBrowserRouter(
       <Route path='WeightSelector' element={<WeightSelector />} />
       <Route path='FitnessLevelSelector' element={<FitnessLevelSelector />} />
       <Route path='WeightGoals' element={<WeightGoals />} />
+      <Route path='BasicInfo' element={<BasicInfo />} />
     </Route>
     )
 );

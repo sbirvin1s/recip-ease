@@ -45,7 +45,6 @@ export default function App() {
     if (!currentUser) {
       return (
         <Link to={'LogIn'}>Sign In</Link>
-        // <ProfilePlaceholder onClick={() => setShowSignIn(true)}>Sign In</ProfilePlaceholder>
       )
     } else {
       return (

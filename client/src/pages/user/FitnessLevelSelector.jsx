@@ -36,25 +36,80 @@ export default function FitnessLevelSelector() {
       </Row>
       <Form
         style={{
-          height: '25vh',
+          height: '50vh',
           width: '100vw',
         }}
         >
-        <Label htmlFor='fitnessLevel'>
-              Select Your Current Level of Activity:
-                <select
-                  id='fitnessLevel'
-                  name='fitnessLevel'
-                  onChange={updateUserInfo}
-                >
-                  <option value={'Bedridden'}>Bedridden</option>
-                  <option value={'Sedentary'}>Sedentary</option>
-                  <option value={'Lightly Active'}>Lightly Active</option>
-                  <option value={'Moderately Active'}>Moderately Active</option>
-                  <option value={'Very Active'}>Very Active</option>
-                  <option value={'Extremely Active'}>Extremely Active</option>
-                </select>
-            </Label>
+          <Label htmlFor='fitnessLevel'>
+            Select Your Current Level of Activity:
+              <select
+                id='fitnessLevel'
+                name='fitnessLevel'
+                onChange={updateUserInfo}
+              >
+                <option value={null}>--</option>
+                <option value={'Bedridden'}>Bedridden</option>
+                <option value={'Sedentary'}>Sedentary</option>
+                <option value={'Lightly Active'}>Lightly Active</option>
+                <option value={'Moderately Active'}>Moderately Active</option>
+                <option value={'Very Active'}>Very Active</option>
+                <option value={'Extremely Active'}>Extremely Active</option>
+              </select>
+          </Label>
+          {/* <Button
+            variant='card'
+            onClick={updateUserInfo}
+            id='fitnessLevel'
+            name='fitnessLevel'
+            value='Bedridden'
+          >
+            Bedridden
+          </Button>
+          <Button
+            variant='card'
+            onClick={updateUserInfo}
+            id='fitnessLevel'
+            name='fitnessLevel'
+            value='Sedentary'
+          >
+            Sedentary
+          </Button>
+          <Button
+            variant='card'
+            onClick={updateUserInfo}
+            id='fitnessLevel'
+            name='fitnessLevel'
+            value='Lightly Active'
+          >
+            Lightly Active
+          </Button>
+          <Button
+            variant='card'
+            onClick={updateUserInfo}
+            id='fitnessLevel'
+            name='fitnessLevel'
+            value='Moderately Active'
+          >
+            Moderately Active
+          </Button>
+          <Button
+            variant='card'
+            onClick={updateUserInfo}
+            id='fitnessLevel'
+            name='fitnessLevel'
+            value='Very Active'
+          >
+            Very Active
+          </Button>
+          <Button
+            variant='card'
+            onClick={updateUserInfo}
+            id='fitnessLevel'
+            name='fitnessLevel'
+            value='Extremely Active'
+          >
+            Extremely Active
+          </Button> */}
         <Row>
           <Button variant='link' onClick={handleBack} >Back</Button>
           <Button onClick={handleNext} >Next</Button>

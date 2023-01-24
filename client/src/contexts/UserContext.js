@@ -21,6 +21,7 @@ export function UserProvider({ children }) {
 
   /*----- EVENT HANDLERS -----*/
   const updateUserInfo = ({ target:{ name, value } }) => {
+    event.preventDefault();
     setUserInfo(prev => ({
       ...prev,
       [name]: value
