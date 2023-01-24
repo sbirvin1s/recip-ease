@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 /*========== INTERNAL MODULES ==========*/
 import { useUserInfo } from '../../contexts/UserContext';
-import { Form, Row } from '../../../dist/stylesheets';
+import { Form, Row, Label } from '../../../dist/stylesheets';
 import Input from '../../components/Input.jsx';
 import Button from '../../components/Button.jsx';
 
@@ -18,12 +18,12 @@ export default function WeightGoals() {
 
   /*----- LIFECYCLE METHODS -----*/
   /*----- EVENT HANDLERS -----*/
-  const handleNext = () => {
+  const handleNext = event => {
     event.preventDefault();
-    navigate('/Profile');
+    navigate('/Review');
   }
 
-  const handleBack = () => {
+  const handleBack = event => {
     event.preventDefault();
     navigate('/FitnessLevelSelector');
   }
@@ -37,11 +37,11 @@ export default function WeightGoals() {
       </Row>
       <Form
         style={{
-          height: '25vh',
+          height: '50vh',
           width: '100vw',
         }}
         >
-        <Input
+        {/* <Input
           name={'weightGoals'}
           labelName={'Change Per Week'}
           onChange={updateUserInfo} required type='range'
@@ -49,7 +49,22 @@ export default function WeightGoals() {
           max='6'
           value='3'
           step='1'
-        />
+        /> */}
+        <Label htmlFor='weightGoals'>
+            Change Per Week:
+              <select
+                id='weightGoals'
+                name='weightGoals'
+                onChange={updateUserInfo}
+              >
+                <option value={null}>--</option>
+                <option value={'-2'}>Lose 2 pounds a week</option>
+                <option value={'-1'}>Lose 1 pound a week</option>
+                <option value={'0'}>Maintain my current weight</option>
+                <option value={'+1'}>Gain 1 pound a week</option>
+                <option value={'+2'}>Gain 2 pounds a week</option>
+              </select>
+          </Label>
         <Row>
           <Button variant='link' onClick={handleBack} >Back</Button>
           <Button onClick={handleNext} >Complete</Button>

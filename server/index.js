@@ -57,7 +57,7 @@ app.post('/ingredient/new', writeIngredient);
 app.post('/recipes', writeRecipe);
 
 /*--- PUT ---*/
-app.put('/user/update', updateUserProfile); // creates/updates user profile
+app.put('/user/update/:uuid', updateUserProfile); // creates/updates user profile
 
 
 /*========== SERVER CONNECTIONS ==========*/

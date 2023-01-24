@@ -40,8 +40,9 @@ export default function Profile() {
   // } = userInfo;
 
   const weightInKg = () => userInfo.currentWeight / 2.20462;
-
   const heightInCm = () => userInfo.height * 2.54;
+  let weeklyFitnessGoals = '';
+
   /*----- LIFECYCLE METHODS -----*/
   /*----- EVENT HANDLERS -----*/
 
@@ -67,20 +68,27 @@ export default function Profile() {
 
     if (userInfo && userInfo.weightGoals) {
       switch(userInfo.weightGoals) {
-        case '1':
+        case '-2':
           calorieModification = -1000;
+          weeklyFitnessGoals = 'Lose 2 pounds a week';
+
           break;
-        case '2':
+        case '-1':
           calorieModification = -500;
+          weeklyFitnessGoals = 'Lose 1 pound a week';
           break;
-        case '4':
+        case '+1':
           calorieModification = 500;
+          weeklyFitnessGoals = 'Gain 1 pound a week';
           break;
-        case '5':
+        case '+2':
           calorieModification = 1000;
+          weeklyFitnessGoals = 'Gain 2 pounds a week';
+
           break;
         default:
           calorieModification = 0;
+          weeklyFitnessGoals = 'Maintain my current weight';
           break;
       }
     }
@@ -139,7 +147,7 @@ export default function Profile() {
           <Row>{userInfo && userInfo.height}</Row>
           <Row>{userInfo && userInfo.currentWeight}</Row>
           <Row>{userInfo && userInfo.fitnessLevel}</Row>
-          <Row>{userInfo && userInfo.weightGoals}</Row>
+          <Row>{userInfo && weeklyFitnessGoals}</Row>
           <Row>
             <h4>Total Daily Caloric Goal</h4>
             {renderCaloricGoal()}
