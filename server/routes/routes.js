@@ -96,7 +96,6 @@ module.exports = {
 
     try {
       await editUser(uuid, userInfo);
-
     } catch (err) {
       console.error(err)
       return res.status(500).json({Error: 'Something went wrong while updating your profile'});
