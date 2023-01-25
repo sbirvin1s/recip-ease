@@ -13,7 +13,7 @@ import styled from 'styled-components';
  * @prop {*} props - any property or tag that needs to be passed to the component
  * @returns {Component}
  */
-export default function Button({ variant, handleClick, children, ...props }) {
+export default function Card({ id, value, name, handleClick = () => null, children, ...props }) {
 
 /*----- STATE HOOKS -----*/
 const [selected, setSelected] = useState(false);
@@ -23,51 +23,39 @@ const [selected, setSelected] = useState(false);
 const handleSelected = event => {
   event.preventDefault();
   handleClick(event);
+  console.log('selected');
   setSelected(selected => !selected);
 }
 /*----- RENDER METHODS -----*/
 
 /*----- RENDERER -----*/
-switch(variant) {
-  case 'success':
-    return <SuccessAlert {...props}>{children}</SuccessAlert>
-  case 'link':
-    return <LinkButton {...props}>{children}</LinkButton>
-  case 'card':
-    return <CardButton selected={selected} onClick={handleSelected} {...props}>{children}</CardButton>
-  default:
-    return <DefaultButton {...props}>{children}</DefaultButton>
-}
+
+return (
+  <CardStyle
+    selected={selected}
+    onClick={handleSelected}
+    id={id}
+    value={value}
+    name={name}
+    {...props}
+  >
+    {children}
+  </CardStyle>
+)
 }
 
 
 /*========== STYLES ==========*/
 
-const DefaultButton = styled.button`
+const CardStyle = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
-  margin: 4px;
-  padding: 10px;
-  background-color: #7de3c5;
-  border-radius: 6px;
-  border: none;
-  outline: none;
-`;
-
-const LinkButton = styled(DefaultButton)`
-  text-decoration: underline;
-  cursor: pointer;
-  background-color: transparent;
-  color: #7de3c5;
-`;
-
-const CardButton = styled.button`
   margin: 0.5rem;
   width: 100px;
   height: 100px;
+  background: ${selected => selected ? 'green' : 'grey'};
   background: linear-gradient(90deg, rgba(197, 196, 196, 0.47) 0%, rgba(166, 165, 165, 0.47) 100.96%);
   box-shadow: 6px 6px 12px rgba(156, 156, 156, 0.6);
   border-radius: 15px;
@@ -75,12 +63,8 @@ const CardButton = styled.button`
   outline: none;
   transition: all .2s ease-in-out;
   transform: scale(${({selected}) => selected ? 1.25 : 1});
-
-  &:hover {
+  :hover {
     cursor: pointer;
     transform: scale(1.1);
   }
-  /* &:active:after {
-    transform: scale(1.25);
-  } */
 `;

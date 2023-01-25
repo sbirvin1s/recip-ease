@@ -48,7 +48,7 @@ const config = {
         },
         proxy: [
           {
-            context: ['/ingredient', '/recipes'],
+            context: ['/ingredient', '/recipes', '/auth', '/user'],
             target: 'http://localhost:3000'
           }
         ],
@@ -63,5 +63,6 @@ module.exports = () => {
     } else {
         config.mode = 'development';
     }
+
     return config;
 };

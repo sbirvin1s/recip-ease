@@ -1,5 +1,5 @@
 /*========== EXTERNAL MODULES ==========*/
-
+require('dotenv').config();
 
 /*========== INTERNAL MODULES ==========*/
 const {
@@ -10,9 +10,17 @@ const {
   findBrand,
 } = require('../../database');
 
+const {
+  FIREBASE_API_KEY,
+  FIREBASE_AUTH_DOMAIN,
+  FIREBASE_PROJECT_ID,
+  FIREBASE_STORAGE_BUCKET,
+  FIREBASE_MESSAGING_SENDER_ID,
+  FIREBASE_APP_ID,
+} = process.env;
+
 /*========== EXPORTS ==========*/
 module.exports = {
-
 /*--- GET REQUESTS ---*/
   getRecipes: (req, res) => {
     findAllRecipes()
@@ -35,6 +43,15 @@ module.exports = {
       console.error(err);
       return res.status(500).json({Error: 'Something went wrong processing your request'});
     })
+  },
+
+  /** Handles requests for individual users
+   *
+   * @param {*} req -
+   * @param {*} res
+   */
+  getUser: (req, res) => {
+    res.json(req.params);
   },
 
 /*--- POST REQUESTS ---*/
@@ -67,5 +84,15 @@ module.exports = {
       console.error(err);
       return res.status(500).json({Error: 'Something went wrong while adding your ingredient'});
     })
+  },
+
+/*--- PUT REQUESTS ---*/
+  /** Handles creating and updating the targeted user profile
+   * @param {object} req - expects a user profile object containing all values for the user profile
+   * @param {object} res
+   * @return {string} status 201 if success or error if not
+  */
+  updateUserProfile: (req, res) => {
+    res.json(req.body);
   },
 }

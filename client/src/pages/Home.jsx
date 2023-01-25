@@ -9,6 +9,7 @@ import ShoppingList from './ShoppingList.jsx';
 import AddRecipe from './AddRecipe.jsx';
 import Recipes from './Recipes.jsx';
 import DiaryItem from '../components/DiaryItem.jsx';
+import Button from '../components/Button.jsx';
 
 
 /*========== EXPORTS ==========*/
@@ -87,8 +88,13 @@ export default function Home() {
   const renderDateSelector = () => {
     return (
       <>
-        <Row>
-          <button>prev</button> November 11th, 2022 <button>next</button>
+        <Row
+          style={{
+            justifyContent: 'space-evenly',
+            width: '100%',
+          }}
+        >
+          <Button>prev</Button> November 11th, 2022 <Button>next</Button>
         </Row>
       </>
     )

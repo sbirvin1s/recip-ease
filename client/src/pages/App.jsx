@@ -5,26 +5,24 @@ import styled from 'styled-components';
 import axios from 'axios';
 
 /*========== INTERNAL MODULES ==========*/
-import Home from './Home.jsx';
-import ShoppingList from './ShoppingList.jsx';
-import AddRecipe from './AddRecipe.jsx';
-import AddIngredient from './AddIngredient.jsx';
-import Recipes from './Recipes.jsx';
-import RecipeInfo from './RecipeInfo.jsx';
+import Modal from '../components/Modal.jsx';
+import Button from '../components/Button.jsx';
 import Header from '../components/Header.jsx';
 import NavBar from '../components/NavBar.jsx';
-import { GlobalStyle } from '../../dist/stylesheets';
+import { GlobalStyle, Page, Row } from '../../dist/stylesheets';
+import { useAuth } from '../contexts/AuthContext.js';
 
 
 /*========== EXPORTS ==========*/
 export default function App() {
 
   /*----- STATE HOOKS -----*/
-    const [showForm, setShowForm] = useState(false);
+    const [showSignIn, setShowSignIn] = useState(false);
     const [showSearchForm, setShowSearchForm] = useState(false);
     const [recipes, setRecipes] = useState([]);
+    const { currentUser } = useAuth();
 
-  /*----- LIFESTYLE METHODS -----*/
+  /*----- LIFECYCLE METHODS -----*/
   useEffect(() =>  {
       const localRecipes = Object.keys(localStorage);
       const newRecipes = localRecipes.map(recipe => localRecipes[recipe] = JSON.parse(localStorage[recipe]))
@@ -43,16 +41,47 @@ export default function App() {
   }
 
   /*----- RENDER METHODS -----*/
+  const renderSignInStatus = () => {
+    if (!currentUser) {
+      return (
+        <Link to={'LogIn'}>Sign In</Link>
+      )
+    } else {
+      return (
+        <ProfilePlaceholder> <Link to={'Profile'}>P</Link></ProfilePlaceholder>
+      )
+    }
+  }
+
+  // const renderSignInForm = () => {
+  //   return (
+  //     <Modal
+  //       showModal={showSignIn}
+  //       setShowModal={setShowSignIn}
+  //     >
+  //       <Page style={{alignItems: 'space-evenly'}}>
+  //         <Button>Sign In</Button>
+  //         <Button>Sign In with Google</Button>
+  //         <Button>Create Account</Button>
+  //       </Page>
+  //     </Modal>
+  //   )
+  // }
 
   /*----- RENDERER -----*/
   return (
     <>
       <GlobalStyle />
-        <Header>
-          <ProfilePlaceholder>P</ProfilePlaceholder>
-        </Header>
-        <Outlet />
-        <NavBar> <Link to={'/'}>Home</Link> <Link to={'Recipes'}>Recipes</Link> <Link to={'AddRecipe'}>Add Recipe</Link> <Link to={'ShoppingList'}>Shopping List</Link> </NavBar>
+      <Header>
+        {renderSignInStatus()}
+      </Header>
+      <Outlet />
+      <NavBar>
+        <Link to={'/'}>Home</Link>
+        <Link to={'Recipes'}>Recipes</Link>
+        <Link to={'AddRecipe'}>Add Recipe</Link>
+        <Link to={'ShoppingList'}>Shopping List</Link>
+      </NavBar>
     </>
   )
 }

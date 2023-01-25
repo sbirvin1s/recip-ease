@@ -5,6 +5,8 @@ import { RouterProvider } from 'react-router-dom';
 
 /*========== INTERNAL MODULES ==========*/
 import { router } from './utils/routes.js';
+import { AuthProvider } from './contexts/AuthContext.js';
+import { UserProvider } from './contexts/UserContext.js';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root')
@@ -13,6 +15,10 @@ const root = ReactDOM.createRoot(
 /*========== EXPORTS ==========*/
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <UserProvider>
+        <RouterProvider router={router} />
+      </UserProvider>
+    </AuthProvider>
   </React.StrictMode>
 );
