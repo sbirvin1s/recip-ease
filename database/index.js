@@ -21,6 +21,47 @@ pool.connect()
 
 /*========== EXPORTS ==========*/
 module.exports = {
+  /*----- RECIPE METHODS -----*/
+  /** Adds new recipe to the database
+    * @param {object} recipe - contains name, img, servings_count, prep_time, instructions, and array of ingredients
+    * @return {promise}
+  */
+  /* TODO: add functionality to create scannable barcode for recipes
+    * unique key, with an alpha-numeric composition to prevent collisions with UPCs
+    * generate upon adding to databse and return barcode / QR code to be shared or printed as a label
+  */
+  /* NOTE: will need to send information to ingredient list for each ingredient
+    * will need to perform sum for each nutrient (might have this value stored on each recipe or calculate on demand)
+    * will need to insert record of each ingredient (ingredient_id) and recipe_id into ingredient_list table
+  */
+  addRecipe: ({
+    name = 'carrots and potatoes',
+    img = null, servings  = 6,
+    prep = 30, instructions  = 'cook it',
+    ingredients = [[416236, 10, 'g'], [636447, 20, 'g'], [145537, 30, 'g'], [618610, 40, 'g']],
+    userId }) => {
+
+    return pool.query(
+      'INSERT INTO recipes (recipe_name, recipe_img, servings, prep_time, instructions) \
+      VALUES (($1), ($2), ($3), ($4), ($5)) \
+      RETURNING id',
+      [name, img, servings, prep, instructions]
+    )
+    .then(id => {
+      let recipeId = id.rows[0].id;
+      // pool.query('INSERT INTO recipe_book VALUES (($1), ($2))', [userId, recipeId]);
+      return ingredients.forEach(ingredient => {
+        [ingredientName, ingredientAmount, ingredientUnit] = ingredient;
+        return pool.query(
+          'INSERT INTO ingredient_list (recipe_id, ingredient_id, ingredient_amount, ingredient_unit) \
+          VALUES (($1), ($2), ($3), ($4))',
+          [recipeId, ingredientName, ingredientAmount, ingredientUnit]
+        )
+      })
+    })
+    .catch(err => console.error(`Unable to retrieve ingredient due to ${err}`))
+  },
+
   /** Returns all recipes in the database
    * @param {number} page - page number to return. Default of 1 that adjusts to 0 after logic check
    * @param {number} count - number of items per page. Default of 20
@@ -74,46 +115,43 @@ module.exports = {
     return pool.query('SELECT * FROM recipes WHERE = ($1)', [recipe, servings, prepTime, calories])
   },
 
-  /** Adds new recipe to the database
-   * @param {object} recipe - contains name, img, servings_count, prep_time, instructions, and array of ingredients
+
+
+
+  /*----- INGREDIENT METHODS -----*/
+  /** Adds new ingredient to database
+   * @param {object} newIngredient - Object containing all nutrition information for new ingredient
    * @return {promise}
   */
-  /* TODO: add functionality to create scannable barcode for recipes
-    * unique key, with an alpha-numeric composition to prevent collisions with UPCs
-    * generate upon adding to databse and return barcode / QR code to be shared or printed as a label
-  */
-  /* NOTE: will need to send information to ingredient list for each ingredient
-    * will need to perform sum for each nutrient (might have this value stored on each recipe or calculate on demand)
-    * will need to insert record of each ingredient (ingredient_id) and recipe_id into ingredient_list table
-  */
-  addRecipe: ({
-    name = 'carrots and potatoes',
-    img = null, servings  = 6,
-    prep = 30, instructions  = 'cook it',
-    ingredients = [[416236, 10, 'g'], [636447, 20, 'g'], [145537, 30, 'g'], [618610, 40, 'g']],
-    userId }) => {
+  addIngredient: (newIngredient) => {
+    const {
+        ingredientName, brand, foodCategory,
+        barcode, servingSize, servingUnit,
+        servingPerContainer, calories, totalFat,
+        satFat, transFat, polyUnSatFat,
+        monoUnSatFat, cholesterol, sodium,
+        totalCarbs, fiber, sugar,
+        protein, vitaminA, vitaminC, vitaminD,
+        calcium, iron, potassium
+      } = newIngredient;
 
-    return pool.query(
-      'INSERT INTO recipes (recipe_name, recipe_img, servings, prep_time, instructions) \
-      VALUES (($1), ($2), ($3), ($4), ($5)) \
-      RETURNING id',
-      [name, img, servings, prep, instructions]
-    )
-    .then(id => {
-      let recipeId = id.rows[0].id;
-      // pool.query('INSERT INTO recipe_book VALUES (($1), ($2))', [userId, recipeId]);
-      return ingredients.forEach(ingredient => {
-        [ingredientName, ingredientAmount, ingredientUnit] = ingredient;
-        return pool.query(
-          'INSERT INTO ingredient_list (recipe_id, ingredient_id, ingredient_amount, ingredient_unit) \
-          VALUES (($1), ($2), ($3), ($4))',
-          [recipeId, ingredientName, ingredientAmount, ingredientUnit]
-        )
-      })
-    })
-    .catch(err => console.error(`Unable to retrieve ingredient due to ${err}`))
+      return pool.query(
+        'INSERT INTO ingredients ( \
+          ingredient, brand, food_category, upc, serving_size, serving_unit, servings_per_container, calories, total_fat, sat_fat, trans_fat, poly_fat, mono_fat, cholesterol, sodium, total_carbs, fiber, sugar, protein, vitamin_a, vitamin_c, vitamin_d, calcium, iron, potassium \
+        ) \
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25) \
+        RETURNING *;',
+        [
+        ingredientName, brand, foodCategory,
+        barcode, servingSize, servingUnit,
+        servingPerContainer, calories, totalFat,
+        satFat, transFat, polyUnSatFat,
+        monoUnSatFat, cholesterol, sodium,
+        totalCarbs, fiber, sugar,
+        protein, vitaminA, vitaminC, vitaminD,
+        calcium, iron, potassium
+      ])
   },
-
   /** Searches the database for an ingredient whose name matches the search term
     * @param {string} ingredient - name of the ingredient
     * @return {promise}
@@ -156,40 +194,7 @@ module.exports = {
   },
 
 
-  /** Adds new ingredient to database
-   * @param {object} newIngredient - Object containing all nutrition information for new ingredient
-   * @return {promise}
-  */
-  addIngredient: (newIngredient) => {
-    const {
-        ingredientName, brand, foodCategory,
-        barcode, servingSize, servingUnit,
-        servingPerContainer, calories, totalFat,
-        satFat, transFat, polyUnSatFat,
-        monoUnSatFat, cholesterol, sodium,
-        totalCarbs, fiber, sugar,
-        protein, vitaminA, vitaminC, vitaminD,
-        calcium, iron, potassium
-      } = newIngredient;
-
-      return pool.query(
-        'INSERT INTO ingredients ( \
-          ingredient, brand, food_category, upc, serving_size, serving_unit, servings_per_container, calories, total_fat, sat_fat, trans_fat, poly_fat, mono_fat, cholesterol, sodium, total_carbs, fiber, sugar, protein, vitamin_a, vitamin_c, vitamin_d, calcium, iron, potassium \
-        ) \
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25) \
-        RETURNING *;',
-        [
-        ingredientName, brand, foodCategory,
-        barcode, servingSize, servingUnit,
-        servingPerContainer, calories, totalFat,
-        satFat, transFat, polyUnSatFat,
-        monoUnSatFat, cholesterol, sodium,
-        totalCarbs, fiber, sugar,
-        protein, vitaminA, vitaminC, vitaminD,
-        calcium, iron, potassium
-      ])
-  },
-
+  /*----- USER METHODS -----*/
   /** Adds new user to database
    * @param {object} uid - Object containing a string that is a unique identifier for the user from Firebase
    * @param {object} userInfo - Object containing all user information to be added to the database
@@ -236,7 +241,7 @@ module.exports = {
       currentWeight,
       fitnessLevel,
       weightGoals,
-    } = body;
+    } = userInfo;
 
     return pool.query(
     'UPDATE users \
