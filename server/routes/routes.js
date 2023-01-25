@@ -8,6 +8,7 @@ const {
   findAllRecipes,
   findIngredient,
   findBrand,
+  editUser,
 } = require('../../database');
 
 const {
@@ -76,10 +77,7 @@ module.exports = {
   */
   writeIngredient: (req, res) => {
     addIngredient(req.body)
-    .then(response => {
-      res.statusCode = 201;
-      res.json(response.rows[0]);
-    })
+    .then(response => res.status(201).json(response.rows[0]))
     .catch(err => {
       console.error(err);
       return res.status(500).json({Error: 'Something went wrong while adding your ingredient'});
@@ -92,7 +90,17 @@ module.exports = {
    * @param {object} res
    * @return {string} status 201 if success or error if not
   */
-  updateUserProfile: (req, res) => {
+  updateUserProfile: async (req, res) => {
+    const uuid = req.params;
+    const userInfo = req.body;
+
+    try {
+      await editUser(uuid, userInfo);
+
+    } catch (err) {
+      console.error(err)
+      return res.status(500).json({Error: 'Something went wrong while updating your profile'});
+    }
     res.json(req.body);
   },
 }

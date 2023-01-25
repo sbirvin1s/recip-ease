@@ -177,4 +177,11 @@ module.exports = {
       ])
   },
 
+  editUser: (uuid, userInfo) => {
+    console.log('uuid: ', uuid, 'userInfo: ', userInfo);
+    // return pool.query(
+    // 'INSERT INTO ingredients  \
+    // VALUES \
+    // RETURNING *;', [])
+  },
 }
