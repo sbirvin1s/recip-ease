@@ -8,6 +8,7 @@ const {
   findAllRecipes,
   findIngredient,
   findBrand,
+  addUser,
   editUser,
 } = require('../../database');
 
@@ -84,22 +85,40 @@ module.exports = {
     })
   },
 
+    /** Handles creating a new user profile
+   * @param {object} req - expects a user profile object containing all values for the user profile
+   * @param {object} res
+   * @return {string} status 201 if success or error if not
+  */
+    writeUserProfile: async (req, res) => {
+      const uid = req.params;
+      const userInfo = req.body.body;
+
+      try {
+        await addUser(uid, userInfo);
+        return res.status(201);
+      } catch (err) {
+        console.error(err)
+        return res.status(500).json({Error: 'Something went wrong while creating your profile'});
+      }
+    },
+
 /*--- PUT REQUESTS ---*/
-  /** Handles creating and updating the targeted user profile
+  /** Handles creating the targeted user profile
    * @param {object} req - expects a user profile object containing all values for the user profile
    * @param {object} res
    * @return {string} status 201 if success or error if not
   */
   updateUserProfile: async (req, res) => {
-    const uuid = req.params;
-    const userInfo = req.body;
+    const uid = req.params;
+    const userInfo = req.body.body;
 
     try {
-      await editUser(uuid, userInfo);
+      await editUser(uid, userInfo);
+      return res.status(201);
     } catch (err) {
       console.error(err)
       return res.status(500).json({Error: 'Something went wrong while updating your profile'});
     }
-    res.json(req.body);
   },
 }

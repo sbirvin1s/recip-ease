@@ -34,18 +34,21 @@ module.exports = {
       offset = offset * count;
     }
 
-    return pool.query('SELECT row_to_json(recipe) AS recipes \
-    FROM ( \
-      SELECT *, (SELECT json_agg(list) \
-            FROM ( \
-              SELECT * FROM ( \
-                SELECT ingredient_list.recipe_id, ingredients.ingredient, ingredients.calories, ingredient_list.ingredient_amount, ingredient_list.ingredient_unit FROM ingredient_list \
-                INNER JOIN ingredients \
-                ON ingredient_list.ingredient_id = ingredients.id \
-              ) AS ingredients WHERE recipe_id = r.id \
-            ) list \
-    ) AS ingredient_list  \
-    FROM recipes AS r) recipe OFFSET ($1) ROWS LIMIT ($2)', [offset, count])
+    return pool.query(
+      'SELECT row_to_json(recipe) AS recipes \
+      FROM ( \
+        SELECT *, (SELECT json_agg(list) \
+              FROM ( \
+                SELECT * FROM ( \
+                  SELECT ingredient_list.recipe_id, ingredients.ingredient, ingredients.calories, ingredient_list.ingredient_amount, ingredient_list.ingredient_unit FROM ingredient_list \
+                  INNER JOIN ingredients \
+                  ON ingredient_list.ingredient_id = ingredients.id \
+                ) AS ingredients WHERE recipe_id = r.id \
+              ) list \
+      ) AS ingredient_list  \
+      FROM recipes AS r) recipe OFFSET ($1) ROWS LIMIT ($2)',
+      [offset, count]
+    )
     .then(response => response.rows)
     .catch(err => console.error(`Unable to retrieve recipes due to ${err}`))
   },
@@ -90,15 +93,24 @@ module.exports = {
     ingredients = [[416236, 10, 'g'], [636447, 20, 'g'], [145537, 30, 'g'], [618610, 40, 'g']],
     userId }) => {
 
-    return pool.query('INSERT INTO recipes (recipe_name, recipe_img, servings, prep_time, instructions) VALUES (($1), ($2), ($3), ($4), ($5)) RETURNING id', [name, img, servings, prep, instructions])
+    return pool.query(
+      'INSERT INTO recipes (recipe_name, recipe_img, servings, prep_time, instructions) \
+      VALUES (($1), ($2), ($3), ($4), ($5)) \
+      RETURNING id',
+      [name, img, servings, prep, instructions]
+    )
     .then(id => {
       let recipeId = id.rows[0].id;
       // pool.query('INSERT INTO recipe_book VALUES (($1), ($2))', [userId, recipeId]);
       return ingredients.forEach(ingredient => {
         [ingredientName, ingredientAmount, ingredientUnit] = ingredient;
-        return pool.query('INSERT INTO ingredient_list (recipe_id, ingredient_id, ingredient_amount, ingredient_unit) VALUES (($1), ($2), ($3), ($4))', [recipeId, ingredientName, ingredientAmount, ingredientUnit])
-        })
+        return pool.query(
+          'INSERT INTO ingredient_list (recipe_id, ingredient_id, ingredient_amount, ingredient_unit) \
+          VALUES (($1), ($2), ($3), ($4))',
+          [recipeId, ingredientName, ingredientAmount, ingredientUnit]
+        )
       })
+    })
     .catch(err => console.error(`Unable to retrieve ingredient due to ${err}`))
   },
 
@@ -165,7 +177,8 @@ module.exports = {
           ingredient, brand, food_category, upc, serving_size, serving_unit, servings_per_container, calories, total_fat, sat_fat, trans_fat, poly_fat, mono_fat, cholesterol, sodium, total_carbs, fiber, sugar, protein, vitamin_a, vitamin_c, vitamin_d, calcium, iron, potassium \
         ) \
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25) \
-        RETURNING *;', [
+        RETURNING *;',
+        [
         ingredientName, brand, foodCategory,
         barcode, servingSize, servingUnit,
         servingPerContainer, calories, totalFat,
@@ -177,11 +190,57 @@ module.exports = {
       ])
   },
 
-  editUser: (uuid, userInfo) => {
-    console.log('uuid: ', uuid, 'userInfo: ', userInfo);
-    // return pool.query(
-    // 'INSERT INTO ingredients  \
-    // VALUES \
-    // RETURNING *;', [])
+  /** Adds new user to database
+   * @param {object} uid - Object containing a string that is a unique identifier for the user from Firebase
+   * @param {object} userInfo - Object containing all user information to be added to the database
+   * @return {promise}
+  */
+  addUser: (uid, userInfo) => {
+    const {
+      firstName,
+      lastName,
+      age,
+      sex,
+      height,
+      currentWeight,
+      fitnessLevel,
+      weightGoals,
+    } = userInfo;
+
+    return pool.query(
+    'INSERT INTO users (uid, first_name, last_name, age, sex, height, current_weight, fitness_level, weight_goals) \
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);',
+    [uid, firstName, lastName, age, sex, height, currentWeight, fitnessLevel, weightGoals])
+    .then(userCreated => {
+      return pool.query(
+        'INSERT INTO user_meta_data (age, height, current_weight, fitness_level, weight_goals) \
+        VALUES ($1, $2, $3, $4, $5);',
+        [age, height, currentWeight, fitnessLevel, weightGoals]
+      )
+    })
+    .catch(err => console.error(`Unable to create user due to ${err}`))
+  },
+
+  /** Updates user profile on the database
+   * @param {object} uid - Object containing a string that is a unique identifier for the user from Firebase
+   * @param {object} userInfo - Object containing all user information to be updated on the database
+   * @return {promise}
+  */
+  editUser: (uid, userInfo) => {
+    const {
+      firstName,
+      lastName,
+      age,
+      sex,
+      height,
+      currentWeight,
+      fitnessLevel,
+      weightGoals,
+    } = body;
+
+    return pool.query(
+    'UPDATE users \
+    SET first_name = ($2), last_name = ($3), age = ($4), sex = ($5), height = ($6), current_weight = ($7), fitness_level = ($8), weight_goals = ($9)\
+    WHERE uid = ($1);', [uid, firstName, lastName, age, sex, height, currentWeight, fitnessLevel, weightGoals])
   },
 }

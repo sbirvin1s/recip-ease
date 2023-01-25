@@ -67,7 +67,7 @@ export default function WeightGoals() {
           </Label>
         <Row>
           <Button variant='link' onClick={handleBack} >Back</Button>
-          <Button onClick={handleNext} >Complete</Button>
+          <Button onClick={handleNext} >Next</Button>
         </Row>
       </Form>
     </>

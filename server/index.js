@@ -15,6 +15,7 @@ const {
   getIngredient,
   writeIngredient,
   getUser,
+  writeUserProfile,
   updateUserProfile,
 } = require('./routes/routes');
 
@@ -55,9 +56,10 @@ app.get('/user/:username', getUser);
 /*--- POST ---*/
 app.post('/ingredient/new', writeIngredient);
 app.post('/recipes', writeRecipe);
+app.post('/user/create/:uid', writeUserProfile);
 
 /*--- PUT ---*/
-app.put('/user/update/:uuid', updateUserProfile); // creates/updates user profile
+app.put('/user/update/:uid', updateUserProfile);
 
 
 /*========== SERVER CONNECTIONS ==========*/
