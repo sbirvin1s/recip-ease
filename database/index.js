@@ -213,9 +213,10 @@ module.exports = {
     } = userInfo;
 
     return pool.query(
-    'INSERT INTO users (uid, first_name, last_name, age, sex, height, current_weight, fitness_level, weight_goals) \
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);',
-    [uid, firstName, lastName, age, sex, height, currentWeight, fitnessLevel, weightGoals])
+      'INSERT INTO users (uid, first_name, last_name, age, sex, height, current_weight, fitness_level, weight_goals) \
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);',
+      [uid, firstName, lastName, age, sex, height, currentWeight, fitnessLevel, weightGoals]
+    )
     .then(userCreated => {
       return pool.query(
         'INSERT INTO user_meta_data (age, height, current_weight, fitness_level, weight_goals) \
@@ -224,6 +225,22 @@ module.exports = {
       )
     })
     .catch(err => console.error(`Unable to create user due to ${err}`))
+  },
+
+  /** Retrieves targeted user information from database
+   * @param {object} uid - Object containing a string that is a unique identifier for the user from Firebase
+   * @return {promise}
+  */
+  findUser: (uid) => {
+    return pool.query('SELECT * FROM users WHERE uid = ($1);', [uid])
+  },
+
+  /** Retrieves all of the targeted user's meta data from database
+   * @param {object} uid - Object containing a string that is a unique identifier for the user from Firebase
+   * @return {promise}
+  */
+  findUserMetaData: (uid) => {
+    return pool.query('SELECT * FROM users WHERE uid = ($1);', [uid])
   },
 
   /** Updates user profile on the database
@@ -244,8 +261,23 @@ module.exports = {
     } = userInfo;
 
     return pool.query(
-    'UPDATE users \
-    SET first_name = ($2), last_name = ($3), age = ($4), sex = ($5), height = ($6), current_weight = ($7), fitness_level = ($8), weight_goals = ($9)\
-    WHERE uid = ($1);', [uid, firstName, lastName, age, sex, height, currentWeight, fitnessLevel, weightGoals])
+      'UPDATE users \
+      SET first_name = ($2), last_name = ($3), age = ($4), sex = ($5), height = ($6), current_weight = ($7), fitness_level = ($8), weight_goals = ($9)\
+      WHERE uid = ($1) \
+      RETURNING id;',
+      [uid, firstName, lastName, age, sex, height, currentWeight, fitnessLevel, weightGoals]
+   )
+   .then(updateComplete => {
+    console.log(updateComplete.rows[0].id);
+    const id = updateComplete.rows[0].id;
+      return pool.query(
+        'SELECT * , MAX(created_at) \
+        FROM  user_meta_data \
+        GROUP BY user_id; \
+        WHERE user_id = ($1);' ,
+        [id]
+      )
+      .then(queryComplete => console.log(queryComplete.rows[0]))
+   })
   },
 }

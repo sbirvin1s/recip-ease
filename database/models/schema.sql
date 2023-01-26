@@ -31,7 +31,9 @@ CREATE TABLE IF NOT EXISTS users (
   current_weight           TEXT,
   fitness_level            TEXT,
   calorie_goal             TEXT,
-  weight_goals             TEXT
+  weight_goals             TEXT,
+  created_at               TIMESTAMP NOT NULL NOW(),
+  updated_at               TIMESTAMP NOT NULL NOW()
 );
 
 CREATE TABLE IF NOT EXISTS user_meta_data (
@@ -42,8 +44,48 @@ CREATE TABLE IF NOT EXISTS user_meta_data (
   current_weight           TEXT,
   fitness_level            TEXT,
   calorie_goal             TEXT,
-  weight_goals             TEXT
+  weight_goals             TEXT,
+  created_at               TIMESTAMP NOT NULL NOW(),
+  updated_at               TIMESTAMP NOT NULL NOW()
 );
+
+-- Creates function and trigger to add created_at timestamp to users and users_meta_data tables
+-- CREATE OR REPLACE FUNCTION trigger_set_timestamp()
+-- RETURNS TRIGGER AS $$
+-- BEGIN
+--   NEW.updated_at = NOW();
+--   RETURN NEW;
+-- END;
+-- $$ LANGUAGE plpgsql;
+
+-- CREATE TRIGGER set_timestamp
+-- BEFORE UPDATE ON users
+-- FOR EACH ROW
+-- EXECUTE PROCEDURE trigger_update_timestamp();
+
+-- CREATE TRIGGER set_timestamp
+-- BEFORE UPDATE ON user_meta_data
+-- FOR EACH ROW
+-- EXECUTE PROCEDURE trigger_update_timestamp();
+
+-- Creates function and trigger to add updated_at timestamp to users and users_meta_data tables
+CREATE OR REPLACE FUNCTION trigger_update_timestamp()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON users
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_update_timestamp();
+
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON user_meta_data
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_update_timestamp();
 
 CREATE TABLE IF NOT EXISTS recipes (
   id                       SERIAL PRIMARY KEY,

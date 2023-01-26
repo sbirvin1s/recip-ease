@@ -9,6 +9,7 @@ const {
   findIngredient,
   findBrand,
   addUser,
+  findUser,
   editUser,
 } = require('../../database');
 
@@ -52,8 +53,30 @@ module.exports = {
    * @param {*} req -
    * @param {*} res
    */
-  getUser: (req, res) => {
+  getUser: async (req, res) => {
     res.json(req.params);
+    const uid = req.params.uid;
+
+    try {
+      const user = await findUser(uid);
+      return res.status(200).json(user);
+    } catch {
+      console.error(err);
+      return res.status(500).json({Error: 'Something went wrong while retrieving your information'});
+    }
+  },
+
+  getUserMetaData: async (req, res) => {
+    res.json(req.params);
+    const uid = req.params.uid;
+
+    try {
+      const user = await findUserMetaData(uid);
+      return res.status(200).json(user);
+    } catch {
+      console.error(err);
+      return res.status(500).json({Error: 'Something went wrong while retrieving your meta data'});
+    }
   },
 
 /*--- POST REQUESTS ---*/
@@ -91,7 +114,7 @@ module.exports = {
    * @return {string} status 201 if success or error if not
   */
     writeUserProfile: async (req, res) => {
-      const uid = req.params;
+      const uid = req.params.uid;
       const userInfo = req.body.body;
 
       try {
@@ -110,7 +133,7 @@ module.exports = {
    * @return {string} status 201 if success or error if not
   */
   updateUserProfile: async (req, res) => {
-    const uid = req.params;
+    const uid = req.params.uid;
     const userInfo = req.body.body;
 
     try {

@@ -16,7 +16,7 @@ export default function LogIn() {
   /*----- STATE HOOKS -----*/
   const [email, setEmail]  = useState();
   const [password, setPassword] = useState();
-  const { logIn } = useAuth();
+  const { logIn, currentUser } = useAuth();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -33,6 +33,8 @@ export default function LogIn() {
       setError('');
       setLoading(true);
       await logIn(email, password);
+      axios.get(`${currentUser.uid}`)
+      .then
 
     } catch (err){
       console.error('Log In Error: ', err);

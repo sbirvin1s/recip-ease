@@ -34,6 +34,16 @@ export default function SignUpReview() {
     navigate('/Profile');
   }
 
+  const handleUpdate = event => {
+    event.preventDefault();
+    axios.put(`/user/update/${currentUser.uid}`, {
+      body: userInfo
+    })
+    .then(submitResponse => console.log(submitResponse.data))
+    .catch(err => console.error(`Unable to submit due to error: ${err}`))
+    navigate('/Profile');
+  }
+
   const handleBack = event => {
     event.preventDefault();
     navigate('/FitnessLevelSelector');
@@ -77,6 +87,7 @@ export default function SignUpReview() {
         <Button variant='link' onClick={handleBack} >Back</Button>
         <Button onClick={handleSubmit} >Complete</Button>
       </Row>
+        <Button onClick={handleUpdate} >Update</Button>
     </Page>
   )
 }
