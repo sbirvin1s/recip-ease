@@ -50,8 +50,10 @@ module.exports = {
     .then(id => {
       let recipeId = id.rows[0].id;
       // pool.query('INSERT INTO recipe_book VALUES (($1), ($2))', [userId, recipeId]);
+
       return ingredients.forEach(ingredient => {
-        [ingredientName, ingredientAmount, ingredientUnit] = ingredient;
+        const [ingredientName, ingredientAmount, ingredientUnit] = ingredient;
+
         return pool.query(
           'INSERT INTO ingredient_list (recipe_id, ingredient_id, ingredient_amount, ingredient_unit) \
           VALUES (($1), ($2), ($3), ($4))',
@@ -69,6 +71,7 @@ module.exports = {
   */
   findAllRecipes: (page = 1, count = 20) => {
     let offset = page - 1;
+
     if (offset < 0) {
       offset = 0;
     } else if (offset > 0) {
@@ -79,13 +82,13 @@ module.exports = {
       'SELECT row_to_json(recipe) AS recipes \
       FROM ( \
         SELECT *, (SELECT json_agg(list) \
-              FROM ( \
-                SELECT * FROM ( \
-                  SELECT ingredient_list.recipe_id, ingredients.ingredient, ingredients.calories, ingredient_list.ingredient_amount, ingredient_list.ingredient_unit FROM ingredient_list \
-                  INNER JOIN ingredients \
-                  ON ingredient_list.ingredient_id = ingredients.id \
-                ) AS ingredients WHERE recipe_id = r.id \
-              ) list \
+          FROM ( \
+            SELECT * FROM ( \
+              SELECT ingredient_list.recipe_id, ingredients.ingredient, ingredients.calories, ingredient_list.ingredient_amount, ingredient_list.ingredient_unit FROM ingredient_list \
+              INNER JOIN ingredients \
+              ON ingredient_list.ingredient_id = ingredients.id \
+            ) AS ingredients WHERE recipe_id = r.id \
+          ) list \
       ) AS ingredient_list  \
       FROM recipes AS r) recipe OFFSET ($1) ROWS LIMIT ($2)',
       [offset, count]
@@ -116,8 +119,6 @@ module.exports = {
   },
 
 
-
-
   /*----- INGREDIENT METHODS -----*/
   /** Adds new ingredient to database
    * @param {object} newIngredient - Object containing all nutrition information for new ingredient
@@ -125,49 +126,34 @@ module.exports = {
   */
   addIngredient: (newIngredient) => {
     const {
-        ingredientName, brand, foodCategory,
-        barcode, servingSize, servingUnit,
-        servingPerContainer, calories, totalFat,
-        satFat, transFat, polyUnSatFat,
-        monoUnSatFat, cholesterol, sodium,
-        totalCarbs, fiber, sugar,
-        protein, vitaminA, vitaminC, vitaminD,
-        calcium, iron, potassium
-      } = newIngredient;
+      ingredientName, brand, foodCategory, barcode, servingSize, servingUnit,
+      servingPerContainer, calories, totalFat, satFat, transFat, polyUnSatFat,
+      monoUnSatFat, cholesterol, sodium, totalCarbs, fiber, sugar,
+      protein, vitaminA, vitaminC, vitaminD, calcium, iron, potassium
+    } = newIngredient;
 
-      return pool.query(
-        'INSERT INTO ingredients ( \
-          ingredient, brand, food_category, upc, serving_size, serving_unit, servings_per_container, calories, total_fat, sat_fat, trans_fat, poly_fat, mono_fat, cholesterol, sodium, total_carbs, fiber, sugar, protein, vitamin_a, vitamin_c, vitamin_d, calcium, iron, potassium \
-        ) \
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25) \
-        RETURNING *;',
-        [
-        ingredientName, brand, foodCategory,
-        barcode, servingSize, servingUnit,
-        servingPerContainer, calories, totalFat,
-        satFat, transFat, polyUnSatFat,
-        monoUnSatFat, cholesterol, sodium,
-        totalCarbs, fiber, sugar,
-        protein, vitaminA, vitaminC, vitaminD,
-        calcium, iron, potassium
-      ])
-    return pool.query('INSERT INTO recipes (recipe_name, recipe_img, servings, prep_time, instructions) VALUES (($1), ($2), ($3), ($4), ($5)) RETURNING id', [name, img, servings, prep, instructions])
-    .then(id => {
-      let recipeId = id.rows[0].id;
-      // pool.query('INSERT INTO recipe_book VALUES (($1), ($2))', [userId, recipeId]);
-      return ingredients.forEach(ingredient => {
-        [ingredientName, ingredientAmount, ingredientUnit] = ingredient;
-        return pool.query('INSERT INTO ingredient_list (recipe_id, ingredient_id, ingredient_amount, ingredient_unit) VALUES (($1), ($2), ($3), ($4))', [recipeId, ingredientName, ingredientAmount, ingredientUnit])
-      })
-    })
-    .catch(err => console.error(`Unable to retrieve ingredient due to ${err}`))
+    return pool.query(
+      'INSERT INTO ingredients ( \
+        ingredient, brand, food_category, upc, serving_size, serving_unit, servings_per_container, calories, total_fat, sat_fat, trans_fat, poly_fat, mono_fat, cholesterol, sodium, total_carbs, fiber, sugar, protein, vitamin_a, vitamin_c, vitamin_d, calcium, iron, potassium \
+      ) \
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25) \
+      RETURNING *;',
+      [
+      ingredientName, brand, foodCategory, barcode, servingSize, servingUnit,
+      servingPerContainer, calories, totalFat, satFat, transFat, polyUnSatFat,
+      monoUnSatFat, cholesterol, sodium, totalCarbs, fiber, sugar,
+      protein, vitaminA, vitaminC, vitaminD, calcium, iron, potassium
+      ]
+    )
   },
+
   /** Searches the database for an ingredient whose name matches the search term
     * @param {string} ingredient - name of the ingredient
     * @return {promise}
   */
   findIngredient: ({ ingredient }) => {
     ingredient = ingredient.toLowerCase();
+
     return pool.query('SELECT * FROM ingredients WHERE LOWER(ingredient) LIKE ($1)', ['%' + ingredient + '%'])
     .then(response => response.rows)
     .catch(err => console.error(`Unable to retrieve ingredient due to ${err}`))
@@ -251,21 +237,6 @@ module.exports = {
   */
   findUserMetaData: (uid) => {
     return pool.query('SELECT * FROM users WHERE uid = ($1);', [uid])
-    return pool.query(
-      'INSERT INTO ingredients ( \
-        ingredient, brand, food_category, upc, serving_size, serving_unit, servings_per_container, calories, total_fat, sat_fat, trans_fat, poly_fat, mono_fat, cholesterol, sodium, total_carbs, fiber, sugar, protein, vitamin_a, vitamin_c, vitamin_d, calcium, iron, potassium \
-      ) \
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25) \
-      RETURNING *;', [
-      ingredientName, brand, foodCategory,
-      barcode, servingSize, servingUnit,
-      servingPerContainer, calories, totalFat,
-      satFat, transFat, polyUnSatFat,
-      monoUnSatFat, cholesterol, sodium,
-      totalCarbs, fiber, sugar,
-      protein, vitaminA, vitaminC, vitaminD,
-      calcium, iron, potassium
-    ])
   },
 
   /** Updates user profile on the database
@@ -291,9 +262,10 @@ module.exports = {
       WHERE uid = ($1) \
       RETURNING id;',
       [uid, firstName, lastName, age, sex, height, currentWeight, fitnessLevel, weightGoals]
-   )
+    )
     .then(updateComplete => {
-        const id = updateComplete.rows[0].id;
+      const id = updateComplete.rows[0].id;
+
       return pool.query(
         'INSERT INTO user_meta_data (user_id, age, height, current_weight, fitness_level, weight_goals, created_at) \
         VALUES ($1, $2, $3, $4, $5, $6, NOW());',
