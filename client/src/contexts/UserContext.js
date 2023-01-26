@@ -28,12 +28,27 @@ export function UserProvider({ children }) {
     }))
   }
 
+  const updateInfo = info => {
+    event.preventDefault();
+    setUserInfo(info);
+  }
+
+  const updateSpecificInfo = (name, value) => {
+    event.preventDefault();
+    setUserInfo(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  }
+
   /*----- RENDERER -----*/
   return (
     <UserContext.Provider
       value={{
         userInfo,
+        updateInfo,
         updateUserInfo,
+        updateSpecificInfo,
       }}
     >
       {children}

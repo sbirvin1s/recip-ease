@@ -54,16 +54,24 @@ module.exports = {
    * @param {*} res
    */
   getUser: async (req, res) => {
-    res.json(req.params);
     const uid = req.params.uid;
 
-    try {
-      const user = await findUser(uid);
-      return res.status(200).json(user);
-    } catch {
+    findUser(uid)
+    .then(user => res.status(200).json(user))
+    .catch(err => {
       console.error(err);
-      return res.status(500).json({Error: 'Something went wrong while retrieving your information'});
-    }
+      return res.status(500).json({Error: 'Something went wrong while retrieving your information'})
+    })
+
+    // try {
+    //   const user = await findUser(uid);
+    //   // res.status = 200;
+    //   return res.json(user);
+    //   // return res.status(200).json(user);
+    // } catch (err) {
+    //   console.error(err);
+    //   return res.status(500).json({Error: 'Something went wrong while retrieving your information'});
+    // }
   },
 
   getUserMetaData: async (req, res) => {
