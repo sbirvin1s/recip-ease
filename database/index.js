@@ -198,26 +198,27 @@ module.exports = {
   */
   addUser: (uid, userInfo) => {
     const {
-      firstName,
-      lastName,
+      first_name,
+      last_name,
       age,
       sex,
       height,
-      currentWeight,
-      fitnessLevel,
-      weightGoals,
+      current_weight,
+      fitness_level,
+      calorie_goal,
+      weight_goals,
     } = userInfo;
 
     return pool.query(
-      'INSERT INTO users (uid, first_name, last_name, age, sex, height, current_weight, fitness_level, weight_goals, created_at) \
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, NOW());',
-      [uid, firstName, lastName, age, sex, height, currentWeight, fitnessLevel, weightGoals]
+      'INSERT INTO users (uid, first_name, last_name, age, sex, height, current_weight, fitness_level, calorie_goal, weight_goals, created_at) \
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, NOW());',
+      [uid, first_name, last_name, age, sex, height, current_weight, fitness_level, calorie_goal, weight_goals]
     )
     .then(userCreated => {
       return pool.query(
-        'INSERT INTO user_meta_data (age, height, current_weight, fitness_level, weight_goals, updated_at) \
-        VALUES ($1, $2, $3, $4, $5, NOW());',
-        [age, height, currentWeight, fitnessLevel, weightGoals]
+        'INSERT INTO user_meta_data (age, height, current_weight, fitness_level, calorie_goal, weight_goals, created_at) \
+        VALUES ($1, $2, $3, $4, $5, $6, NOW());',
+        [age, height, current_weight, fitness_level, calorie_goal, weight_goals]
       )
     })
     .catch(err => console.error(`Unable to create user due to ${err}`))
@@ -246,30 +247,31 @@ module.exports = {
   */
   editUser: (uid, userInfo) => {
     const {
-      firstName,
-      lastName,
+      first_name,
+      last_name,
       age,
       sex,
       height,
-      currentWeight,
-      fitnessLevel,
-      weightGoals,
+      current_weight,
+      fitness_level,
+      calorie_goal,
+      weight_goals,
     } = userInfo;
 
     return pool.query(
       'UPDATE users \
-      SET first_name = ($2), last_name = ($3), age = ($4), sex = ($5), height = ($6), current_weight = ($7), fitness_level = ($8), weight_goals = ($9)\
+      SET first_name = ($2), last_name = ($3), age = ($4), sex = ($5), height = ($6), current_weight = ($7), fitness_level = ($8), calorie_goal = ($9), weight_goals = ($10)\
       WHERE uid = ($1) \
       RETURNING id;',
-      [uid, firstName, lastName, age, sex, height, currentWeight, fitnessLevel, weightGoals]
+      [uid, first_name, last_name, age, sex, height, current_weight, fitness_level, calorie_goal, weight_goals]
     )
     .then(updateComplete => {
       const id = updateComplete.rows[0].id;
 
       return pool.query(
-        'INSERT INTO user_meta_data (user_id, age, height, current_weight, fitness_level, weight_goals, created_at) \
-        VALUES ($1, $2, $3, $4, $5, $6, NOW());',
-        [id, age, height, currentWeight, fitnessLevel, weightGoals]
+        'INSERT INTO user_meta_data (user_id, age, height, current_weight, fitness_level, calorie_goal, weight_goals, created_at) \
+        VALUES ($1, $2, $3, $4, $5, $6, $7, NOW());',
+        [id, age, height, current_weight, fitness_level, calorie_goal, weight_goals]
       )
     })
     .catch(err => console.error(`Unable to create user due to ${err}`))

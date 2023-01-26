@@ -32,8 +32,8 @@ CREATE TABLE IF NOT EXISTS users (
   fitness_level            TEXT,
   calorie_goal             TEXT,
   weight_goals             TEXT,
-  created_at               TIMESTAMP NOT NULL NOW(),
-  updated_at               TIMESTAMP NOT NULL NOW()
+  created_at               TIMESTAMP NOT NULL,
+  updated_at               TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS user_meta_data (
@@ -45,8 +45,7 @@ CREATE TABLE IF NOT EXISTS user_meta_data (
   fitness_level            TEXT,
   calorie_goal             TEXT,
   weight_goals             TEXT,
-  created_at               TIMESTAMP NOT NULL NOW(),
-  updated_at               TIMESTAMP NOT NULL NOW()
+  created_at               TIMESTAMP NOT NULL
 );
 
 CREATE OR REPLACE FUNCTION trigger_update_timestamp()

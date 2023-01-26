@@ -27,18 +27,6 @@ app.use(express.json());
 
 /*TODO: Update add Server Side Rendering(SSR) and to use rename current 'Routes' to controllers*/
 
-/*TODO: #32 User Profile - Server Implementation
-  - [ ] Create API route for client and server communication
-    - [ ] GET route to get all user information
-      - [ ] Current Weight, Fitness Level, Weight Loss goals, and daily caloric goal
-  - [ ] POST / PUT route(s) to:
-    - [ ] Create new account
-    - [ ] Update account information
-    - [ ] Add / Update weight
-    - [ ] Add / Update Fitness Level
-    - [ ] Add / Update weight loss goals
-*/
-
 /*NOTE: Server route request logging
  */
 // app.use((req,res,next) => {
