@@ -13,7 +13,7 @@ import Button from '../../components/Button.jsx';
 export default function WeightGoals() {
 
   /*----- STATE HOOKS -----*/
-  const { updateUserInfo } = useUserInfo();
+  const { userInfo, updateUserInfo } = useUserInfo();
   const navigate = useNavigate();
 
   /*----- LIFECYCLE METHODS -----*/
@@ -56,13 +56,14 @@ export default function WeightGoals() {
                 id='weight_goals'
                 name='weight_goals'
                 onChange={updateUserInfo}
+                value={(userInfo && userInfo.weight_goals) || ''}
               >
                 <option value={null}>--</option>
-                <option value={'-2'}>Lose 2 pounds a week</option>
-                <option value={'-1'}>Lose 1 pound a week</option>
-                <option value={'0'}>Maintain my current weight</option>
-                <option value={'+1'}>Gain 1 pound a week</option>
-                <option value={'+2'}>Gain 2 pounds a week</option>
+                <option value={'Lose 2 pounds a week'}>Lose 2 pounds a week</option>
+                <option value={'Lose 1 pound a week'}>Lose 1 pound a week</option>
+                <option value={'Maintain my current weight'}>Maintain my current weight</option>
+                <option value={'Gain 1 pound a week'}>Gain 1 pound a week</option>
+                <option value={'Gain 2 pounds a week'}>Gain 2 pounds a week</option>
               </select>
           </Label>
         <Row>

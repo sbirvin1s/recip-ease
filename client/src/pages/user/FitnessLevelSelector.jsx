@@ -12,7 +12,7 @@ import Button from '../../components/Button.jsx';
 export default function FitnessLevelSelector() {
 
   /*----- STATE HOOKS -----*/
-  const { updateUserInfo } = useUserInfo();
+  const { userInfo, updateUserInfo } = useUserInfo();
   const navigate = useNavigate();
 
   /*----- LIFECYCLE METHODS -----*/
@@ -46,6 +46,7 @@ export default function FitnessLevelSelector() {
                 id='fitness_level'
                 name='fitness_level'
                 onChange={updateUserInfo}
+                value={(userInfo && userInfo.fitness_level) || ''}
               >
                 <option value={null}>--</option>
                 <option value={'Bedridden'}>Bedridden</option>

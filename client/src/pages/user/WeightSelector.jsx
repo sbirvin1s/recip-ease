@@ -46,15 +46,16 @@ export default function WeightSelector() {
           labelName={'Height (in inches)'}
           onChange={updateUserInfo}
           type='number'
+          value={(userInfo && userInfo.height) || ''}
           required
         />
         <Input
           name={'current_weight'}
           labelName={'Current Weight (in pounds)'}
           onChange={updateUserInfo}
-          required
           type='number'
-          // value={userInfo.currentWeight || ''}
+          value={(userInfo && userInfo.current_weight) || ''}
+          required
         />
         <Row>
           <Button variant='link' onClick={handleBack} >Back</Button>
