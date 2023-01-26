@@ -23,7 +23,17 @@ export default function SignUpReview() {
   /*----- EVENT HANDLERS -----*/
   const handleSubmit = event => {
     event.preventDefault();
-    axios.put(`/user/update/${currentUser.uuid}`, {
+    axios.post(`/user/create/${currentUser.uid}`, {
+      body: userInfo
+    })
+    .then(submitResponse => console.log(submitResponse.data))
+    .catch(err => console.error(`Unable to submit due to error: ${err}`))
+    navigate('/Profile');
+  }
+
+  const handleUpdate = event => {
+    event.preventDefault();
+    axios.put(`/user/update/${currentUser.uid}`, {
       body: userInfo
     })
     .then(submitResponse => console.log(submitResponse.data))
@@ -74,6 +84,7 @@ export default function SignUpReview() {
         <Button variant='link' onClick={handleBack} >Back</Button>
         <Button onClick={handleSubmit} >Complete</Button>
       </Row>
+        <Button onClick={handleUpdate} >Update</Button>
     </Page>
   )
 }
