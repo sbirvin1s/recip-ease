@@ -43,18 +43,19 @@ export default function BasicInfo() {
         }}
         >
           <Input
-            name={'firstName'}
+            name={'first_name'}
             labelName={'First Name'}
             onChange={updateUserInfo}
             placeholder='Iman'
-            value={(userInfo && userInfo.firstName) || ''}
+            value={(userInfo && userInfo.first_name) || ''}
             required
           />
           <Input
-            name={'lastName'}
+            name={'last_name'}
             labelName={'Last Name'}
             onChange={updateUserInfo}
             placeholder='Example'
+            value={(userInfo && userInfo.last_name) || ''}
             required
           />
           <Input
@@ -63,6 +64,7 @@ export default function BasicInfo() {
             onChange={updateUserInfo}
             placeholder='30'
             type='number'
+            value={(userInfo && userInfo.age) || ''}
             required
           />
           <Label htmlFor='sex'>
@@ -71,6 +73,7 @@ export default function BasicInfo() {
                 id='sex'
                 name='sex'
                 onChange={updateUserInfo}
+                value={(userInfo && userInfo.sex) || ''}
               >
                 <option value={null}>--</option>
                 <option value={'Female'}>Female</option>

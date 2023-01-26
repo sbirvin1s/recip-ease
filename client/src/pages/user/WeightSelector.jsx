@@ -49,7 +49,7 @@ export default function WeightSelector() {
           required
         />
         <Input
-          name={'currentWeight'}
+          name={'current_weight'}
           labelName={'Current Weight (in pounds)'}
           onChange={updateUserInfo}
           required

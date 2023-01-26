@@ -35,11 +35,11 @@ export default function Profile() {
   //   sex,
   //   firstName,
   //   lastName,
-  //   fitnessLevel,
+  //   fitness_level,
   //   weightGoals,
   // } = userInfo;
 
-  const weightInKg = () => userInfo.currentWeight / 2.20462;
+  const weightInKg = () => userInfo.current_weight / 2.20462;
   const heightInCm = () => userInfo.height * 2.54;
   let weeklyFitnessGoals = '';
 
@@ -66,8 +66,8 @@ export default function Profile() {
     let calorieModification;
     let activityModifier;
 
-    if (userInfo && userInfo.weightGoals) {
-      switch(userInfo.weightGoals) {
+    if (userInfo && userInfo.weight_goals) {
+      switch(userInfo.weight_goals) {
         case '-2':
           calorieModification = -1000;
           weeklyFitnessGoals = 'Lose 2 pounds a week';
@@ -94,8 +94,8 @@ export default function Profile() {
     }
 
 
-    if (userInfo && userInfo.fitnessLevel) {
-      switch(userInfo.fitnessLevel) {
+    if (userInfo && userInfo.fitness_level) {
+      switch(userInfo.fitness_level) {
         case 'Sedentary':
           activityModifier = 1.2;  // sedentary - no exercise
           break;
@@ -120,7 +120,7 @@ export default function Profile() {
 
     if(userInfo && userInfo.sex === 'male') {
       const mifflinStJeor = ((10 * weightInKg()) + (6.25 * heightInCm()) - (5 * userInfo.age + 5));
-      const harrisBenedict = (88.362 + (13.397 * weightInKg()) + (4.799 * heightInCm) - (5.677 * userInfo.ages));
+      const harrisBenedict = (88.362 + (13.397 * weightInKg()) + (4.799 * heightInCm) - (5.677 * userInfo.age));
 
       const averageBMR = (mifflinStJeor + harrisBenedict) / 2;
       return (averageBMR * activityModifier) + calorieModification;
@@ -140,13 +140,13 @@ export default function Profile() {
   return (
     <>
       <Page>
-        <h1>Welcome {userInfo && userInfo.firstName}</h1>
+        <h1>Welcome {userInfo && userInfo.first_name}</h1>
         <Column>
           Placeholders:
           <Row>{userInfo && userInfo.age}</Row>
           <Row>{userInfo && userInfo.height}</Row>
-          <Row>{userInfo && userInfo.currentWeight}</Row>
-          <Row>{userInfo && userInfo.fitnessLevel}</Row>
+          <Row>{userInfo && userInfo.current_weight}</Row>
+          <Row>{userInfo && userInfo.fitness_level}</Row>
           <Row>{userInfo && weeklyFitnessGoals}</Row>
           <Row>
             <h4>Total Daily Caloric Goal</h4>

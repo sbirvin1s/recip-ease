@@ -50,11 +50,11 @@ export default function WeightGoals() {
           value='3'
           step='1'
         /> */}
-        <Label htmlFor='weightGoals'>
+        <Label htmlFor='weight_goals'>
             Change Per Week:
               <select
-                id='weightGoals'
-                name='weightGoals'
+                id='weight_goals'
+                name='weight_goals'
                 onChange={updateUserInfo}
               >
                 <option value={null}>--</option>

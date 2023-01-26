@@ -46,7 +46,7 @@ export default function SignUpReview() {
     navigate('/FitnessLevelSelector');
   }
 
-  switch(userInfo.WeightGoals) {
+  switch(userInfo.weight_goals) {
     case '-2':
       weeklyFitnessGoals = 'Lose 2 pounds a week';
       break;
@@ -72,12 +72,12 @@ export default function SignUpReview() {
         <h1>One final check. Does this Information look correct?</h1>
       </Row>
       <Column>
-        <P><strong>Name: </strong>{userInfo.firstName + ' ' + userInfo.lastName}</P>
+        <P><strong>Name: </strong>{userInfo.first_name + ' ' + userInfo.last_name}</P>
         <P><strong>Age: </strong>{userInfo.age}</P>
         <P><strong>Biological Sex: </strong>{userInfo.sex}</P>
         <P><strong>Height: </strong>{userInfo.height}</P>
-        <P><strong>Current Weight: </strong>{userInfo.currentWeight}</P>
-        <P><strong>Current Fitness Level: </strong>{userInfo.fitnessLevel}</P>
+        <P><strong>Current Weight: </strong>{userInfo.current_weight}</P>
+        <P><strong>Current Fitness Level: </strong>{userInfo.fitness_level}</P>
         <P><strong>Weekly Fitness Goal: </strong>{weeklyFitnessGoals}</P>
       </Column>
       <Row>

@@ -40,11 +40,11 @@ export default function FitnessLevelSelector() {
           width: '100vw',
         }}
         >
-          <Label htmlFor='fitnessLevel'>
+          <Label htmlFor='fitness_level'>
             Select Your Current Level of Activity:
               <select
-                id='fitnessLevel'
-                name='fitnessLevel'
+                id='fitness_level'
+                name='fitness_level'
                 onChange={updateUserInfo}
               >
                 <option value={null}>--</option>
