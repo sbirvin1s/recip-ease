@@ -8,6 +8,9 @@ const {
   findAllRecipes,
   findIngredient,
   findBrand,
+  addUser,
+  findUser,
+  editUser,
 } = require('../../database');
 
 const {
@@ -50,8 +53,38 @@ module.exports = {
    * @param {*} req -
    * @param {*} res
    */
-  getUser: (req, res) => {
+  getUser: async (req, res) => {
+    const uid = req.params.uid;
+
+    findUser(uid)
+    .then(user => res.status(200).json(user))
+    .catch(err => {
+      console.error(err);
+      return res.status(500).json({Error: 'Something went wrong while retrieving your information'})
+    })
+
+    // try {
+    //   const user = await findUser(uid);
+    //   // res.status = 200;
+    //   return res.json(user);
+    //   // return res.status(200).json(user);
+    // } catch (err) {
+    //   console.error(err);
+    //   return res.status(500).json({Error: 'Something went wrong while retrieving your information'});
+    // }
+  },
+
+  getUserMetaData: async (req, res) => {
     res.json(req.params);
+    const uid = req.params.uid;
+
+    try {
+      const user = await findUserMetaData(uid);
+      return res.status(200).json(user);
+    } catch {
+      console.error(err);
+      return res.status(500).json({Error: 'Something went wrong while retrieving your meta data'});
+    }
   },
 
 /*--- POST REQUESTS ---*/
@@ -76,23 +109,47 @@ module.exports = {
   */
   writeIngredient: (req, res) => {
     addIngredient(req.body)
-    .then(response => {
-      res.statusCode = 201;
-      res.json(response.rows[0]);
-    })
+    .then(response => res.status(201).json(response.rows[0]))
     .catch(err => {
       console.error(err);
       return res.status(500).json({Error: 'Something went wrong while adding your ingredient'});
     })
   },
 
-/*--- PUT REQUESTS ---*/
-  /** Handles creating and updating the targeted user profile
+    /** Handles creating a new user profile
    * @param {object} req - expects a user profile object containing all values for the user profile
    * @param {object} res
    * @return {string} status 201 if success or error if not
   */
-  updateUserProfile: (req, res) => {
-    res.json(req.body);
+    writeUserProfile: async (req, res) => {
+      const uid = req.params.uid;
+      const userInfo = req.body.body;
+
+      try {
+        await addUser(uid, userInfo);
+        return res.status(201);
+      } catch (err) {
+        console.error(err)
+        return res.status(500).json({Error: 'Something went wrong while creating your profile'});
+      }
+    },
+
+/*--- PUT REQUESTS ---*/
+  /** Handles creating the targeted user profile
+   * @param {object} req - expects a user profile object containing all values for the user profile
+   * @param {object} res
+   * @return {string} status 201 if success or error if not
+  */
+  updateUserProfile: async (req, res) => {
+    const uid = req.params.uid;
+    const userInfo = req.body.body;
+
+    try {
+      await editUser(uid, userInfo);
+      return res.status(201);
+    } catch (err) {
+      console.error(err)
+      return res.status(500).json({Error: 'Something went wrong while updating your profile'});
+    }
   },
 }

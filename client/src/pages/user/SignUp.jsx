@@ -47,7 +47,7 @@ export default function SignUp() {
     }
 
     setLoading(false);
-    navigate('/WeightSelector');
+    navigate('/BaseInfo');
   }
 
   /*----- RENDER METHODS -----*/

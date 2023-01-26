@@ -1,10 +1,12 @@
 /*========== EXTERNAL MODULES ==========*/
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 
 /*========== INTERNAL MODULES ==========*/
 import { useAuth } from '../../contexts/AuthContext';
+import { useUserInfo } from '../../contexts/UserContext';
 import { Form, Row } from '../../../dist/stylesheets';
 import Alert from '../../components/Alert.jsx';
 import Input from '../../components/Input.jsx';
@@ -17,6 +19,7 @@ export default function LogIn() {
   const [email, setEmail]  = useState();
   const [password, setPassword] = useState();
   const { logIn } = useAuth();
+  const { updateInfo } = useUserInfo();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -29,12 +32,16 @@ export default function LogIn() {
   const handleLogIn = async () => {
     event.preventDefault();
 
-    try{
+    try {
       setError('');
       setLoading(true);
-      await logIn(email, password);
+      const user = await logIn(email, password);
 
-    } catch (err){
+      axios.get(`/user/${user.user.uid}`)
+      .then(userData => updateInfo(userData.data.rows[0]))
+      .catch(err => console.error(`Unable to retrieve user data due to error: ${err}`))
+
+    } catch (err) {
       console.error('Log In Error: ', err);
       setError('Failed to Log In');
     }

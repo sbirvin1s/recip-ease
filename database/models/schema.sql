@@ -3,6 +3,7 @@
 \c recipease;
 -- Drop Tables
   DROP TABLE IF EXISTS users CASCADE;
+  DROP TABLE IF EXISTS user_meta_data CASCADE;
   DROP TABLE IF EXISTS recipes CASCADE;
   DROP TABLE IF EXISTS ingredients CASCADE;
   DROP TABLE IF EXISTS branded_foods CASCADE;
@@ -21,22 +22,45 @@
 
 CREATE TABLE IF NOT EXISTS users (
   id                       SERIAL PRIMARY KEY,
-  username                 TEXT,
-  calorie_goal             SMALLINT,
-  activity_level           SMALLINT,
-  weight                   SMALLINT,
-  weight_goal              TEXT
+  uid                      TEXT UNIQUE,
+  first_name               TEXT,
+  last_name                TEXT,
+  age                      TEXT,
+  sex                      TEXT,
+  height                   TEXT,
+  current_weight           TEXT,
+  fitness_level            TEXT,
+  calorie_goal             TEXT,
+  weight_goals             TEXT,
+  created_at               TIMESTAMP NOT NULL NOW(),
+  updated_at               TIMESTAMP NOT NULL NOW()
 );
 
 CREATE TABLE IF NOT EXISTS user_meta_data (
   id                       SERIAL PRIMARY KEY,
   user_id                  SERIAL REFERENCES users (id),
-  date                     DATE,
-  calorie_goal             SMALLINT,
-  activity_level           SMALLINT,
-  weight                   SMALLINT,
-  weight_goal              TEXT
+  age                      TEXT,
+  height                   TEXT,
+  current_weight           TEXT,
+  fitness_level            TEXT,
+  calorie_goal             TEXT,
+  weight_goals             TEXT,
+  created_at               TIMESTAMP NOT NULL NOW(),
+  updated_at               TIMESTAMP NOT NULL NOW()
 );
+
+CREATE OR REPLACE FUNCTION trigger_update_timestamp()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON users
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_update_timestamp();
 
 CREATE TABLE IF NOT EXISTS recipes (
   id                       SERIAL PRIMARY KEY,
