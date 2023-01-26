@@ -213,14 +213,14 @@ module.exports = {
     } = userInfo;
 
     return pool.query(
-      'INSERT INTO users (uid, first_name, last_name, age, sex, height, current_weight, fitness_level, weight_goals) \
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);',
+      'INSERT INTO users (uid, first_name, last_name, age, sex, height, current_weight, fitness_level, weight_goals, created_at) \
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, NOW());',
       [uid, firstName, lastName, age, sex, height, currentWeight, fitnessLevel, weightGoals]
     )
     .then(userCreated => {
       return pool.query(
-        'INSERT INTO user_meta_data (age, height, current_weight, fitness_level, weight_goals) \
-        VALUES ($1, $2, $3, $4, $5);',
+        'INSERT INTO user_meta_data (age, height, current_weight, fitness_level, weight_goals, updated_at) \
+        VALUES ($1, $2, $3, $4, $5, NOW());',
         [age, height, currentWeight, fitnessLevel, weightGoals]
       )
     })
@@ -267,17 +267,14 @@ module.exports = {
       RETURNING id;',
       [uid, firstName, lastName, age, sex, height, currentWeight, fitnessLevel, weightGoals]
    )
-   .then(updateComplete => {
-    console.log(updateComplete.rows[0].id);
-    const id = updateComplete.rows[0].id;
+    .then(updateComplete => {
+        const id = updateComplete.rows[0].id;
       return pool.query(
-        'SELECT * , MAX(created_at) \
-        FROM  user_meta_data \
-        GROUP BY user_id; \
-        WHERE user_id = ($1);' ,
-        [id]
+        'INSERT INTO user_meta_data (user_id, age, height, current_weight, fitness_level, weight_goals, created_at) \
+        VALUES ($1, $2, $3, $4, $5, $6, NOW());',
+        [id, age, height, currentWeight, fitnessLevel, weightGoals]
       )
-      .then(queryComplete => console.log(queryComplete.rows[0]))
-   })
+    })
+    .catch(err => console.error(`Unable to create user due to ${err}`))
   },
 }
