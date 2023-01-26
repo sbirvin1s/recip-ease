@@ -215,7 +215,7 @@ module.exports = {
     )
     .then(userCreated => {
       return pool.query(
-        'INSERT INTO user_meta_data (age, height, current_weight, fitness_level, weight_goals, updated_at) \
+        'INSERT INTO user_meta_data (age, height, current_weight, fitness_level, weight_goals, created_at) \
         VALUES ($1, $2, $3, $4, $5, NOW());',
         [age, height, currentWeight, fitnessLevel, weightGoals]
       )

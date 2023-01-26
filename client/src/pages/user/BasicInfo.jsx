@@ -14,7 +14,7 @@ import Card from '../../components/Card.jsx';
 export default function BasicInfo() {
 
   /*----- STATE HOOKS -----*/
-  const { updateUserInfo } = useUserInfo();
+  const { userInfo, updateUserInfo } = useUserInfo();
   const navigate = useNavigate();
 
   /*----- LIFECYCLE METHODS -----*/
@@ -47,6 +47,7 @@ export default function BasicInfo() {
             labelName={'First Name'}
             onChange={updateUserInfo}
             placeholder='Iman'
+            value={(userInfo && userInfo.firstName) || ''}
             required
           />
           <Input
