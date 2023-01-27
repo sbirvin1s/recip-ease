@@ -18,7 +18,7 @@ const {
   writeUserProfile,
   updateUserProfile,
   getUserMetaData,
-} = require('./routes/routes');
+} = require('./controllers');
 
 
 /*========== MIDDLEWARE ==========*/
