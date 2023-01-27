@@ -57,60 +57,6 @@ export default function FitnessLevelSelector() {
                 <option value={'Extremely Active'}>Extremely Active</option>
               </select>
           </Label>
-          {/* <Button
-            variant='card'
-            onClick={updateUserInfo}
-            id='fitnessLevel'
-            name='fitnessLevel'
-            value='Bedridden'
-          >
-            Bedridden
-          </Button>
-          <Button
-            variant='card'
-            onClick={updateUserInfo}
-            id='fitnessLevel'
-            name='fitnessLevel'
-            value='Sedentary'
-          >
-            Sedentary
-          </Button>
-          <Button
-            variant='card'
-            onClick={updateUserInfo}
-            id='fitnessLevel'
-            name='fitnessLevel'
-            value='Lightly Active'
-          >
-            Lightly Active
-          </Button>
-          <Button
-            variant='card'
-            onClick={updateUserInfo}
-            id='fitnessLevel'
-            name='fitnessLevel'
-            value='Moderately Active'
-          >
-            Moderately Active
-          </Button>
-          <Button
-            variant='card'
-            onClick={updateUserInfo}
-            id='fitnessLevel'
-            name='fitnessLevel'
-            value='Very Active'
-          >
-            Very Active
-          </Button>
-          <Button
-            variant='card'
-            onClick={updateUserInfo}
-            id='fitnessLevel'
-            name='fitnessLevel'
-            value='Extremely Active'
-          >
-            Extremely Active
-          </Button> */}
         <Row>
           <Button variant='link' onClick={handleBack} >Back</Button>
           <Button onClick={handleNext} >Next</Button>

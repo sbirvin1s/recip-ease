@@ -20,8 +20,6 @@ export default function Home() {
     const [showSearchForm, setShowSearchForm] = useState(false);
     const [recipes, setRecipes] = useState([]);
 
-    // console.log('it is this time: ', time);
-
   /*----- LIFESTYLE METHODS -----*/
   useEffect(() =>  {
       const localRecipes = Object.keys(localStorage);

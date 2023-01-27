@@ -10,15 +10,6 @@ import { useUserInfo } from '../../contexts/UserContext';
 import Button from '../../components/Button.jsx';
 import Alert from '../../components/Alert.jsx';
 
-/** TODO: #31 User Profile - Client Implementation
-  - [ ] Create User Profile Interface that allows:
-    - [ ] Making a new profile
-    - [ ] Adding Weight
-    - [ ] Adding Fitness Level
-    - [ ] Adding weight loss goals
-    - [ ] Reporting shows total caloric daily goals
-*/
-
 /*========== EXPORTS ==========*/
 export default function Profile() {
 
@@ -27,17 +18,6 @@ export default function Profile() {
   const { userInfo } = useUserInfo();
   const [error, setError] = useState();
   const navigate = useNavigate();
-
-  // const {
-  //   age,
-  //   height,
-  //   currentWeight,
-  //   sex,
-  //   firstName,
-  //   lastName,
-  //   fitness_level,
-  //   weightGoals,
-  // } = userInfo;
 
   /*----- LIFECYCLE METHODS -----*/
   /*----- EVENT HANDLERS -----*/

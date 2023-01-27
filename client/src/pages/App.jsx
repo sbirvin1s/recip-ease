@@ -17,16 +17,16 @@ import { useAuth } from '../contexts/AuthContext.js';
 export default function App() {
 
   /*----- STATE HOOKS -----*/
-    const [showSignIn, setShowSignIn] = useState(false);
-    const [showSearchForm, setShowSearchForm] = useState(false);
-    const [recipes, setRecipes] = useState([]);
-    const { currentUser } = useAuth();
+  const [showSignIn, setShowSignIn] = useState(false);
+  const [showSearchForm, setShowSearchForm] = useState(false);
+  const [recipes, setRecipes] = useState([]);
+  const { currentUser } = useAuth();
 
   /*----- LIFECYCLE METHODS -----*/
   useEffect(() =>  {
-      const localRecipes = Object.keys(localStorage);
-      const newRecipes = localRecipes.map(recipe => localRecipes[recipe] = JSON.parse(localStorage[recipe]))
-      setRecipes(newRecipes);
+    const localRecipes = Object.keys(localStorage);
+    const newRecipes = localRecipes.map(recipe => localRecipes[recipe] = JSON.parse(localStorage[recipe]))
+    setRecipes(newRecipes);
   }, [localStorage]);
 
   /*----- EVENT HANDLERS -----*/
@@ -37,7 +37,6 @@ export default function App() {
 
   const handleSubmit = ({target: {name, value}}) => {
     event.preventDefault();
-
   }
 
   /*----- RENDER METHODS -----*/

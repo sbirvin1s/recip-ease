@@ -41,15 +41,6 @@ export default function WeightGoals() {
           width: '100vw',
         }}
         >
-        {/* <Input
-          name={'weightGoals'}
-          labelName={'Change Per Week'}
-          onChange={updateUserInfo} required type='range'
-          min='0'
-          max='6'
-          value='3'
-          step='1'
-        /> */}
         <Label htmlFor='weight_goals'>
             Change Per Week:
               <select

@@ -80,26 +80,6 @@ export default function BasicInfo() {
                 <option value={'Male'}>Male</option>
               </select>
           </Label>
-          {/* <Row>
-            <Button
-              variant='card'
-              handleClick={updateUserInfo}
-              id='sex'
-              name='sex'
-              value='female'
-            >
-              FEMALE
-            </Button>
-            <Button
-              variant='card'
-              handleClick={updateUserInfo}
-              id='sex'
-              name='sex'
-              value='male'
-            >
-              MALE
-            </Button>
-          </Row> */}
         <Row>
           <Button variant='link' onClick={handleBack} >Back</Button>
           <Button onClick={handleNext} >Next</Button>
