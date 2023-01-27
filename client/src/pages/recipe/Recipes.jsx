@@ -5,7 +5,7 @@ import axios from 'axios';
 
 
 /*========== INTERNAL MODULES ==========*/
-import RecipeList from '../components/RecipeList.jsx';
+import RecipeList from '../../components/RecipeList.jsx';
 
 /*========== EXPORTS ==========*/
 export default function Recipes({showSearchForm, setShowSearchForm, setRecipes}) {

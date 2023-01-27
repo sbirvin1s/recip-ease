@@ -5,9 +5,9 @@ import styled from 'styled-components';
 
 /*========== INTERNAL MODULES ==========*/
 import { Page, Column, Row } from '../../dist/stylesheets';
-import ShoppingList from './ShoppingList.jsx';
-import AddRecipe from './AddRecipe.jsx';
-import Recipes from './Recipes.jsx';
+import ShoppingList from './shoppingList/ShoppingList.jsx';
+import AddRecipe from './recipe/AddRecipe.jsx';
+import Recipes from './recipe/Recipes.jsx';
 import DiaryItem from '../components/DiaryItem.jsx';
 import Button from '../components/Button.jsx';
 

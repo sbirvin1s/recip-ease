@@ -4,12 +4,12 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 /*========== INTERNAL MODULES ==========*/
-import { Row, Page, Label, Column } from '../../dist/stylesheets';
-import Input from '../components/Input.jsx';
-import Button from '../components/Button.jsx';
-import SearchBar from '../components/SearchBar.jsx';
-import ListItem from '../components/ListItem.jsx';
-import Modal from '../components/Modal.jsx';
+import { Row, Page, Label, Column } from '../../../dist/stylesheets';
+import Input from '../../components/Input.jsx';
+import Button from '../../components/Button.jsx';
+import SearchBar from '../../components/SearchBar.jsx';
+import ListItem from '../../components/ListItem.jsx';
+import Modal from '../../components/Modal.jsx';
 
 
 /*========== EXPORTS ==========*/

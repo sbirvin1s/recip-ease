@@ -6,9 +6,9 @@ import axios from 'axios';
 
 
 /*========== INTERNAL MODULES ==========*/
-import RecipePreview from '../components/RecipePreview.jsx';
-import AddIngredient from './AddIngredient.jsx';
-import SearchBar from '../components/SearchBar.jsx';
+import RecipePreview from '../../components/RecipePreview.jsx';
+import AddIngredient from '../ingredient/AddIngredient.jsx';
+import SearchBar from '../../components/SearchBar.jsx';
 
 
 /* TODO: Implement Add Recipe feature

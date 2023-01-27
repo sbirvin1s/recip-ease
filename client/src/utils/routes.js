@@ -9,20 +9,20 @@ import {
 /*========== INTERNAL MODULE ==========*/
 import App from '../pages/App.jsx';
 import Home from '../pages/Home.jsx';
-import Recipes from '../pages/Recipes.jsx';
-import AddRecipe from '../pages/AddRecipe.jsx';
-import ShoppingList from '../pages/ShoppingList.jsx';
-import AddIngredient from '../pages/AddIngredient.jsx';
-import RecipeInfo from '../pages/RecipeInfo.jsx';
-import Profile from '../pages/user/Profile.jsx';
 import Error from '../pages/Error.jsx';
 import SignUp from '../pages/user/SignUp.jsx';
 import LogIn from '../pages/user/LogIn.jsx';
+import BasicInfo from '../pages/user/BasicInfo.jsx';
 import WeightSelector from '../pages/user/WeightSelector.jsx';
 import FitnessLevelSelector from '../pages/user/FitnessLevelSelector.jsx';
 import WeightGoals from '../pages/user/WeightGoals.jsx';
-import BasicInfo from '../pages/user/BasicInfo.jsx';
 import SignUpReview from '../pages/user/SignUpReview.jsx';
+import Profile from '../pages/user/Profile.jsx';
+import Recipes from '../pages/recipe/Recipes.jsx';
+import AddRecipe from '../pages/recipe/AddRecipe.jsx';
+import RecipeInfo from '../pages/recipe/RecipeInfo.jsx';
+import ShoppingList from '../pages/shoppingList/ShoppingList.jsx';
+import AddIngredient from '../pages/ingredient/AddIngredient.jsx';
 
 /*========== EXPORTS ==========*/
 export const router = createBrowserRouter(
