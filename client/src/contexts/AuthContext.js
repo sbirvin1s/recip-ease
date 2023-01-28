@@ -2,9 +2,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
+
 /*========== INTERNAL MODULES ==========*/
 import { default as app } from '../firebase';
 
+
+/*========== CONTEXTS ==========*/
 const AuthContext = React.createContext();
 
 /*========== EXPORTS ==========*/
@@ -43,16 +46,17 @@ export function AuthProvider({ children }) {
     return signOut(auth);
   }
 
-  const value = {
-    currentUser,
-    signUp,
-    logIn,
-    logOut,
-  }
 
   /*----- RENDERER -----*/
   return (
-    <AuthContext.Provider value={value}>
+    <AuthContext.Provider
+      value={{
+        currentUser,
+        signUp,
+        logIn,
+        logOut,
+      }}
+    >
       {!loading && children}
     </AuthContext.Provider>
   )

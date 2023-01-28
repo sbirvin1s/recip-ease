@@ -2,7 +2,7 @@
 import React, { useContext, useState } from 'react';
 
 
-/*========== INTERNAL MODULES ==========*/
+/*========== CONTEXTS ==========*/
 
 const UserContext = React.createContext();
 
@@ -16,8 +16,6 @@ export function UserProvider({ children }) {
 
   /*----- STATE HOOKS -----*/
   const [userInfo, setUserInfo] = useState();
-
-  /*----- LIFECYCLE METHODS -----*/
 
   /*----- EVENT HANDLERS -----*/
   const updateUserInfo = ({ target:{ name, value } }) => {

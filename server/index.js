@@ -25,7 +25,7 @@ const {
 app.use('/', express.static(path.join(__dirname,'../client', '/dist')));
 app.use(express.json());
 
-/*TODO: Update add Server Side Rendering(SSR) and to use rename current 'Routes' to controllers*/
+/*TODO: Update add Server Side Rendering(SSR)*/
 
 /*NOTE: Server route request logging
  */

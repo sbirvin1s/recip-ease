@@ -12,15 +12,15 @@ import SearchBar from '../../components/SearchBar.jsx';
 
 
 /* TODO: Implement Add Recipe feature
-  * Should be able to add a new Recipe if recipe is not found
-  * When entering recipe, should access Search Ingredient functionality to add the selected ingredients to the recipe
-  * Requires:
-    * Recipe Name
-    * Recipe Total Servings
-    *  Recipe Prep Time in minutes
-    *  Recipe Total Calories
-    *  Recipe Picture (optional)
-  * Should be able to edit Recipe if needed
+  - [ ] Should be able to add a new Recipe if recipe is not found
+  - [ ] When entering recipe, should access Search Ingredient functionality to add the selected ingredients to the recipe
+  - [ ] Requires:
+      - [ ] Recipe Name
+      - [ ] Recipe Total Servings
+      - [ ]  Recipe Prep Time in minutes
+      - [ ]  Recipe Total Calories
+      - [ ]  Recipe Picture (optional)
+  - [ ] Should be able to edit Recipe if needed
 */
 
 /*========== EXPORTS ==========*/
