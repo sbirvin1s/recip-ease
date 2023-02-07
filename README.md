@@ -2,9 +2,20 @@
 
 <img src="https://img.shields.io/github/license/sbirvin1s/recip-ease?style=flat-square"/>
 
-> A web app intended to simplify the creation of grocery lists by saving recipes entered by users and creating a grocery list based on ingredients and serving amounts
+> A web app intended to focus users on sufficiently fueling their bodies with the proper nutrients each day. 
+<br/>
 
-[![Demo Video](https://res.cloudinary.com/dsfj56bcp/image/upload/v1665607432/recipease_demo_trorib.png)](https://youtu.be/V43eVw38SlA)
+> Flex Goal: Allow users to simplify the creation of grocery lists by saving recipes entered by users and creating a grocery list based on ingredients and serving amounts
+
+<p align="center">
+  <img 
+    src="https://res.cloudinary.com/dsfj56bcp/image/upload/v1675808835/Screenshot_2023-02-07_144251_y7flw9.png"
+    href="https://www.youtube.com/shorts/RRbkwgZDHXY"
+    alt="Updated Demo Video
+    heigh="422"
+    width="195"
+  />
+</p>
 
 ---
 
