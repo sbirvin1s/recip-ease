@@ -8,13 +8,14 @@
 > Flex Goal: Allow users to simplify the creation of grocery lists by saving recipes entered by users and creating a grocery list based on ingredients and serving amounts
 
 <p align="center">
-  <img 
-    src="https://res.cloudinary.com/dsfj56bcp/image/upload/v1675808835/Screenshot_2023-02-07_144251_y7flw9.png"
-    href="https://www.youtube.com/shorts/RRbkwgZDHXY"
-    alt="Updated Demo Video
-    heigh="422"
-    width="195"
-  />
+  <a href="https://www.youtube.com/shorts/RRbkwgZDHXY">
+    <img 
+      src="https://res.cloudinary.com/dsfj56bcp/image/upload/v1675808835/Screenshot_2023-02-07_144251_y7flw9.png"
+      alt="Updated Demo Video
+      heigh="422"
+      width="195"
+    />
+  </a>
 </p>
 
 ---
