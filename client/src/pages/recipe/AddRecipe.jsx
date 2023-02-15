@@ -6,6 +6,7 @@ import axios from 'axios';
 
 
 /*========== INTERNAL MODULES ==========*/
+import { addRecipe } from '../../contexts/RecipeContext.js';
 import RecipePreview from '../../components/RecipePreview.jsx';
 import AddIngredient from '../ingredient/AddIngredient.jsx';
 import SearchBar from '../../components/SearchBar.jsx';
@@ -17,11 +18,45 @@ import SearchBar from '../../components/SearchBar.jsx';
   - [ ] Requires:
       - [ ] Recipe Name
       - [ ] Recipe Total Servings
-      - [ ]  Recipe Prep Time in minutes
-      - [ ]  Recipe Total Calories
-      - [ ]  Recipe Picture (optional)
+      - [ ] Recipe Prep Time in minutes
+      - [ ] Recipe Total Calories
+      - [ ] Recipe Picture (optional)
   - [ ] Should be able to edit Recipe if needed
 */
+
+/* NOTE: Shape of recipe object should be:
+  {
+    recipe_name: ,
+    recipe_img: <takes URL>,
+    servings: 4,
+    prep_time: 30,
+    instructions: 'list of instructions' <- might make this an array of instructions to make listing out easier,
+    calories: 1600 <- should be the total calories for all servings, calculated from ingredient list
+    total_fat: <number>,    <- should be the total for the whole recipe
+    sat_fat: <number>,      <- should be the total for the whole recipe
+    trans_fat: <number>,    <- should be the total for the whole recipe
+    poly_fat: <number>,     <- should be the total for the whole recipe
+    mono_fat: <number>,     <- should be the total for the whole recipe
+    cholesterol: <number>,  <- should be the total for the whole recipe
+    sodium: <number>,       <- should be the total for the whole recipe
+    total_carbs: <number>,  <- should be the total for the whole recipe
+    fiber: <number>,        <- should be the total for the whole recipe
+    sugar: <number>,        <- should be the total for the whole recipe
+    protein: <number>,      <- should be the total for the whole recipe
+    vitamin_d: <number>,    <- should be the total for the whole recipe
+    calcium: <number>,      <- should be the total for the whole recipe
+    iron: <number>,         <- should be the total for the whole recipe
+    potassium: <number>,    <- should be the total for the whole recipe
+  }
+*/
+
+/* NOTE: Shape of ingredient list should be an array of objects where each object is the information for that ingredient
+  - [ ] should be retrieved from database
+  - [ ] should append 'ingredient_amount' to the ingredient object where ingredient amount is the amount of the ingredient required for the recipe
+  - [ ] should handle different units (gram, pound, oz, etc.) and convert to gram or mg for saving to database
+  - [ ] ingredient list should be submitted after the recipe is stored on the database and the recipe ID is returned
+*/
+
 
 /*========== EXPORTS ==========*/
 export default function AddRecipe({showForm, setShowForm, setRecipes}) {
@@ -30,6 +65,7 @@ export default function AddRecipe({showForm, setShowForm, setRecipes}) {
   const lastRef = useRef(null);
 
   /*----- STATE HOOKS -----*/
+  const { addNewRecipe, addIngredient } = addRecipe();
   const [ingredient, setIngredient] = useState({});
   const [recipe, setRecipe] = useState({recipeName: '', servings: 0, ingredients: []});
   const [visible, setVisible] = useState('hidden');
@@ -171,58 +207,6 @@ export default function AddRecipe({showForm, setShowForm, setRecipes}) {
   }
 
     /*----- RENDERER -----*/
-    // return ReactDOM.createPortal (
-    //   <Background onClick={() => setShowForm(false)}>
-    //   <Container onClick={(event) => event.stopPropagation()}>
-    //     <Column>
-    //       <h1>Enter your Recipe</h1>
-    //         <label>
-    //           <h3 style={{margin: '0', padding: '0'}}>
-    //           Recipe Name
-    //           <Input
-    //             style={{width: '10em'}}
-    //             type='text'
-    //             name='recipeName'
-    //             placeholder='Grilled Cheese'
-    //             onChange={handleRecipe}
-    //           />
-    //           </h3>
-    //         </label>
-    //         <Row>
-    //           <label>
-    //             Number of Servings
-    //             <Input
-    //               type='number'
-    //               name='servings'
-    //               placeholder='1'
-    //               onChange={handleRecipe}
-    //               />
-    //           </label>
-    //           <label>
-    //             <Row>
-    //               Prep Time:
-    //               <Input
-    //                 type='number'
-    //                 name='prepTime'
-    //                 placeholder='30'
-    //                 step='1'
-    //                 onChange={handleRecipe}
-    //                 />
-    //               <p>minutes</p>
-    //             </Row>
-    //           </label>
-    //         </Row>
-    //       <RecipePreview ingredients={recipe.ingredients} recipe={recipe} setRecipe={setRecipe}/>
-    //       {/* {renderIngredientAlert()} */}
-    //       <h4>Add Ingredient</h4>
-    //       {renderEnterIngredient()}
-    //     </Column>
-    //     <ButtonContainer>{renderSubmit()}</ButtonContainer>
-    //   </Container>
-    // </Background>,
-    // document.getElementById('portal')
-    // )
-
     return (
       <>
         {/* <Route path='AddIngredient' element={<AddIngredient />} /> */}

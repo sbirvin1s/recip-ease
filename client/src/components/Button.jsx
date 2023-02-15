@@ -16,7 +16,7 @@ import styled from 'styled-components';
 export default function Button({ variant, handleClick, children, ...props }) {
 
 /*----- STATE HOOKS -----*/
-const [selected, setSelected] = useState(false);
+cccccc
 
 /*----- LIFECYCLE METHODS -----*/
 /*----- EVENT HANDLERS -----*/
@@ -28,16 +28,16 @@ const handleSelected = event => {
 /*----- RENDER METHODS -----*/
 
 /*----- RENDERER -----*/
-switch(variant) {
-  case 'success':
-    return <SuccessAlert {...props}>{children}</SuccessAlert>
-  case 'link':
-    return <LinkButton {...props}>{children}</LinkButton>
-  case 'card':
-    return <CardButton selected={selected} onClick={handleSelected} {...props}>{children}</CardButton>
-  default:
-    return <DefaultButton {...props}>{children}</DefaultButton>
-}
+  switch(variant) {
+    case 'success':
+      return <SuccessAlert {...props}>{children}</SuccessAlert>
+    case 'link':
+      return <LinkButton {...props}>{children}</LinkButton>
+    case 'card':
+      return <CardButton selected={selected} onClick={handleSelected} {...props}>{children}</CardButton>
+    default:
+      return <DefaultButton {...props}>{children}</DefaultButton>
+  }
 }
 
 
