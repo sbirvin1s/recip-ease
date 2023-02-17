@@ -51,6 +51,13 @@ app.post('/user/create/:uid', writeUserProfile);
 /*--- PUT ---*/
 app.put('/user/update/:uid', updateUserProfile);
 
-
+// /*========== DATABASE CONNECTION ==========*/
+// const { DB_USER, DB_PASS, DATABASE, HOST } = process.env;
+// const pool = new Pool ({
+//   user: postgres,
+//   host: localhost,
+//   password: root,
+//   database: recipease,
+// })
 /*========== SERVER CONNECTIONS ==========*/
 app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
