@@ -22,16 +22,16 @@ export default function Profile() {
   /*----- LIFECYCLE METHODS -----*/
   /*----- EVENT HANDLERS -----*/
 
-    const handleLogOut = async () => {
-      setError('');
+  const handleLogOut = async () => {
+    setError('');
 
-      try {
-        await logOut();
-        navigate('/LogIn');
-      } catch {
-        setError('Failed to Log Out')
-      }
+    try {
+      await logOut();
+      navigate('/LogIn');
+    } catch {
+      setError('Failed to Log Out')
     }
+  }
 
   const handleUpdate = () => {
     return navigate('/BasicInfo');
